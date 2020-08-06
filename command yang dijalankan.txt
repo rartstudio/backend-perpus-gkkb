@@ -1,0 +1,12 @@
+
+php artisan make:model CategoriesState -mfsc --resource
+php artisan make:model CategoriesBook -mfsc --resource
+php artisan make:model Publisher  -mfsc --resource
+php artisan make:model Authors  -mfsc --resource
+php artisan make:model Members  -mfsc --resource
+php artisan make:model Books  -mfsc --resource 
+php artisan make:model Transactions  -mfsc --resource
+php artisan make:model TransactionDetail  -mfsc --resource
+
+
+

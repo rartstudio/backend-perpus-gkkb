@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//after implement auth add this
+//check user.php implements mustverifyemail
+Auth::routes(['verify' => true]);
+
+//add middleware verified to make user need verification email
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
