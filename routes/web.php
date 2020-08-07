@@ -18,9 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin', function () {
-    return view('admin.templates.default');
-})->name('admin');
+
 
 //after implement auth add this
 //check user.php implements mustverifyemail

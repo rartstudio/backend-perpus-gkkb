@@ -42,11 +42,24 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
+        //put first because we want our prefix not cascading
+        $this->mapAdminRoutes();
+
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+        
+    }
 
-        //
+    protected function mapAdminRoutes()
+    {
+        //add authentication to make sure, a login user is authenticated
+        //adding role:admin to make sure, only admin can login this page
+        Route::middleware('web','auth','role:admin')
+            ->prefix('admin')
+            ->name('admin.')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin.php'));
     }
 
     /**
