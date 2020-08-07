@@ -55,10 +55,13 @@ class RouteServiceProvider extends ServiceProvider
     {
         //add authentication to make sure, a login user is authenticated
         //adding role:admin to make sure, only admin can login this page
+        //giving prefix to make different
+        //to giving a different we gave naming so we dont confuse when we check routing
+        //adding folder to namespace , so we dont need to explain where are folder contain our admin
         Route::middleware('web','auth','role:admin')
             ->prefix('admin')
             ->name('admin.')
-            ->namespace($this->namespace)
+            ->namespace($this->namespace . '\Admin')
             ->group(base_path('routes/admin.php'));
     }
 
