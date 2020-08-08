@@ -50,7 +50,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
+                            <a href="{{ route('admin.authors.index') }}" class="nav-link active">
                                 <i class="far fa-user nav-icon"></i>
                                 <p>Penulis</p>
                             </a>
