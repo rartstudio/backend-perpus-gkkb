@@ -30,14 +30,14 @@ tambahkan ini pada kernel.php bagian routemiddleware (dari dokumentasi spatie pe
 composer require barryvdh/laravel-debugbar --dev
 
 //menambahkan model, factory, seeder, controller resource
-php artisan make:model CategoriesState -mfsc --resource
-php artisan make:model CategoriesBook -mfsc --resource
-php artisan make:model Publisher  -mfsc --resource
-php artisan make:model Authors  -mfsc --resource
-php artisan make:model Members  -mfsc --resource
-php artisan make:model Books  -mfsc --resource 
-php artisan make:model Transactions  -mfsc --resource
-php artisan make:model TransactionDetail  -mfsc --resource
+php artisan make:model CategoriesState -mfs
+php artisan make:model CategoriesBook -mfs
+php artisan make:model Publisher  -mfs
+php artisan make:model Authors  -mfs
+php artisan make:model Members  -mfs
+php artisan make:model Books  -mfs 
+php artisan make:model Transactions  -mfs
+php artisan make:model TransactionDetail  -mfs
 
 //mendrop all table lalu melakukan migrasi ulang dan melakukan seeder
 php artisan migrate:refresh --seed
@@ -47,3 +47,5 @@ composer require yajra/laravel-datatables-oracle:"~9.0"
 
 //install breadcrumb
 composer require davejamesmiller/laravel-breadcrumbs:5.x
+
+php artisan make:controller Admin\AuthorsController --resource
