@@ -13,11 +13,11 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6">
-                        {{-- <h5 class="m-0 text-dark">{{ Breadcrumbs::current()->title }}</h5> --}}
+                        <h5 class="m-0 text-dark">{{ Breadcrumbs::current()->title }}</h5>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            {{-- {{ Breadcrumbs::render() }} --}}
+                            {{ Breadcrumbs::render() }}
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->

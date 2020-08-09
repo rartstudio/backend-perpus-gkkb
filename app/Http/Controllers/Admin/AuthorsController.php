@@ -15,7 +15,10 @@ class AuthorsController extends Controller
      */
     public function index()
     {
-        return view('admin.author.index');
+        return view('admin.author.index',
+        [
+            'title' => 'Data Penulis'
+        ]);
     }
 
     /**
@@ -25,7 +28,9 @@ class AuthorsController extends Controller
      */
     public function create()
     {
-        return view('admin.author.create');
+        return view('admin.author.create',[
+            'title' => 'Tambah Penulis'
+        ]);
     }
 
     /**
@@ -65,7 +70,8 @@ class AuthorsController extends Controller
     public function edit(Authors $author)
     {
         return view('admin.author.edit',[
-            'author' => $author
+            'author' => $author,
+            'title' => 'Edit Penulis'
         ]);
     }
 
