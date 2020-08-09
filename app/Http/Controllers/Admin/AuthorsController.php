@@ -43,6 +43,9 @@ class AuthorsController extends Controller
     {
         $this->validate($request, [
             'author_name' => 'required|min:3'
+        ],[
+            'author_name.required' => 'Nama penulis harus diisi',
+            'author_name.min' => 'Nama penulis minimal 3 huruf'
         ]);
 
         Authors::create($request->only('author_name'));

@@ -10,10 +10,10 @@
         <div class="box-body">
             <form action="{{ route('admin.authors.store') }}" method="POST">
                 @csrf
-                <div class="form-group @error('name') has-error @enderror">
+                <div class="form-group">
                     <label for="name">Nama</label>
-                    <input type="text" name="author_name" id="name" placeholder="Ketikkan nama penulis" class="form-control" value="{{ old('name') }}" required>
-                    @error('name')
+                    <input type="text" name="author_name" id="name" placeholder="Ketikkan nama penulis" class="form-control @error('author_name') border border-danger @enderror" value="{{ old('author_name') }}">
+                    @error('author_name')
                         <span class="form-text text-red">
                             {{ $message }}
                         </span>

@@ -11,9 +11,9 @@
             <form action="{{ route('admin.authors.update',$author) }}" method="POST">
                 @csrf
                 @method("PUT")
-                <div class="form-group @error('name') has-error @enderror">
+                <div class="form-group @error('author_name') has-error @enderror">
                     <label for="name">Nama</label>
-                    <input type="text" class="form-control" name="author_name" id="name" placeholder="ketikkan nama penulis" value="{{ old('name') ??$author->author_name }}" required>
+                    <input type="text" class="form-control" name="author_name" id="name" placeholder="ketikkan nama penulis" value="{{ old('name') ??$author->author_name }}">
                     @error('name')
                         <span class="form-text text-red">{{ $message }}</span>
                     @enderror

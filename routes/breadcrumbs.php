@@ -2,6 +2,9 @@
 
 
 //home
+
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
+
 Breadcrumbs::for('admin.dashboard',function($trail){
     $trail->push('Beranda', route('admin.dashboard'));
 });
