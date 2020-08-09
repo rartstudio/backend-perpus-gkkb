@@ -43,6 +43,7 @@
 @endpush
 
 @push('scripts')
+@include('admin.templates.partials.alert')
     <script>
         $(function(){
             $('#dataTable').DataTable({
