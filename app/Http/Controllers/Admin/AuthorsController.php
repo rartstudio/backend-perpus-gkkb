@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Authors;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,7 @@ class AuthorsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.author.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class AuthorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'author_name' => 'required|min:3'
+        ]);
+
+        Authors::create($request->only('author_name'));
+
+        return redirect()->route('admin.authors.index')->with('success', 'Data penulis berhasil ditambahkan');
     }
 
     /**
