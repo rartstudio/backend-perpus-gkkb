@@ -56,7 +56,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
+                            <a href="{{ route('admin.categories_book.index') }}" class="nav-link active">
                                 <i class="fas fa-bookmark nav-icon"></i>
                                 <p>Kategori Buku</p>
                             </a>

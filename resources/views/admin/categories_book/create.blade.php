@@ -2,15 +2,13 @@
 
 @section('content')
     <div class="box">
-        <div class="box-header">
-        </div>
         <div class="box-body">
-            <form action="{{ route('admin.authors.store') }}" method="POST">
+            <form action="{{ route('admin.categories_book.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="name">Nama</label>
-                    <input type="text" name="author_name" id="name" placeholder="Ketikkan nama penulis" class="form-control @error('author_name') border border-danger @enderror" value="{{ old('author_name') }}">
-                    @error('author_name')
+                    <input type="text" name="cbo_name" id="name" placeholder="Ketikkan nama kategori buku" class="form-control @error('cbo_name') border border-danger @enderror" value="{{ old('cbo_name') }}">
+                    @error('cbo_name')
                         <span class="form-text text-red">
                             {{ $message }}
                         </span>

@@ -3,7 +3,7 @@
 @section('content')
     <div class="box">
         <div class="box-header">
-            <a href="{{ route('admin.authors.create') }}" class="btn btn-primary my-2">Tambah Penulis</a>
+            <a href="{{ route('admin.categories_book.create') }}" class="btn btn-primary my-2">Tambah Kategori Buku</a>
         </div>
         <div class="box-body">
             <table class="table table-bordered table-hover" id="dataTable">
@@ -48,10 +48,10 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('admin.authors.data') }}',
+                ajax: '{{ route('admin.categories_book.data') }}',
                 columns: [
                     { data: 'DT_RowIndex', orderable:false, searchable:false},
-                    { data: 'author_name'},
+                    { data: 'cbo_name'},
                     { data: 'action'}
                 ]
             })

@@ -87,8 +87,11 @@ class AuthorsController extends Controller
      */
     public function update(Request $request, Authors $author)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'author_name' => 'required|min:3'
+        ],[
+            'author_name.required' => 'Nama penulis harus diisi',
+            'author_name.min' => 'Nama penulis minimal 3 huruf'
         ]);
 
         $author->update($request->only('author_name'));
