@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Authors;
 use App\CategoriesBook;
+use App\CategoriesState;
 use App\Http\Controllers\Controller;
 use App\Publisher;
 use Illuminate\Http\Request;
@@ -40,6 +41,17 @@ class DataController extends Controller
 
         return datatables()->of($categories_books)
                 ->addColumn('action','admin.categories_book.action')
+                ->addIndexColumn()
+                ->rawColumns(['action'])
+                ->toJson();
+    }
+
+    public function categories_state()
+    {
+        $categories_state = CategoriesState::orderBy('cst_name','ASC');
+
+        return datatables()->of($categories_state)
+                ->addColumn('action','admin.categories_state.action')
                 ->addIndexColumn()
                 ->rawColumns(['action'])
                 ->toJson();

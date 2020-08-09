@@ -68,7 +68,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
+                            <a href="{{ route('admin.categories_state.index') }}" class="nav-link active">
                                 <i class="fas fa-user nav-icon"></i>
                                 <p>Kategori Member</p>
                             </a>
