@@ -18,6 +18,11 @@
             </table>
         </div>
     </div>
+    <form method="POST" id="deleteForm" action="">
+        @csrf
+        @method("DELETE")
+        <input type="submit" value="Hapus" style="display: none">
+    </form>
 @endsection
 
 

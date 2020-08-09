@@ -15,7 +15,7 @@ class DataController extends Controller
         $authors = Authors::orderBy('author_name','ASC');
 
         return datatables()->of($authors)
-                ->addColumn('action','admin.authors.action')
+                ->addColumn('action','admin.author.action')
                 ->addIndexColumn()
                 ->rawColumns(['action'])
                 ->toJson();

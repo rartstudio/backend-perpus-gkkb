@@ -62,9 +62,11 @@ class AuthorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Authors $author)
     {
-        //
+        return view('admin.author.edit',[
+            'author' => $author
+        ]);
     }
 
     /**
@@ -74,9 +76,15 @@ class AuthorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Authors $author)
     {
-        //
+        $this->validate($request,[
+            'author_name' => 'required|min:3'
+        ]);
+
+        $author->update($request->only('author_name'));
+        return redirect()->route('admin.authors.index')
+                ->with('info','Data Penulis berhasil diupdate');
     }
 
     /**
@@ -85,8 +93,10 @@ class AuthorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Authors $author)
     {
-        //
+        $author->delete();
+        return redirect()->route('admin.authors.index')
+            ->with('danger','Data penulis berhasil dihapus');
     }
 }
