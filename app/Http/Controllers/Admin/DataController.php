@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Authors;
 use App\CategoriesBook;
 use App\Http\Controllers\Controller;
+use App\Publisher;
 use Illuminate\Http\Request;
 
 
@@ -17,6 +18,17 @@ class DataController extends Controller
 
         return datatables()->of($authors)
                 ->addColumn('action','admin.author.action')
+                ->addIndexColumn()
+                ->rawColumns(['action'])
+                ->toJson();
+    }
+
+    public function publishers()
+    {
+        $publishers = Publisher::orderBy('pub_name','ASC');
+
+        return datatables()->of($publishers)
+                ->addColumn('action','admin.publisher.action')
                 ->addIndexColumn()
                 ->rawColumns(['action'])
                 ->toJson();

@@ -40,7 +40,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item has-treeview">
+                <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
@@ -62,7 +62,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
+                            <a href="{{ route('admin.publishers.index') }}" class="nav-link active">
                                 <i class="fas fa-building nav-icon"></i>
                                 <p>Penerbit</p>
                             </a>

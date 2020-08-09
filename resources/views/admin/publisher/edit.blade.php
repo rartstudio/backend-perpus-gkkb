@@ -4,17 +4,17 @@
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">
-                Edit Data Kategori Buku
+                Edit Data Penulis
             </h3>
         </div>
         <div class="box-body">
-            <form action="{{ route('admin.categories_book.update',$categories_book) }}" method="POST">
+            <form action="{{ route('admin.publishers.update',$publisher) }}" method="POST">
                 @csrf
                 @method("PUT")
-                <div class="form-group @error('cbo_name') has-error @enderror">
+                <div class="form-group @error('publisher_name') has-error @enderror">
                     <label for="name">Nama</label>
-                    <input type="text" class="form-control" name="cbo_name" id="name" placeholder="ketikkan nama Kategori buku" value="{{ old('cbo_name') ??$categories_book->cbo_name }}">
-                    @error('cbo_name')
+                    <input type="text" class="form-control" name="pub_name" id="name" placeholder="ketikkan nama penulis" value="{{ old('pub_name') ??$publisher->pub_name }}">
+                    @error('name')
                         <span class="form-text text-red">{{ $message }}</span>
                     @enderror
                 </div>

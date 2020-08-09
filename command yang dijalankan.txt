@@ -54,3 +54,7 @@ jika ada kesalahan dalam koding dan ingin kembali kesebelumnya
 git checkout hashing commit
 lalu delete semua
 git checkout master
+
+
+php artisan make:controller Admin\CategoriesBookController --resource
+php artisan make:controller Admin\PublishersController --resource
