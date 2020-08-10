@@ -45,7 +45,9 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            // 'root' => storage_path('app'),
+            //changing type file system so we dont need to use symlink
+            'root' => public_path()
         ],
 
         'public' => [

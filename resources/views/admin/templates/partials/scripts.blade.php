@@ -25,4 +25,5 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets/js/demo.js') }}"></script>
 
+
 @stack('scripts')

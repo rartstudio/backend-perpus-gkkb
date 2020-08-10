@@ -58,3 +58,15 @@ git checkout master
 
 php artisan make:controller Admin\CategoriesBookController --resource
 php artisan make:controller Admin\PublishersController --resource
+
+
+//if user have a support of using ssh to access image do this
+php artisan storage:link
+
+//put this on your env file
+FILESYSTEM_DRIVER=public
+
+//if user doesnt have access to do this on config/filesystems.php
+//on disk local
+//and commented previous anc change with this
+'root' => public_path()
