@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Authors;
+use App\Books;
 use App\CategoriesBook;
 use App\CategoriesState;
 use App\Http\Controllers\Controller;
@@ -54,6 +55,24 @@ class DataController extends Controller
                 ->addColumn('action','admin.categories_state.action')
                 ->addIndexColumn()
                 ->rawColumns(['action'])
+                ->toJson();
+    }
+
+    public function books()
+    {
+        $books = Books::select('id','title','qty','author_id','cover')->with('author')->orderBy('title','ASC');
+
+        return datatables()->of($books)
+                ->addColumn('author', function(Books $model){
+                    return $model->author->author_name;
+                })
+                ->editColumn('cover', function(Books $model){
+                    return '<img src="'.$model->getCover().'" height="150px">';
+                })
+                ->addColumn('action','admin.book.action')
+                ->addIndexColumn()
+                ->rawColumns(['cover','action'])
+                //->rawColumns(['action'])
                 ->toJson();
     }
 }

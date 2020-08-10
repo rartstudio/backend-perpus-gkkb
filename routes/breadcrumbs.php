@@ -88,3 +88,23 @@ Breadcrumbs::for('admin.categories_state.edit',function($trail,$author){
     $trail->push('Kategori Status', route('admin.categories_state.index'));
     $trail->push('Edit Kategori Status', route('admin.categories_state.edit', $author));
 });
+
+//author index
+Breadcrumbs::for('admin.books.index',function($trail){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('Buku', route('admin.books.index'));
+});
+
+//author tambah
+Breadcrumbs::for('admin.books.create',function($trail){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('Buku', route('admin.books.index'));
+    $trail->push('Tambah Buku', route('admin.books.create'));
+});
+
+//author edit
+Breadcrumbs::for('admin.books.edit',function($trail,$author){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('Buku', route('admin.books.index'));
+    $trail->push('Edit Buku', route('admin.books.edit', $author));
+});

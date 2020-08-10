@@ -10,6 +10,6 @@ class Publisher extends Model
 
     public function books()
     {
-        return $this->hasMany(Books::class);
+        return $this->hasMany('App\Books', 'pub_id', 'id');
     }
 }

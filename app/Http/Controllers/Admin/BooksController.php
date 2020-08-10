@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Books;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -14,7 +14,9 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.book.index',[
+            'title'=> 'Daftar Buku'
+        ]);
     }
 
     /**
@@ -41,10 +43,10 @@ class BooksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Books  $books
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Books $books)
+    public function show($id)
     {
         //
     }
@@ -52,10 +54,10 @@ class BooksController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Books  $books
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Books $books)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +66,10 @@ class BooksController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Books  $books
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Books $books)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +77,10 @@ class BooksController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Books  $books
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Books $books)
+    public function destroy($id)
     {
         //
     }

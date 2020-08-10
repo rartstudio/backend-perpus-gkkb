@@ -10,6 +10,6 @@ class CategoriesBook extends Model
 
     public function books()
     {
-        return $this->hasMany(Books::class);
+        return $this->hasMany('App\Books', 'cbo_id', 'id');
     }
 }
