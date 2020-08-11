@@ -9,6 +9,7 @@ Route::get('/categories_book/data','DataController@categories_book')->name('cate
 Route::get('/categories_state/data','DataController@categories_state')->name('categories_state.data');
 Route::get('/publishers/data','DataController@publishers')->name('publishers.data');
 Route::get('/books/data','DataController@books')->name('books.data');
+Route::get('/members/data','DataController@members')->name('members.data');
 
 Route::resource('authors', 'AuthorsController');
 Route::resource('categories_book', 'CategoriesBookController');

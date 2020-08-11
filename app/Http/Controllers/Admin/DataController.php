@@ -7,6 +7,7 @@ use App\Books;
 use App\CategoriesBook;
 use App\CategoriesState;
 use App\Http\Controllers\Controller;
+use App\Members;
 use App\Publisher;
 use Illuminate\Http\Request;
 
@@ -74,5 +75,14 @@ class DataController extends Controller
                 ->rawColumns(['cover','action'])
                 //->rawColumns(['action'])
                 ->toJson();
+    }
+
+    public function members()
+    {
+        $members = Members::all();
+
+        return datatables()->of($members)
+        ->addIndexColumn()
+        ->toJson();
     }
 }

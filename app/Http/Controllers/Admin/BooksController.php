@@ -93,9 +93,11 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Books $book)
     {
-        //
+        return view('admin.book.show',[
+            'book' => $book
+        ]);
     }
 
     /**
