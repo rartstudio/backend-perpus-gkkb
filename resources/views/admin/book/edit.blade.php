@@ -3,13 +3,20 @@
 @section('content')
     <div class="box">
         <div class="box-body">
-            <form action="{{ route('admin.books.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.books.update', $book) }}" method="POST" enctype="multipart/form-data">
+                @method("PUT")
                 @csrf
                 <div class="form-group">
                     <label for="cbo_id">Kategori Buku</label>
                     <select name="cbo_id" id="cbo_id" class="form-control select2 @error('cbo_id') border border-danger @enderror">
                         @foreach ($categories_book as $category_book)
-                            <option value="{{ $category_book->id ?? old('cbo_id') }}">{{ $category_book->cbo_name }}</option>
+                            <option value="{{ $category_book->id ?? old('cbo_id') }}"
+                                @if ($category_book->id == $book->cbo_id)
+                                    selected
+                                @endif
+                            >
+                                {{ $category_book->cbo_name }}
+                            </option>
                         @endforeach
                     </select>
                     @error('cbo_id')
@@ -20,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label for="title">Judul</label>
-                    <input type="text" name="title" id="title" class="form-control @error('title') border border-danger @enderror" placeholder="Ketikkan judul buku" value="{{old('title')}}">
+                    <input type="text" name="title" id="title" class="form-control @error('title') border border-danger @enderror" placeholder="Ketikkan judul buku" value="{{ $book->title ?? old('title') }}">
                     @error('title')
                         <span class="form-text text-red">
                             {{ $message }}
@@ -29,9 +36,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Deskripsi</label>
-                    <textarea name="description" id="description" class="form-control @error('description') border border-danger @enderror" rows="3">
-                        {{ old('description')}}
-                    </textarea>
+                    <input type="text" name="description" id="description" class="form-control @error('description') border border-danger @enderror" value="{{ $book->description ?? old('description') }}">
                     @error('description')
                         <span class="form-text text-red">
                             {{ $message }}
@@ -40,7 +45,7 @@
                 </div>
                 <div class="form-group">
                     <label for="qty">Qty</label>
-                    <input type="text" name="qty" id="qty" class="form-control @error('qty') border border-danger @enderror" placeholder="Ketikkan jumlah buku" value="{{old('qty')}}">
+                    <input type="text" name="qty" id="qty" class="form-control @error('qty') border border-danger @enderror" placeholder="Ketikkan deskripsi buku" value="{{ $book->qty ?? old('qty') }}">
                     @error('qty')
                         <span class="form-text text-red">
                             {{ $message }}
@@ -51,7 +56,13 @@
                     <label for="author_id">Penulis</label>
                     <select name="author_id" id="author_id" class="form-control select2 @error('author_id') border border-danger @enderror">
                         @foreach ($authors as $author)
-                            <option value="{{ $author->id ?? old('author_id') }}">{{ $author->author_name }}</option>
+                            <option value="{{ $author->id ?? old('author_id') }}"
+                                @if ($author->id == $book->author_id)
+                                    selected
+                                @endif
+                            >
+                                {{ $author->author_name }}
+                            </option>
                         @endforeach
                     </select>
                     @error('author_id')
@@ -64,7 +75,13 @@
                     <label for="pub_id">Penerbit</label>
                     <select name="pub_id" id="pub_id" class="form-control select2 @error('pub_id') border border-danger @enderror">
                         @foreach ($publishers as $publisher)
-                            <option value="{{ $publisher->id ?? old('pub_id') }}">{{ $publisher->pub_name }}</option>
+                            <option value="{{ $publisher->id ?? old('pub_id') }}"
+                                @if ($publisher->id == $book->pub_id)
+                                    selected
+                                @endif
+                            >
+                                {{ $publisher->pub_name }}
+                            </option>
                         @endforeach
                     </select>
                     @error('pub_id')
@@ -75,15 +92,13 @@
                 </div>
                 <div class="form-group">
                     <label for="cover">Sampul</label>
-                    <input type="file" name="cover" id="cover" class="form-control @error('cover') border border-danger @enderror">
+                    <input type="file" class="form-control @error('qty') border border-danger @enderror" name="cover" id="cover">
                     @error('cover')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
+                        <span class="form-text text-red">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Tambah">
+                    <input type="submit" class="btn btn-primary" value="Ubah">
                 </div>
             </form>
         </div>

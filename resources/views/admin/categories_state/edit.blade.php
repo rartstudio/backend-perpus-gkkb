@@ -2,8 +2,6 @@
 
 @section('content')
     <div class="box">
-        <div class="box-header">
-        </div>
         <div class="box-body">
             <form action="{{ route('admin.categories_state.update',$categories_state) }}" method="POST">
                 @csrf

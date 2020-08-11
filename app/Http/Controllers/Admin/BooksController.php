@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Publisher;
 use Illuminate\Http\Request;
 
+//import storage
+use Illuminate\Support\Facades\Storage;
+
 class BooksController extends Controller
 {
     /**
@@ -101,9 +104,15 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Books $book)
     {
-        //
+        return view('admin.book.edit',[
+            'title' => 'Edit Buku',
+            'book' => $book,
+            'authors' => Authors::orderBy('author_name','ASC')->get(),
+            'publishers' => Publisher::orderBy('pub_name','ASC')->get(),
+            'categories_book' => CategoriesBook::orderBy('cbo_name','ASC')->get()
+        ]);
     }
 
     /**
@@ -113,9 +122,50 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Books $book)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required|min:20',
+            'qty' => 'required|numeric',
+            'cover' => 'file|image',
+            'author_id' => 'required',
+            'cbo_id' => 'required',
+            'pub_id' => 'required',
+        ],[
+            'title.required' => 'Judul buku harus diisi',
+            'description.required' => 'Deskripsi buku harus diisi',
+            'qty.required' => 'Qty buku harus diisi',
+            'author_id.required' => 'Penulis buku harus diisi',
+            'cbo_id.required' => 'Kategori buku harus diisi',
+            'pub_id.required' => 'Penerbit buku harus diisi',
+        ]);
+
+        //if user dont change previous image
+        $cover = $book->cover;
+
+        //checking $request cover if exist
+        if($request->hasFile('cover')){
+            //delete previous image if user update new one
+            Storage::delete($book->cover);
+
+            //storing file image to assets/cover on public path (check filesystem.php)
+            $cover = $request->file('cover')->store('assets/cover');
+        }
+
+        //updating data to table
+        $book->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'author_id' => $request->author_id,
+            'pub_id' => $request->pub_id,
+            'cover' => $cover,
+            'cbo_id' => $request->cbo_id,
+            'qty' => $request->qty
+        ]);
+
+        return redirect()->route('admin.books.index')
+                ->with('info', 'data buku berhasil diubah');
     }
 
     /**
@@ -124,8 +174,10 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Books $book)
     {
-        //
+        $book->delete();
+        return redirect()->route('admin.books.index')
+                ->with('danger','data buku berhasil dihapus');
     }
 }
