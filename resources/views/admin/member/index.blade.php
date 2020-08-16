@@ -9,11 +9,11 @@
             <table class="table table-bordered table-hover" id="dataTable">
                 <thead>
                     <tr>
+                        <th>No</th>
+                        <th>No Anggota</th>
                         <th>Id</th>
-                        <th>Cover</th>
-                        <th>Judul</th>
-                        <th>Penulis</th>
-                        <th>Qty</th>
+                        <th>Nama</th>
+                        <th>Jenis Kelamin</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -51,13 +51,13 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('admin.books.data') }}',
+                ajax: '{{ route('admin.members.data') }}',
                 columns: [
                     { data: 'DT_RowIndex', orderable:false, searchable:false},
-                    { data: 'cover'},
-                    { data: 'title'},
-                    { data: 'author'},
-                    { data: 'qty'},
+                    { data: 'member_code'},
+                    { data: 'category_state'},
+                    { data: 'full_name'},
+                    { data: 'gender'},
                     { data: 'action'}
                 ]
             })

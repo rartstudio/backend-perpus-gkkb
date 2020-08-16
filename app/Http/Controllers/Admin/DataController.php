@@ -11,8 +11,7 @@ use App\Members;
 use App\Publisher;
 use App\User;
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\DB;
 
 class DataController extends Controller
 {
@@ -62,7 +61,7 @@ class DataController extends Controller
 
     public function books()
     {
-        $books = Books::select('id','title','qty','author_id','cover')->with('author')->orderBy('title','ASC');
+        $books = Books::select('id','title','qty','author_id','cover','slug')->with('author')->orderBy('title','ASC');
 
         return datatables()->of($books)
                 ->addColumn('author', function(Books $model){
@@ -74,15 +73,20 @@ class DataController extends Controller
                 ->addColumn('action','admin.book.action')
                 ->addIndexColumn()
                 ->rawColumns(['cover','action'])
-                //->rawColumns(['action'])
                 ->toJson();
     }
 
     public function members()
     {
-        $members = Members::all();
+        $members = Members::select('id','member_code',DB::raw("CONCAT(first_name,' ',last_name) as full_name"),'slug','gender','cst_id')->with('category_state')->orderBy('full_name', 'ASC');
+
         return datatables()->of($members)
+        ->addColumn('category_state',function(Members $model){
+            return $model->category_state->cst_name;
+        })
+        ->addColumn('action','admin.member.action')
         ->addIndexColumn()
+        ->rawColumns(['action'])
         ->toJson();
     }
 }

@@ -13,7 +13,7 @@ class CategoriesState extends Model
 
     public function users()
     {
-        return $this->hasMany(Members::class);
+        return $this->hasMany('App\Members', 'cst_id', 'id');
     }
 
     public function getRouteKeyName()

@@ -116,3 +116,31 @@ Breadcrumbs::for('admin.books.show',function($trail,$book){
     $trail->push('Buku', route('admin.books.index'));
     $trail->push('Detail Buku', route('admin.books.show', $book));
 });
+
+
+//members
+
+Breadcrumbs::for('admin.members.index',function($trail){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('Member', route('admin.members.index'));
+});
+
+
+Breadcrumbs::for('admin.members.create',function($trail){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('Member', route('admin.members.index'));
+    $trail->push('Tambah Member', route('admin.members.create'));
+});
+
+
+Breadcrumbs::for('admin.members.edit',function($trail,$book){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('Member', route('admin.members.index'));
+    $trail->push('Edit Member', route('admin.members.edit', $book));
+});
+
+Breadcrumbs::for('admin.members.show',function($trail,$book){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('Member', route('admin.members.index'));
+    $trail->push('Detail Member', route('admin.members.show', $book));
+});

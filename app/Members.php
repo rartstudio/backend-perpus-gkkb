@@ -10,10 +10,10 @@ class Members extends Model
     use SoftDeletes;
 
     protected $guarded = [];
-
+    
     public function category_state()
     {
-        return $this->belongsTo(CategoriesState::class);
+        return $this->belongsTo('App\CategoriesState', 'cst_id', 'id');
     }
 
     public function user()
