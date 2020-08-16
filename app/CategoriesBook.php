@@ -15,4 +15,9 @@ class CategoriesBook extends Model
     {
         return $this->hasMany('App\Books', 'cbo_id', 'id');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

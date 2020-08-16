@@ -45,4 +45,9 @@ class Books extends Model
         //returning placeholder if image is null
         return 'https://via.placeholder.com/150x200.png?text=No+Cover';
     }
+    
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

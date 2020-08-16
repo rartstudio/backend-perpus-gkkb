@@ -15,4 +15,9 @@ class Publisher extends Model
     {
         return $this->hasMany('App\Books', 'pub_id', 'id');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

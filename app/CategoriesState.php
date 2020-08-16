@@ -15,4 +15,9 @@ class CategoriesState extends Model
     {
         return $this->hasMany(Members::class);
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

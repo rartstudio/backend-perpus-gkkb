@@ -26,8 +26,8 @@ class Members extends Model
         return $this->hasMany(Transactions::class);
     }
 
-    public function getFullName()
+    public function getRouteKeyName()
     {
-        return $this->first_name.' '.$this->last_name;
+        return 'slug';
     }
 }

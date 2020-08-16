@@ -15,4 +15,9 @@ class Authors extends Model
     {
         return $this->hasMany(Books::class);
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
