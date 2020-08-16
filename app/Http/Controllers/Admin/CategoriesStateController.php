@@ -6,6 +6,7 @@ use App\CategoriesState;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoriesStateRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoriesStateController extends Controller
 {
@@ -48,6 +49,7 @@ class CategoriesStateController extends Controller
         //     'cst_name.min' => 'Nama Kategori Status minimal 3 huruf'
         // ]);
         $validated = $request->validated();
+        $validated['slug'] = Str::slug($validated['cst_name']);
 
         CategoriesState::create($validated);
 
@@ -90,6 +92,7 @@ class CategoriesStateController extends Controller
     {
         
         $validated = $request->validated();
+        $validated['slug'] = Str::slug($validated['cst_name']);
         
         $categories_state->update($validated);
         return redirect()->route('admin.categories_state.index')->with('success','Data Kategori Status berhasil diupdate');
