@@ -29,9 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Deskripsi</label>
-                    <textarea name="description" id="description" class="form-control @error('description') border border-danger @enderror" rows="3">
-                        {{ old('description')}}
-                    </textarea>
+                    <textarea name="description" id="description" class="form-control @error('description') border border-danger @enderror" rows="3">{{ old('description')}}</textarea>
                     @error('description')
                         <span class="form-text text-red">
                             {{ $message }}
@@ -102,5 +100,17 @@
     {{-- using that scripts --}}
     <script>
         $('.select2').select2();
+    </script>
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/21.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+                .create( document.querySelector( '#description' ) )
+                .then( editor => {
+                        console.log( editor );
+                } )
+                .catch( error => {
+                        console.error( error );
+                } );
     </script>
 @endpush
