@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\CategoriesState;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoriesStateRequest;
 use Illuminate\Http\Request;
 
 class CategoriesStateController extends Controller
@@ -38,16 +39,17 @@ class CategoriesStateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriesStateRequest $request)
     {
-        $this->validate($request,[
-            'cst_name'=> 'required|min:3'
-        ],[
-            'cst_name.required' => 'Nama Kategori Status harus diisi',
-            'cst_name.min' => 'Nama Kategori Status minimal 3 huruf'
-        ]);
+        // $this->validate($request,[
+        //     'cst_name'=> 'required|min:3'
+        // ],[
+        //     'cst_name.required' => 'Nama Kategori Status harus diisi',
+        //     'cst_name.min' => 'Nama Kategori Status minimal 3 huruf'
+        // ]);
+        $validated = $request->validated();
 
-        CategoriesState::create($request->only('cst_name'));
+        CategoriesState::create($validated);
 
         return redirect()->route('admin.categories_state.index')->with('success','Data Kategori Status berhasil disimpan');
     }
@@ -84,16 +86,12 @@ class CategoriesStateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CategoriesState $categories_state)
+    public function update(CategoriesStateRequest $request, CategoriesState $categories_state)
     {
-        $this->validate($request,[
-            'cst_name' => 'required|min:4'
-        ],[
-            'cst_name.required' => 'Nama Kategori Status harus diisi',
-            'cst_name.min' => 'Nama Kategori Status minimal 4 huruf'
-        ]);
-
-        $categories_state->update($request->only('cst_name'));
+        
+        $validated = $request->validated();
+        
+        $categories_state->update($validated);
         return redirect()->route('admin.categories_state.index')->with('success','Data Kategori Status berhasil diupdate');
     }
 

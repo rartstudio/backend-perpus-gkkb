@@ -92,7 +92,7 @@ class PublishersController extends Controller
         $validated = $request->validated();
         
         $publisher->update($validated);
-        return redirect()->route('admin.publishers.index')->with('success','Data Publisher berhasil diubah');
+        return redirect()->route('admin.publishers.index')->with('info','Data Penerbit berhasil diubah');
     }
 
     /**

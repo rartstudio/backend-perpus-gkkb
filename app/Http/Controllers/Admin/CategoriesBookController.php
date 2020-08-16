@@ -93,7 +93,7 @@ class CategoriesBookController extends Controller
         $validated = $request->validated();
 
         $categories_book->update($validated);
-        return redirect()->route('admin.categories_book.index')->with('success','Data Kategori Buku berhasil diupdate');
+        return redirect()->route('admin.categories_book.index')->with('info','Data Kategori Buku berhasil diupdate');
     }
 
     /**
