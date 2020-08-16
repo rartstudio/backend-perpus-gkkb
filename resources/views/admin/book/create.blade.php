@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     <label for="qty">Qty</label>
-                    <input type="text" name="qty" id="qty" class="form-control @error('qty') border border-danger @enderror" placeholder="Ketikkan jumlah buku" value="{{old('qty')}}">
+                    <input type="number" name="qty" id="qty" class="form-control @error('qty') border border-danger @enderror" placeholder="Ketikkan jumlah buku" value="{{old('qty')}}">
                     @error('qty')
                         <span class="form-text text-red">
                             {{ $message }}
