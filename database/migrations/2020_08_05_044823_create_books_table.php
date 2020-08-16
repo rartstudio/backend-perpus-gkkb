@@ -22,6 +22,7 @@ class CreateBooksTable extends Migration
             $table->string('description')->nullable();
             $table->integer('qty')->nullable();
             $table->string('cover')->nullable()->default(null);
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('pub_id')->references('id')->on('publishers')->onUpdate('CASCADE')->onDelete('CASCADE');

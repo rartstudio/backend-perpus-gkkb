@@ -16,6 +16,7 @@ class CreateCategoriesStatesTable extends Migration
         Schema::create('categories_states', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('cst_name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

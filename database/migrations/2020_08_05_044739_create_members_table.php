@@ -23,6 +23,7 @@ class CreateMembersTable extends Migration
             $table->unsignedBigInteger('cst_id');
             $table->string('no_cst');
             $table->unsignedBigInteger('user_id');
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('cst_id')->references('id')->on('categories_states')->onUpdate('CASCADE')->onDelete('CASCADE');
