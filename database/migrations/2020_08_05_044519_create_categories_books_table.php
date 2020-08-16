@@ -16,6 +16,7 @@ class CreateCategoriesBooksTable extends Migration
         Schema::create('categories_books', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('cbo_name');
+            $table->string('slug');
             $table->softDeletes();
             $table->timestamps();
         });
