@@ -14,8 +14,10 @@ $factory->define(Members::class, function (Faker $faker) {
     $lastName = $faker->lastName(['male']);
     $fullName = $firstName.' '.$lastName;
     $slug = Str::slug($fullName);
+    $randMemberCode = 'GKKB-PTK-'.$faker->randomNumber(6); 
 
     return [
+        'member_code' => $randMemberCode,
         'first_name' => $firstName,
         'last_name' => $lastName,
         'slug' => $slug,
