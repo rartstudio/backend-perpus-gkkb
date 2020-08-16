@@ -22,4 +22,9 @@ class Members extends Model
     {
         return $this->hasMany(Transactions::class);
     }
+
+    public function getFullName()
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
 }

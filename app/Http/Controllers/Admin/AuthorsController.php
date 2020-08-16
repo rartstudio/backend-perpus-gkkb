@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Authors;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AuthorsRequest;
 use Illuminate\Http\Request;
 
 class AuthorsController extends Controller
@@ -39,16 +40,11 @@ class AuthorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AuthorsRequest $request)
     {
-        $this->validate($request, [
-            'author_name' => 'required|min:3'
-        ],[
-            'author_name.required' => 'Nama penulis harus diisi',
-            'author_name.min' => 'Nama penulis minimal 3 huruf'
-        ]);
+        $validated = $request->validated();
 
-        Authors::create($request->only('author_name'));
+        Authors::create($validated);
 
         return redirect()->route('admin.authors.index')->with('success', 'Data penulis berhasil ditambahkan');
     }
@@ -85,16 +81,11 @@ class AuthorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Authors $author)
+    public function update(AuthorsRequest $request, Authors $author)
     {
-        $this->validate($request, [
-            'author_name' => 'required|min:3'
-        ],[
-            'author_name.required' => 'Nama penulis harus diisi',
-            'author_name.min' => 'Nama penulis minimal 3 huruf'
-        ]);
+        $validated = $request->validated();
 
-        $author->update($request->only('author_name'));
+        $author->update($validated);
         return redirect()->route('admin.authors.index')
                 ->with('info','Data Penulis berhasil diupdate');
     }

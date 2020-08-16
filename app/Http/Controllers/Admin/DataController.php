@@ -9,6 +9,7 @@ use App\CategoriesState;
 use App\Http\Controllers\Controller;
 use App\Members;
 use App\Publisher;
+use App\User;
 use Illuminate\Http\Request;
 
 
@@ -80,7 +81,6 @@ class DataController extends Controller
     public function members()
     {
         $members = Members::all();
-
         return datatables()->of($members)
         ->addIndexColumn()
         ->toJson();
