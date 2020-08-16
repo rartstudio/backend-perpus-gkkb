@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Authors;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthorsRequest;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class AuthorsController extends Controller
@@ -50,6 +51,7 @@ class AuthorsController extends Controller
         // ]);
 
         $validated = $request->validated();
+        $validated['slug'] = Str::slug($validated['author_name']);
 
         Authors::create($validated);
 
@@ -91,6 +93,7 @@ class AuthorsController extends Controller
     public function update(AuthorsRequest $request, Authors $author)
     {
         $validated = $request->validated();
+        $validated['slug'] = Str::slug($validated['author_name']);
 
         $author->update($validated);
         return redirect()->route('admin.authors.index')
