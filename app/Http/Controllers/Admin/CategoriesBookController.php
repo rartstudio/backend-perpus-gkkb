@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\CategoriesBook;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoriesBookRequest;
 use Illuminate\Http\Request;
 
 class CategoriesBookController extends Controller
@@ -39,16 +40,18 @@ class CategoriesBookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriesBookRequest $request)
     {
-        $this->validate($request, [
-            'cbo_name' => 'required|min:2'
-        ],[
-            'cbo_name.required' => 'Nama kategori harus diisi',
-            'cbo_name.min' =>'Nama kategori minimal 2 huruf'
-        ]);
+        // $this->validate($request, [
+        //     'cbo_name' => 'required|min:2'
+        // ],[
+        //     'cbo_name.required' => 'Nama kategori harus diisi',
+        //     'cbo_name.min' =>'Nama kategori minimal 2 huruf'
+        // ]);
 
-        CategoriesBook::create($request->only('cbo_name'));
+        $validated = $request->validated();
+
+        CategoriesBook::create($validated);
 
         return redirect()->route('admin.categories_book.index')->with('success', 'data kategori buku berhasil disimpan');
     }
@@ -85,16 +88,11 @@ class CategoriesBookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CategoriesBook $categories_book)
+    public function update(CategoriesBookRequest $request, CategoriesBook $categories_book)
     {
-        $this->validate($request,[
-            'cbo_name'=> 'required|min:2'
-        ],[
-            'cbo_name.required' => 'Nama Kategori buku harus diisi',
-            'cbo_name.min' => 'Nama Kategori buku minimal 2 huruf'
-        ]);
+        $validated = $request->validated();
 
-        $categories_book->update($request->only('cbo_name'));
+        $categories_book->update($validated);
         return redirect()->route('admin.categories_book.index')->with('success','Data Kategori Buku berhasil diupdate');
     }
 
