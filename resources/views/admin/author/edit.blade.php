@@ -14,9 +14,20 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Ubah">
+                    <button type="submit" class="btn btn-primary" id="btn-form">Ubah</button>
                 </div>
             </form>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        var btnTambah = document.getElementById('btn-form');
+
+        btnTambah.addEventListener('click', function(e){
+            btnTambah.innerHTML = "Tunggu...";
+            btnTambah.disabled = true;
+        });
+    </script>
+@endpush
