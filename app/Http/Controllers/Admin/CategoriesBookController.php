@@ -6,6 +6,7 @@ use App\CategoriesBook;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoriesBookRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoriesBookController extends Controller
 {
@@ -50,6 +51,7 @@ class CategoriesBookController extends Controller
         // ]);
 
         $validated = $request->validated();
+        $validated['slug'] = Str::slug($validated['cbo_name']);
 
         CategoriesBook::create($validated);
 
@@ -91,6 +93,7 @@ class CategoriesBookController extends Controller
     public function update(CategoriesBookRequest $request, CategoriesBook $categories_book)
     {
         $validated = $request->validated();
+        $validated['slug'] = Str::slug($validated['cbo_name']);
 
         $categories_book->update($validated);
         return redirect()->route('admin.categories_book.index')->with('info','Data Kategori Buku berhasil diupdate');
