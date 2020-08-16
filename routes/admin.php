@@ -16,3 +16,4 @@ Route::resource('categories_book', 'CategoriesBookController');
 Route::resource('publishers', 'PublishersController');
 Route::resource('categories_state', 'CategoriesStateController');
 Route::resource('books', 'BooksController');
+Route::resource('members', 'MembersController');
