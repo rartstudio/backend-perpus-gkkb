@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PublisherRequest;
 use App\Publisher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PublishersController extends Controller
 {
@@ -49,6 +50,7 @@ class PublishersController extends Controller
         // ]);
 
         $validated = $request->validated();
+        $validated['slug'] = Str::slug($validated['pub_name']);
 
         Publisher::create($validated);
 
@@ -90,6 +92,7 @@ class PublishersController extends Controller
     public function update(PublisherRequest $request, Publisher $publisher)
     {
         $validated = $request->validated();
+        $validated['slug'] = Str::slug($validated['pub_name']);
         
         $publisher->update($validated);
         return redirect()->route('admin.publishers.index')->with('info','Data Penerbit berhasil diubah');
