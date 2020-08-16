@@ -8,6 +8,7 @@ use App\CategoriesBook;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BooksRequest;
 use App\Publisher;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 //import storage
@@ -91,6 +92,7 @@ class BooksController extends Controller
     public function store(BooksRequest $request)
     {
         $validated= $request->validated();
+        $validated['slug'] = Str::slug($validated['title']);
 
         //set default null if user dont submit a cover image
         $cover = null;
@@ -102,6 +104,7 @@ class BooksController extends Controller
 
         Books::create([
             'title' => $validated['title'],
+            'slug' => $validated['slug'],
             'description' => $validated['description'],
             'author_id' => $validated['author_id'],
             'pub_id' => $validated['pub_id'],
@@ -198,6 +201,7 @@ class BooksController extends Controller
     public function update(BooksRequest $request, Books $book)
     {
         $validated = $request->validated();
+        $validated['slug'] = Str::slug($validated['title']);
 
         //if user dont change previous image
         $cover = $book->cover;
@@ -214,6 +218,7 @@ class BooksController extends Controller
         //updating data to table
         $book->update([
             'title' => $validated['title'],
+            'slug' => $validated['slug'],
             'description' => $validated['description'],
             'author_id' => $validated['author_id'],
             'pub_id' => $validated['pub_id'],
