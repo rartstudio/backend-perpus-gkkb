@@ -70,3 +70,5 @@ FILESYSTEM_DRIVER=public
 //on disk local
 //and commented previous anc change with this
 'root' => public_path()
+
+php artisan make:request AuthorsRequest

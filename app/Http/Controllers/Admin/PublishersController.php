@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PublisherRequest;
 use App\Publisher;
 use Illuminate\Http\Request;
 
@@ -38,16 +39,18 @@ class PublishersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PublisherRequest $request)
     {
-        $this->validate($request, [
-            'pub_name' => 'required|min:2'
-        ],[
-            'pub_name.required' => 'Nama Penerbit Buku harus diisi',
-            'pub_name.min' => 'Nama penerbit minimal 2 huruf'
-        ]);
+        // $this->validate($request, [
+        //     'pub_name' => 'required|min:2'
+        // ],[
+        //     'pub_name.required' => 'Nama Penerbit Buku harus diisi',
+        //     'pub_name.min' => 'Nama penerbit minimal 2 huruf'
+        // ]);
 
-        Publisher::create($request->only('pub_name'));
+        $validated = $request->validated();
+
+        Publisher::create($validated);
 
         return redirect()->route('admin.publishers.index')->with('success', 'data penerbit berhasil ditambahkan');
     }
@@ -84,16 +87,11 @@ class PublishersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Publisher $publisher)
+    public function update(PublisherRequest $request, Publisher $publisher)
     {
-        $this->validate($request,[
-            'pub_name' => 'required|min:2',
-        ],[
-            'pub_name.required' => 'Nama Penerbit Buku harus diisi',
-            'pub_name.min' => 'Nama Penerbit Buku minimal 2 huruf'
-        ]);
-
-        $publisher->update($request->only('pub_name'));
+        $validated = $request->validated();
+        
+        $publisher->update($validated);
         return redirect()->route('admin.publishers.index')->with('success','Data Publisher berhasil diubah');
     }
 

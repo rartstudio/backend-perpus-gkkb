@@ -9,7 +9,7 @@
                 <div class="form-group @error('publisher_name') has-error @enderror">
                     <label for="name">Nama</label>
                     <input type="text" class="form-control" name="pub_name" id="name" placeholder="ketikkan nama penulis" value="{{ old('pub_name') ??$publisher->pub_name }}">
-                    @error('name')
+                    @error('pub_name')
                         <span class="form-text text-red">{{ $message }}</span>
                     @enderror
                 </div>
