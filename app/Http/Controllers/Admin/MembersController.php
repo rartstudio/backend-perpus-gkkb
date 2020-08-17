@@ -66,9 +66,11 @@ class MembersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Members $member)
     {
-        //
+        return view('admin.member.show',[
+            'member' => $member
+        ]);
     }
 
     /**
