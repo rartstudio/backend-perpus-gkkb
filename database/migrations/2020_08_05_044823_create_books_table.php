@@ -18,9 +18,9 @@ class CreateBooksTable extends Migration
             $table->unsignedBigInteger('pub_id');
             $table->unsignedBigInteger('author_id');
             $table->unsignedBigInteger('cbo_id');
-            $table->string('title');
-            $table->string('slug');
-            $table->string('description')->nullable();
+            $table->string('title',150);
+            $table->string('slug',175);
+            $table->text('description')->nullable();
             $table->integer('qty')->nullable();
             $table->string('cover')->nullable()->default(null);
             $table->softDeletes();
