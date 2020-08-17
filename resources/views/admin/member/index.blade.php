@@ -3,7 +3,7 @@
 @section('content')
     <div class="box">
         <div class="box-header">
-            <a href="{{ route('admin.books.create') }}" class="btn btn-primary my-2">Tambah Buku</a>
+            <a href="{{ route('admin.members.create') }}" class="btn btn-primary my-2">Tambah Buku</a>
         </div>
         <div class="box-body">
             <table class="table table-bordered table-hover" id="dataTable">

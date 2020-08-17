@@ -41,7 +41,7 @@ class MembersRequest extends FormRequest
             'date_of_birth.required' => 'Tanggal Lahir Wajib Diisi',
             'gender.required' => 'Jenis Kelamin Wajib Diisi',
             'phone_number.required' => 'Nomor Handphone Wajib Diisi',
-            'no_cst' => 'Nomor Identitas Wajib Diisi'
+            'no_cst.required' => 'Nomor Identitas Wajib Diisi'
         ];
     }
 }

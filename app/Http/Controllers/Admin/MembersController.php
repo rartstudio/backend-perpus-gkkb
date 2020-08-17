@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\CategoriesState;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MembersRequest;
 use App\Members;
@@ -31,7 +32,8 @@ class MembersController extends Controller
     public function create()
     {
         return view('admin.member.create',[
-            'title' => 'Tambah Member'
+            'title' => 'Tambah Member',
+            'categories_state' => CategoriesState::orderBy('cst_name','ASC')->get()
         ]);
     }
 
@@ -51,11 +53,11 @@ class MembersController extends Controller
         // ]);
 
         $validated = $request->validated();
-        $validated['slug'] = Str::slug($validated['author_name']);
+        $validated['slug'] = Str::slug($validated['first_name'].' '.$request['last_name']);
 
         Members::create($validated);
 
-        return redirect()->route('admin.authors.index')->with('success', 'Data penulis berhasil ditambahkan');
+        return redirect()->route('admin.members.index')->with('success', 'Data member berhasil ditambahkan');
     }
 
     /**
