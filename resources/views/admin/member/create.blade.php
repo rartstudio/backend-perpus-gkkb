@@ -133,7 +133,7 @@
     <script>
         $('#datepicker').datepicker({
             uiLibrary: 'bootstrap4',
-            format: 'dd mmm yyyy'
+            format: 'dd-mm-yyyy'
         });
     </script>
 

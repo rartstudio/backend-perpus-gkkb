@@ -6,7 +6,9 @@ use App\CategoriesState;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MembersRequest;
 use App\Members;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class MembersController extends Controller
@@ -45,15 +47,14 @@ class MembersController extends Controller
      */
     public function store(MembersRequest $request)
     {
-        // $this->validate($request, [
-        //     'author_name' => 'required|min:3'
-        // ],[
-        //     'author_name.required' => 'Nama penulis harus diisi',
-        //     'author_name.min' => 'Nama penulis minimal 3 huruf'
-        // ]);
 
         $validated = $request->validated();
         $validated['slug'] = Str::slug($validated['first_name'].' '.$request['last_name']);
+        $validated['date_of_birth'] = date('yy-m-d',strtotime($validated['date_of_birth']));
+        $validated['member_code'] = $request['member_code'];
+        $validated['last_name'] = $request['last_name'];
+        $validated['cst_id']= $request['cst_id'];
+        $validated['user_id'] = Auth::id();
 
         Members::create($validated);
 

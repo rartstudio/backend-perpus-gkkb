@@ -78,15 +78,20 @@ class DataController extends Controller
 
     public function members()
     {
-        $members = Members::select('id','member_code',DB::raw("CONCAT(first_name,' ',last_name) as full_name"),'slug','gender','cst_id')->with('category_state')->orderBy('full_name', 'ASC');
+        $members = Members::select('id','member_code',DB::raw("CONCAT(first_name,' ',last_name) as full_name"),'slug','gender','cst_id')->with('category_state')->orderBy('member_code', 'ASC');
 
         return datatables()->of($members)
-        ->addColumn('category_state',function(Members $model){
-            return $model->category_state->cst_name;
-        })
-        ->addColumn('action','admin.member.action')
-        ->addIndexColumn()
-        ->rawColumns(['action'])
-        ->toJson();
+            //if we use concat add filter column in below
+            ->filterColumn('full_name', function($query, $keyword) {
+                $sql = "CONCAT(first_name,'-',last_name)  like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
+            ->addColumn('category_state',function(Members $model){
+                return $model->category_state->cst_name;
+                })
+            ->addColumn('action','admin.member.action')
+            ->addIndexColumn()
+            ->rawColumns(['action'])
+            ->toJson();
     }
 }
