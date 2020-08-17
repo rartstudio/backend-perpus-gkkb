@@ -47,7 +47,6 @@ class MembersController extends Controller
      */
     public function store(MembersRequest $request)
     {
-
         $validated = $request->validated();
         $validated['slug'] = Str::slug($validated['first_name'].' '.$request['last_name']);
         $validated['date_of_birth'] = date('yy-m-d',strtotime($validated['date_of_birth']));
@@ -80,9 +79,10 @@ class MembersController extends Controller
      */
     public function edit(Members $member)
     {
-        return view('admin.author.edit',[
-            'members' => $member,
-            'title' => 'Edit Penulis'
+        return view('admin.member.edit',[
+            'member' => $member,
+            'categories_state' => CategoriesState::orderBy('cst_name','ASC')->get(),
+            'title' => 'Edit Member'
         ]);
     }
 
@@ -96,11 +96,16 @@ class MembersController extends Controller
     public function update(MembersRequest $request, Members $member)
     {
         $validated = $request->validated();
-        $validated['slug'] = Str::slug($validated['author_name']);
+        $validated['slug'] = Str::slug($validated['first_name'].' '.$request['last_name']);
+        $validated['date_of_birth'] = date('yy-m-d',strtotime($validated['date_of_birth']));
+        $validated['member_code'] = $request['member_code'];
+        $validated['last_name'] = $request['last_name'];
+        $validated['cst_id']= $request['cst_id'];
+        $validated['user_id'] = Auth::id();
 
         $member->update($validated);
-        return redirect()->route('admin.authors.index')
-                ->with('info','Data Penulis berhasil diupdate');
+        return redirect()->route('admin.members.index')
+                ->with('info','Data Member berhasil diupdate');
     }
 
     /**
@@ -112,7 +117,7 @@ class MembersController extends Controller
     public function destroy(Members $member)
     {
         $member->delete();
-        return redirect()->route('admin.member.index')
+        return redirect()->route('admin.members.index')
             ->with('danger','Data member berhasil dihapus');
     }
 }

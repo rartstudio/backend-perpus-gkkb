@@ -1,104 +1,122 @@
 @extends('admin.templates.default')
 
+@push('aftercss')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/css/gijgo.min.css " type="text/css">    
+@endpush
+
 @section('content')
     <div class="box">
         <div class="box-body">
-            <form action="{{ route('admin.books.update', $book) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.members.update',$member) }}" method="POST">
                 @method("PUT")
                 @csrf
                 <div class="form-group">
-                    <label for="cbo_id">Kategori Buku</label>
-                    <select name="cbo_id" id="cbo_id" class="form-control select2 @error('cbo_id') border border-danger @enderror">
-                        @foreach ($categories_book as $category_book)
-                            <option value="{{ $category_book->id ?? old('cbo_id') }}"
-                                @if ($category_book->id == $book->cbo_id)
-                                    selected
-                                @endif
-                            >
-                                {{ $category_book->cbo_name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('cbo_id')
+                    <label for="member_code">Nomor Member</label>
+                    <input type="text" name="member_code" id="member_code" class="form-control @error('member_code') border border-danger @enderror" placeholder="Ketikkan nama depan member" value="{{ $member->member_code }} " readonly>
+                    @error('member_code')
                         <span class="form-text text-red">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label for="title">Judul</label>
-                    <input type="text" name="title" id="title" class="form-control @error('title') border border-danger @enderror" placeholder="Ketikkan judul buku" value="{{ $book->title ?? old('title') }}">
-                    @error('title')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="cst_id">Kartu Identitas</label>
+                            <select name="cst_id" id="cst_id" class="form-control select2 @error('cst_id') border border-danger @enderror">
+                                @foreach ($categories_state as $category_state)
+                                    <option value="{{ $category_state->id ?? old('cst_id') }}" @if ($category_state->id == $member->cst_id)
+                                        selected
+                                    @endif>{{ $category_state->cst_name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('cst_id')
+                                <span class="form-text text-red">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="no_cst">No Kartu Identitas</label>
+                            <input type="text" name="no_cst" id="no_cst" class="form-control @error('no_cst') border border-danger @enderror" placeholder="Ketikkan no kartu identitas" value="{{$member->no_cst ?? old('no_cst')}}">
+                            @error('no_cst')
+                                <span class="form-text text-red">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="first_name">Nama Depan</label>
+                            <input type="text" name="first_name" id="first_name" class="form-control @error('first_name') border border-danger @enderror" placeholder="Ketikkan nama depan member" value="{{$member->first_name ?? old('first_name')}}">
+                            @error('first_name')
+                                <span class="form-text text-red">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="last_name">Nama Belakang</label>
+                            <input type="text" name="last_name" id="last_name" class="form-control @error('last_name') border border-danger @enderror" placeholder="Ketikkan nama belakang member" value="{{$member->last_name ?? old('last_name')}}">
+                            @error('last_name')
+                                <span class="form-text text-red">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="date_of_birth">Tanggal Lahir</label>
+                            <input id="datepicker" name="date_of_birth" class="form-control @error('date_of_birth') border border-danger @enderror" value="{{ date('d-m-yy',strtotime($member->date_of_birth)) ?? old('date_of_birth') }}">
+                            @error('date_of_birth')
+                                <span class="form-text text-red">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="gender">Gender</label>
+                        <select name="gender" id="gender" class="form-control select2 @error('gender') border border-danger @enderror">
+                            <option value="Pria" @if ($member->gender == 'Pria')
+                                selected
+                            @endif>Pria</option>
+                            <option value="Wanita" @if ($member->gender == 'Wanita')
+                                selected
+                            @endif>Wanita</option>
+                        </select>
+                        @error('gender')
+                            <span class="form-text text-red">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="phone_number">Nomor HP</label>
+                            <input type="text" name="phone_number" id="phone_number" class="form-control @error('phone_number') border border-danger @enderror" placeholder="Ketikkan nomor hp member" value="{{$member->phone_number ?? old('phone_number')}}">
+                            @error('phone_number')
+                                <span class="form-text text-red">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="description">Deskripsi</label>
-                    <textarea name="description" id="description" class="form-control @error('description') border border-danger @enderror" rows="3">{{ $book->description ?? old('description')}}</textarea>
-                    @error('description')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="qty">Qty</label>
-                    <input type="number" name="qty" id="qty" class="form-control @error('qty') border border-danger @enderror" placeholder="Ketikkan deskripsi buku" value="{{ $book->qty ?? old('qty') }}">
-                    @error('qty')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="author_id">Penulis</label>
-                    <select name="author_id" id="author_id" class="form-control select2 @error('author_id') border border-danger @enderror">
-                        @foreach ($authors as $author)
-                            <option value="{{ $author->id ?? old('author_id') }}"
-                                @if ($author->id == $book->author_id)
-                                    selected
-                                @endif
-                            >
-                                {{ $author->author_name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('author_id')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="pub_id">Penerbit</label>
-                    <select name="pub_id" id="pub_id" class="form-control select2 @error('pub_id') border border-danger @enderror">
-                        @foreach ($publishers as $publisher)
-                            <option value="{{ $publisher->id ?? old('pub_id') }}"
-                                @if ($publisher->id == $book->pub_id)
-                                    selected
-                                @endif
-                            >
-                                {{ $publisher->pub_name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('pub_id')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="cover">Sampul</label>
-                    <input type="file" class="form-control @error('qty') border border-danger @enderror" name="cover" id="cover">
-                    @error('cover')
-                        <span class="form-text text-red">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Ubah">
+                    <button type="submit" class="btn btn-primary" id="btn-form">Ubah</button>
                 </div>
             </form>
         </div>
@@ -118,15 +136,25 @@
     <script>
         $('.select2').select2();
     </script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/21.0.0/classic/ckeditor.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/js/gijgo.min.js"></script>
     <script>
-        ClassicEditor
-                .create( document.querySelector( '#description' ) )
-                .then( editor => {
-                        console.log( editor );
-                } )
-                .catch( error => {
-                        console.error( error );
-                } );
+        const getDatePicker = document.querySelector('#datepicker').value;
+        console.log(getDatePicker);
+
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4',
+            format: 'dd-mm-yyyy',
+            value: getDatePicker
+        });
+    </script>
+
+    <script>
+        var btnTambah = document.getElementById('btn-form');
+
+        btnTambah.addEventListener('click', function(e){
+            btnTambah.innerHTML = "Tunggu...";
+            btnTambah.disabled = true;
+        });
     </script>
 @endpush
