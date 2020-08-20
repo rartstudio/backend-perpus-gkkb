@@ -72,3 +72,12 @@ FILESYSTEM_DRIVER=public
 'root' => public_path()
 
 php artisan make:request AuthorsRequest
+
+//membuat controller untuk api
+php artisan make:controller Api\BooksController
+
+//membuat resource untuk api (single data)
+php artisan make:resource Books\BookResource
+
+//membuat resource untuk api (banyak data)
+php artisan make:resource Books\BookCollection
