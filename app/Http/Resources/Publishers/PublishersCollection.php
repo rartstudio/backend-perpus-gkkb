@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Books;
+namespace App\Http\Resources\Publishers;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class BookCollection extends ResourceCollection
+class PublishersCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -15,10 +15,10 @@ class BookCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => BookResource::collection($this->collection),
+            'data' => PublishersResource::collection($this->collection),
             'meta' => [
-                'books_total' => $this->collection->count()
+                'publishers_total' => $this->collection->count()
             ]
-        ]
+        ];
     }
 }
