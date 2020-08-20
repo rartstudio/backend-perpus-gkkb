@@ -19,6 +19,6 @@ class BookCollection extends ResourceCollection
             'meta' => [
                 'books_total' => $this->collection->count()
             ]
-        ]
+        ];
     }
 }
