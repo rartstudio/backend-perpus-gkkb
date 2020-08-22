@@ -16,6 +16,8 @@ class CreateRecomendationBooksTable extends Migration
         Schema::create('recomendation_books', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('book_id');
+            $table->date('started_at');
+            $table->date('ended_at');
             $table->integer('status');
             $table->softDeletes();
             $table->timestamps();
