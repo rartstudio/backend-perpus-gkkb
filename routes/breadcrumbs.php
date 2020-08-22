@@ -144,3 +144,9 @@ Breadcrumbs::for('admin.members.show',function($trail,$book){
     $trail->push('Member', route('admin.members.index'));
     $trail->push('Detail Member', route('admin.members.show', $book));
 });
+
+//recommendation books
+Breadcrumbs::for('admin.recommendation-books.index',function($trail){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('Rekomendasi Buku', route('admin.recommendation-books.index'));
+});

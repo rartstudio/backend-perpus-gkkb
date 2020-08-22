@@ -10,7 +10,6 @@ $factory->define(RecomendationBooks::class, function (Faker $faker) {
 
     return [
         'book_id' => Books::inRandomOrder()->first()->id,
-        'started_at' => now(),
-        'ended_at' => now()
+        'status' => $faker->numberBetween(0,1)
     ];
 });

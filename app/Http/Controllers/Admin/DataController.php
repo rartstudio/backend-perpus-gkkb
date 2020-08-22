@@ -9,6 +9,7 @@ use App\CategoriesState;
 use App\Http\Controllers\Controller;
 use App\Members;
 use App\Publisher;
+use App\RecomendationBooks;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -92,6 +93,30 @@ class DataController extends Controller
             ->addColumn('action','admin.member.action')
             ->addIndexColumn()
             ->rawColumns(['action'])
+            ->toJson();
+    }
+
+    public function recomendationBooks ()
+    {
+        $recommendations = RecomendationBooks::orderBy('status','DESC');
+
+        return datatables()->of($recommendations)
+            ->addColumn('title', function(RecomendationBooks $model){
+                return $model->book->title;
+            })
+            ->editColumn('cover', function(RecomendationBooks $model){
+                return '<img src="'.$model->book->getCover().'" height="180px">';
+            })
+            ->editColumn('status', function(RecomendationBooks $model){
+                if($model->status == 1) {
+                    return 'Aktif';
+                }
+                else {
+                    return 'Tidak Aktif';
+                }
+            })
+            ->addIndexColumn()
+            ->rawColumns(['cover'])
             ->toJson();
     }
 }

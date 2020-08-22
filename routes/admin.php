@@ -10,6 +10,8 @@ Route::get('/categories_state/data','DataController@categories_state')->name('ca
 Route::get('/publishers/data','DataController@publishers')->name('publishers.data');
 Route::get('/books/data','DataController@books')->name('books.data');
 Route::get('/members/data','DataController@members')->name('members.data');
+Route::get('/recommendation-books/data','DataController@recomendationBooks')->name('recommendation-books.data');
+
 
 Route::resource('authors', 'AuthorsController');
 Route::resource('categories_book', 'CategoriesBookController');
@@ -17,3 +19,4 @@ Route::resource('publishers', 'PublishersController');
 Route::resource('categories_state', 'CategoriesStateController');
 Route::resource('books', 'BooksController');
 Route::resource('members', 'MembersController');
+Route::get('recommendation-books','RecomendationBooksController@index')->name('recommendation-books.index');
