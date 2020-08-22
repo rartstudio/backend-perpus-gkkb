@@ -25,8 +25,10 @@ Route::get('book/{book}','Api\BooksController@show');
 Route::get('author','Api\AuthorsController@index');
 Route::get('author/{author}','Api\AuthorsController@show');
 
-Route::get('categories_book','Api\CategoriesBookController@index');
-Route::get('categories_book/{category_book}','Api\CategoriesBookController@show');
+Route::get('categories-book','Api\CategoriesBookController@index');
+Route::get('categories-book/{category_book}','Api\CategoriesBookController@show');
 
 Route::get('publisher','Api\PublishersController@index');
 Route::get('publisher/{publisher}','Api\PublishersController@show');
+
+Route::get('recomendation-books','Api\RecomendationBooksController@index');
