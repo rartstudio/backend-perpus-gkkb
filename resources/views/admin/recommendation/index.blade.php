@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="box">
+        <div class="box-header">
+            <a href="{{ route('admin.members.create') }}" class="btn btn-primary my-2">Tambah Member</a>
+        </div>
         <div class="box-body">
             <table class="table table-bordered table-hover" id="dataTable">
                 <thead>
@@ -9,6 +12,8 @@
                         <th>Id</th>
                         <th>Cover</th>
                         <th>Judul</th>
+                        <th>Mulai</th>
+                        <th>Berakhir</th>
                         <th>Status</th>
                         {{-- <th>Aksi</th> --}}
                     </tr>
@@ -52,6 +57,8 @@
                     { data: 'DT_RowIndex', orderable:false, searchable:false},
                     { data: 'cover'},
                     { data: 'title'},
+                    { data: 'started_at'},
+                    { data: 'ended_at'},
                     { data: 'status'},
                     // { data: 'action'}
                 ]
