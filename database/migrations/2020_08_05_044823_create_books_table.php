@@ -23,6 +23,7 @@ class CreateBooksTable extends Migration
             $table->text('description')->nullable();
             $table->integer('qty')->nullable();
             $table->string('cover')->nullable()->default(null);
+            $table->unsignedBigInteger('admin_id');
             $table->softDeletes();
             $table->timestamps();
 

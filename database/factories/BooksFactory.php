@@ -25,5 +25,6 @@ $factory->define(Books::class, function (Faker $faker) {
         'description' => $faker->sentence(12),
         'qty' => rand(10,50),
         'cover' =>$cover,
+        'admin_id' => 1
     ];
 });
