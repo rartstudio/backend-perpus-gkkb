@@ -69,7 +69,7 @@ class DataController extends Controller
                     return $model->author->author_name;
                 })
                 ->editColumn('cover', function(Books $model){
-                    return '<img src="'.$model->getCover().'" height="180px">';
+                    return '<img src="'.$model->getCover().'" height="180px" width="130px">';
                 })
                 ->addColumn('action','admin.book.action')
                 ->addIndexColumn()
@@ -105,7 +105,7 @@ class DataController extends Controller
                 return $model->book->title;
             })
             ->editColumn('cover', function(RecomendationBooks $model){
-                return '<img src="'.$model->book->getCover().'" height="180px">';
+                return '<img src="'.$model->book->getCover().'" height="180px" width="130px">';
             })
             ->editColumn('status', function(RecomendationBooks $model){
                 if($model->status == 1) {
