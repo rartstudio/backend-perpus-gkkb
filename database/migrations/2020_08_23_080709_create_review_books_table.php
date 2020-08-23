@@ -19,6 +19,7 @@ class CreateReviewBooksTable extends Migration
             $table->unsignedBigInteger('book_id');
             $table->text('comment');
             $table->integer('rating');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

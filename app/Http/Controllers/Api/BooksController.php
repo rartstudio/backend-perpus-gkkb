@@ -13,7 +13,7 @@ class BooksController extends Controller
     public function index() 
     {
         //get all data book
-        $data = Books::with(['author','categories_book','publisher'])->paginate(5);
+        $data = Books::with(['author','categories_book','publisher','review'])->paginate(5);
 
         return new BookCollection($data);
     }
