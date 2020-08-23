@@ -3,7 +3,7 @@
 @section('content')
     <div class="box">
         <div class="box-header">
-            <a href="{{ route('admin.members.create') }}" class="btn btn-primary my-2">Tambah Member</a>
+            <a href="{{ route('admin.recommendation-books.create') }}" class="btn btn-primary my-2">Tambah Rekomendasi Buku</a>
         </div>
         <div class="box-body">
             <table class="table table-bordered table-hover" id="dataTable">
@@ -15,7 +15,7 @@
                         <th>Mulai</th>
                         <th>Berakhir</th>
                         <th>Status</th>
-                        {{-- <th>Aksi</th> --}}
+                        <th>Aksi</th>
                     </tr>
                 </thead>
             </table>
@@ -60,7 +60,7 @@
                     { data: 'started_at'},
                     { data: 'ended_at'},
                     { data: 'status'},
-                    // { data: 'action'}
+                    { data: 'action'}
                 ]
             })
         });

@@ -19,4 +19,4 @@ Route::resource('publishers', 'PublishersController');
 Route::resource('categories_state', 'CategoriesStateController');
 Route::resource('books', 'BooksController');
 Route::resource('members', 'MembersController');
-Route::get('recommendation-books','RecomendationBooksController@index')->name('recommendation-books.index');
+Route::resource('recommendation-books','RecomendationBooksController');

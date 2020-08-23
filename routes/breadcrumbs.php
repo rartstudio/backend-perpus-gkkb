@@ -133,20 +133,32 @@ Breadcrumbs::for('admin.members.create',function($trail){
 });
 
 
-Breadcrumbs::for('admin.members.edit',function($trail,$book){
+Breadcrumbs::for('admin.members.edit',function($trail,$member){
     $trail->push('Beranda', route('admin.dashboard'));
     $trail->push('Member', route('admin.members.index'));
-    $trail->push('Edit Member', route('admin.members.edit', $book));
+    $trail->push('Edit Member', route('admin.members.edit', $member));
 });
 
-Breadcrumbs::for('admin.members.show',function($trail,$book){
+Breadcrumbs::for('admin.members.show',function($trail,$member){
     $trail->push('Beranda', route('admin.dashboard'));
     $trail->push('Member', route('admin.members.index'));
-    $trail->push('Detail Member', route('admin.members.show', $book));
+    $trail->push('Detail Member', route('admin.members.show', $member));
 });
 
 //recommendation books
 Breadcrumbs::for('admin.recommendation-books.index',function($trail){
     $trail->push('Beranda', route('admin.dashboard'));
     $trail->push('Rekomendasi Buku', route('admin.recommendation-books.index'));
+});
+
+Breadcrumbs::for('admin.recommendation-books.create',function($trail){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('Rekomendasi Buku', route('admin.recommendation-books.index'));
+    $trail->push('Tambah Rekomendasi Buku', route('admin.recommendation-books.create'));
+});
+
+Breadcrumbs::for('admin.recommendation-books.edit',function($trail,$recommendation_book){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('Rekomendasi Buku', route('admin.recommendation-books.index'));
+    $trail->push('Edit Rekomendasi Buku', route('admin.recommendation-books.edit', $recommendation_book));
 });

@@ -1,84 +1,50 @@
 @extends('admin.templates.default')
 
+@push('aftercss')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/css/gijgo.min.css " type="text/css">    
+@endpush
+
 @section('content')
     <div class="box">
         <div class="box-body">
-            <form action="{{ route('admin.books.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.members.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="cbo_id">Kategori Buku</label>
-                    <select name="cbo_id" id="cbo_id" class="form-control select2 @error('cbo_id') border border-danger @enderror">
-                        @foreach ($categories_book as $category_book)
-                            <option value="{{ $category_book->id ?? old('cbo_id') }}">{{ $category_book->cbo_name }}</option>
+                    <label for="book_id">Buku</label>
+                    <select name="book_id" id="book_id" class="form-control select2 @error('book_id') border border-danger @enderror">
+                        @foreach ($books as $book)
+                            <option value="{{ $book->id ?? old('book_id') }}">{{ $book->title }}</option>
                         @endforeach
                     </select>
-                    @error('cbo_id')
+                    @error('book_id')
                         <span class="form-text text-red">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label for="title">Judul</label>
-                    <input type="text" name="title" id="title" class="form-control @error('title') border border-danger @enderror" placeholder="Ketikkan judul buku" value="{{old('title')}}">
-                    @error('title')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="description">Deskripsi</label>
-                    <textarea name="description" id="description" class="form-control @error('description') border border-danger @enderror" rows="3">{{ old('description')}}</textarea>
-                    @error('description')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="qty">Qty</label>
-                    <input type="number" name="qty" id="qty" class="form-control @error('qty') border border-danger @enderror" placeholder="Ketikkan jumlah buku" value="{{old('qty')}}">
-                    @error('qty')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="author_id">Penulis</label>
-                    <select name="author_id" id="author_id" class="form-control select2 @error('author_id') border border-danger @enderror">
-                        @foreach ($authors as $author)
-                            <option value="{{ $author->id ?? old('author_id') }}">{{ $author->author_name }}</option>
-                        @endforeach
-                    </select>
-                    @error('author_id')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="pub_id">Penerbit</label>
-                    <select name="pub_id" id="pub_id" class="form-control select2 @error('pub_id') border border-danger @enderror">
-                        @foreach ($publishers as $publisher)
-                            <option value="{{ $publisher->id ?? old('pub_id') }}">{{ $publisher->pub_name }}</option>
-                        @endforeach
-                    </select>
-                    @error('pub_id')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="cover">Sampul</label>
-                    <input type="file" name="cover" id="cover" class="form-control @error('cover') border border-danger @enderror">
-                    @error('cover')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="started_at">Tanggal Mulai</label>
+                            <input id="datepicker" name="started_at" class="form-control @error('started_at') border border-danger @enderror" value="{{ old('started_at') }}">
+                            @error('started_at')
+                                <span class="form-text text-red">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="ended_at">Tanggal Berakhir</label>
+                            <input id="datepicker2" name="ended_at" class="form-control @error('ended_at') border border-danger @enderror" value="{{ old('ended_at') }}">
+                            @error('ended_at')
+                                <span class="form-text text-red">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary" id="btn-form">Tambah</button>
@@ -102,16 +68,16 @@
         $('.select2').select2();
     </script>
 
-    <script src="https://cdn.ckeditor.com/ckeditor5/21.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/js/gijgo.min.js"></script>
     <script>
-        ClassicEditor
-                .create( document.querySelector( '#description' ) )
-                .then( editor => {
-                        console.log( editor );
-                } )
-                .catch( error => {
-                        console.error( error );
-                } );
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4',
+            format: 'dd-mm-yyyy'
+        });
+        $('#datepicker2').datepicker({
+            uiLibrary: 'bootstrap4',
+            format: 'dd-mm-yyyy'
+        });
     </script>
 
     <script>

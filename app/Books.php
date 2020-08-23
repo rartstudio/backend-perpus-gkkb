@@ -31,6 +31,11 @@ class Books extends Model
         return $this->hasOne('App\RecomendationBooks', 'book_id', 'id');
     }
 
+    public function review()
+    {
+        return $this->hasMany('App\ReviewBooks', 'book_id', 'id');
+    }
+
     public function transaction_details()
     {
         return $this->hasMany(TransactionDetail::class);

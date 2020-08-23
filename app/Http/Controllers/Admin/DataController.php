@@ -115,8 +115,9 @@ class DataController extends Controller
                     return 'Tidak Aktif';
                 }
             })
+            ->addColumn('action','admin.recommendation.action')
             ->addIndexColumn()
-            ->rawColumns(['cover'])
+            ->rawColumns(['cover','action'])
             ->toJson();
     }
 }

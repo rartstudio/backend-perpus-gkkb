@@ -3,99 +3,49 @@
 @section('content')
     <div class="box">
         <div class="box-body">
-            <form action="{{ route('admin.books.update', $book) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.recommendation-books.update', $recommendation_book) }}" method="POST" >
                 @method("PUT")
                 @csrf
                 <div class="form-group">
-                    <label for="cbo_id">Kategori Buku</label>
-                    <select name="cbo_id" id="cbo_id" class="form-control select2 @error('cbo_id') border border-danger @enderror">
-                        @foreach ($categories_book as $category_book)
-                            <option value="{{ $category_book->id ?? old('cbo_id') }}"
-                                @if ($category_book->id == $book->cbo_id)
+                    <label for="book_id">Buku</label>
+                    <select name="book_id" id="book_id" class="form-control select2 @error('book_id') border border-danger @enderror">
+                        @foreach ($books as $book)
+                            <option value="{{ $book->id ?? old('book_id') }}"
+                                @if ($book->id == $recommendation_book->book_id)
                                     selected
                                 @endif
-                            >
-                                {{ $category_book->cbo_name }}
-                            </option>
+                                >{{ $book->title }}</option>
                         @endforeach
                     </select>
-                    @error('cbo_id')
+                    @error('book_id')
                         <span class="form-text text-red">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label for="title">Judul</label>
-                    <input type="text" name="title" id="title" class="form-control @error('title') border border-danger @enderror" placeholder="Ketikkan judul buku" value="{{ $book->title ?? old('title') }}">
-                    @error('title')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="description">Deskripsi</label>
-                    <textarea name="description" id="description" class="form-control @error('description') border border-danger @enderror" rows="3">{{ $book->description ?? old('description')}}</textarea>
-                    @error('description')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="qty">Qty</label>
-                    <input type="number" name="qty" id="qty" class="form-control @error('qty') border border-danger @enderror" placeholder="Ketikkan deskripsi buku" value="{{ $book->qty ?? old('qty') }}">
-                    @error('qty')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="author_id">Penulis</label>
-                    <select name="author_id" id="author_id" class="form-control select2 @error('author_id') border border-danger @enderror">
-                        @foreach ($authors as $author)
-                            <option value="{{ $author->id ?? old('author_id') }}"
-                                @if ($author->id == $book->author_id)
-                                    selected
-                                @endif
-                            >
-                                {{ $author->author_name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('author_id')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="pub_id">Penerbit</label>
-                    <select name="pub_id" id="pub_id" class="form-control select2 @error('pub_id') border border-danger @enderror">
-                        @foreach ($publishers as $publisher)
-                            <option value="{{ $publisher->id ?? old('pub_id') }}"
-                                @if ($publisher->id == $book->pub_id)
-                                    selected
-                                @endif
-                            >
-                                {{ $publisher->pub_name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('pub_id')
-                        <span class="form-text text-red">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="cover">Sampul</label>
-                    <input type="file" class="form-control @error('qty') border border-danger @enderror" name="cover" id="cover">
-                    @error('cover')
-                        <span class="form-text text-red">{{ $message }}</span>
-                    @enderror
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="started_at">Tanggal Mulai</label>
+                            <input id="datepicker" name="started_at" class="form-control @error('started_at') border border-danger @enderror" value="{{ date('d-m-yy',strtotime($recommendation_book->started_at)) ?? old('started_at') }}">
+                            @error('started_at')
+                                <span class="form-text text-red">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="ended_at">Tanggal Berakhir</label>
+                            <input id="datepicker2" name="ended_at" class="form-control @error('ended_at') border border-danger @enderror" value="{{ date('d-m-yy',strtotime($recommendation_book->ended_at)) ?? old('ended_at') }}">
+                            @error('ended_at')
+                                <span class="form-text text-red">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary" id="btn-form">Ubah</button>
