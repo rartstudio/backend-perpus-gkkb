@@ -20,6 +20,7 @@ class CreateRecomendationBooksTable extends Migration
             $table->date('started_at');
             $table->date('ended_at');
             $table->integer('status');
+            $table->unsignedBigInteger('admin_id');
             $table->softDeletes();
             $table->timestamps();
         });

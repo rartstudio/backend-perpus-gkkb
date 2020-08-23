@@ -7,7 +7,7 @@
 @section('content')
     <div class="box">
         <div class="box-body">
-            <form action="{{ route('admin.members.store') }}" method="POST">
+            <form action="{{ route('admin.recommendation-books.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="book_id">Buku</label>

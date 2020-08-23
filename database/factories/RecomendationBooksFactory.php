@@ -4,6 +4,7 @@
 
 use App\Books;
 use App\RecomendationBooks;
+use App\User;
 use Carbon\Carbon;
 use Faker\Generator as Faker;
 
@@ -19,6 +20,7 @@ $factory->define(RecomendationBooks::class, function (Faker $faker) {
         'slug' => $slug,
         'started_at' => $date,
         'ended_at' => $date,
-        'status' => $status
+        'status' => $status,
+        'admin_id' => User::inRandomOrder()->first()->id,
     ];
 });

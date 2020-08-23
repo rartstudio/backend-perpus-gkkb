@@ -9,6 +9,8 @@ class RecomendationBooks extends Model
 {
     use SoftDeletes;
 
+    protected $guarded= [];
+
     public function book()
     {
         return $this->belongsTo('App\Books', 'book_id', 'id');

@@ -1,5 +1,9 @@
 @extends('admin.templates.default')
 
+@push('aftercss')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/css/gijgo.min.css " type="text/css">    
+@endpush
+
 @section('content')
     <div class="box">
         <div class="box-body">
@@ -78,6 +82,22 @@
                 .catch( error => {
                         console.error( error );
                 } );
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gijgo/1.9.13/combined/js/gijgo.min.js"></script>
+    <script>
+        const getDatePicker = document.querySelector('#datepicker').value;
+        const getDatePicker2 = document.querySelector('#datepicker2').value;
+
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap4',
+            format: 'dd-mm-yyyy',
+            value: getDatePicker
+        });
+        $('#datepicker2').datepicker({
+            uiLibrary: 'bootstrap4',
+            format: 'dd-mm-yyyy',
+            value: getDatePicker2
+        });
     </script>
     <script>
         var btnTambah = document.getElementById('btn-form');

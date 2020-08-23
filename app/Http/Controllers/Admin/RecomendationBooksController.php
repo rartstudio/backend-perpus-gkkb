@@ -6,6 +6,7 @@ use App\Books;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RecommendationBooksRequest;
 use App\RecomendationBooks;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class RecomendationBooksController extends Controller
@@ -45,16 +46,24 @@ class RecomendationBooksController extends Controller
     public function store(RecommendationBooksRequest $request)
     {
         $validated = $request->validated();
-        //$validated['slug'] = Str::slug($validated['first_name'].' '.$request['last_name']);
-        $validated['date_of_birth'] = date('yy-m-d',strtotime($validated['date_of_birth']));
-        $validated['member_code'] = $request['member_code'];
-        $validated['last_name'] = $request['last_name'];
-        $validated['cst_id']= $request['cst_id'];
-        //$validated['user_id'] = Auth::id();
+        $validated['slug'] = Books::where('id',$validated['book_id'])->first()->slug;
+        $validated['started_at'] = date('yy-m-d',strtotime($validated['started_at']));
+        $validated['ended_at'] = date('yy-m-d',strtotime($validated['ended_at']));
+        $validated['admin_id'] = Auth::id();
 
-        //Members::create($validated);
+        $now = date('yy-m-d', strtotime(now()));
 
-        return redirect()->route('admin.members.index')->with('success', 'Data member berhasil ditambahkan');
+        //checking if user update ended at less than current date
+        if($validated['ended_at'] >= $now){
+            $validated['status'] = 1;
+        }
+        else {
+            $validated['status'] = 0;
+        }
+
+        RecomendationBooks::create($validated);
+
+        return redirect()->route('admin.recommendation-books.index')->with('success', 'Data rekomendasi berhasil ditambahkan');
     }
 
     /**
@@ -89,18 +98,26 @@ class RecomendationBooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RecomendationBooks $request, RecomendationBooks $recommendation_book)
+    public function update(RecommendationBooksRequest $request, RecomendationBooks $recommendation_book)
     {
         $validated = $request->validated();
-        //$validated['slug'] = Str::slug($validated['first_name'].' '.$request['last_name']);
-        $validated['date_of_birth'] = date('yy-m-d',strtotime($validated['date_of_birth']));
-        $validated['member_code'] = $request['member_code'];
-        $validated['last_name'] = $request['last_name'];
-        $validated['cst_id']= $request['cst_id'];
-        //$validated['user_id'] = Auth::id();
+        $validated['slug'] = Books::where('id',$validated['book_id'])->first()->slug;
+        $validated['started_at'] = date('yy-m-d',strtotime($validated['started_at']));
+        $validated['ended_at'] = date('yy-m-d',strtotime($validated['ended_at']));
+        $validated['admin_id'] = Auth::id();
+
+        $now = date('yy-m-d', strtotime(now()));
+
+        //checking if user update ended at less than current date
+        if($validated['ended_at'] >= $now){
+            $validated['status'] = 1;
+        }
+        else {
+            $validated['status'] = 0;
+        }
 
         $recommendation_book->update($validated);
-        return redirect()->route('admin.members.index')
+        return redirect()->route('admin.recommendation-books.index')
                 ->with('info','Data Member berhasil diupdate');
     }
 
@@ -113,7 +130,7 @@ class RecomendationBooksController extends Controller
     public function destroy(RecomendationBooks $recommendation_book)
     {
         $recommendation_book->delete();
-        return redirect()->route('admin.members.index')
+        return redirect()->route('admin.recommendation-books.index')
             ->with('danger','Data member berhasil dihapus');
     }
 }
