@@ -20,7 +20,7 @@ class BooksController extends Controller
 
     public function show (Books $book) 
     {
-        $data = Books::find($book->id);
+        $data = Books::with(['author','categories_book','publisher','review'])->find($book->id);
 
         //checking if data null
         if(is_null($data)){
