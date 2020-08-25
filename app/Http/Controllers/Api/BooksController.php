@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Books\BookCollection;
 use App\Http\Resources\Books\BookResource;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class BooksController extends Controller
 {
@@ -43,6 +42,28 @@ class BooksController extends Controller
 
             //get data
             $data = Books::with(['author','categories_book','publisher','review'])->whereIn('author_id',$conArray)->get();
+        }
+        else if ($request->query('cat')){
+            //get query
+            $query = $request->query('cat');    
+            
+            //get id of cat
+            $id = CategoriesBook::select('id')->where('cbo_name','like','%'.$query.'%')->get();
+
+            //encode it to array associative
+            $parser = json_decode($id);
+
+            //a container for using where in
+            $conArray = array();
+
+            //loop through array associative and object inside
+            foreach($parser as $value){
+                $int = $value->id;
+                array_push($conArray,$int);
+            }
+
+            //get data
+            $data = Books::with(['author','categories_book','publisher','review'])->whereIn('cbo_id',$conArray)->get();
         }
         else {
             $data = Books::with(['author','categories_book','publisher','review'])->take(10)->get();
