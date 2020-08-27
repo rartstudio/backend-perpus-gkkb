@@ -64,11 +64,11 @@ class BooksController extends Controller
             //get data
             $data = Books::with(['author','categories_book','publisher','review'])->whereIn('cbo_id',$conArray)->take(10)->get();
         }
-        else if ($request->query('last')){
+        else if ($request->query('sort')){
             //get query
-            $query = $request->query('last');
+            $query = $request->query('sort');
 
-            $data = Books::with(['author','categories_book','publisher','review'])->orderBy('created_at','DESC')->take(10)->get();
+            $data = Books::with(['author','categories_book','publisher','review'])->orderBy('created_at',$query)->take(10)->get();
         }
         else {
             $data = Books::with(['author','categories_book','publisher','review'])->take(10)->get();
