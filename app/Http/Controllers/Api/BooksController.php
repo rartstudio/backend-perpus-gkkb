@@ -12,12 +12,29 @@ use Illuminate\Http\Request;
 
 class BooksController extends Controller
 {
+    public function parserData($data){
+        //encode it to array associative
+        $parser = json_decode($data);
+
+        //a container for using where in
+        $conArray = array();
+
+        //loop through array associative and object inside
+        foreach($parser as $value){
+            $int = $value->id;
+            array_push($conArray,$int);
+        }
+
+        return $conArray;
+    }
+
     public function index(Request $request) 
     {
         //query name
         if ($request->query('name')){
             //get query
             $query = $request->query('name');    
+            
             //get all data book
             $data = Books::with(['author','categories_book','publisher','review'])->where('title','like','%'.$query.'%')->get();   
         }
@@ -28,17 +45,8 @@ class BooksController extends Controller
             //get id of author
             $id = Authors::select('id')->where('author_name','like','%'.$query.'%')->get();
 
-            //encode it to array associative
-            $parser = json_decode($id);
-
-            //a container for using where in
-            $conArray = array();
-
-            //loop through array associative and object inside
-            foreach($parser as $value){
-                $int = $value->id;
-                array_push($conArray,$int);
-            }
+            //using function parser data
+            $conArray = $this->parserData($id);
 
             //get data
             $data = Books::with(['author','categories_book','publisher','review'])->whereIn('author_id',$conArray)->get();
@@ -50,20 +58,17 @@ class BooksController extends Controller
             //get id of cat
             $id = CategoriesBook::select('id')->where('cbo_name','like','%'.$query.'%')->get();
 
-            //encode it to array associative
-            $parser = json_decode($id);
-
-            //a container for using where in
-            $conArray = array();
-
-            //loop through array associative and object inside
-            foreach($parser as $value){
-                $int = $value->id;
-                array_push($conArray,$int);
-            }
+            //using function parser data
+            $conArray = $this->parserData($id);
 
             //get data
-            $data = Books::with(['author','categories_book','publisher','review'])->whereIn('cbo_id',$conArray)->get();
+            $data = Books::with(['author','categories_book','publisher','review'])->whereIn('cbo_id',$conArray)->take(10)->get();
+        }
+        else if ($request->query('last')){
+            //get query
+            $query = $request->query('last');
+
+            $data = Books::with(['author','categories_book','publisher','review'])->orderBy('created_at','DESC')->take(10)->get();
         }
         else {
             $data = Books::with(['author','categories_book','publisher','review'])->take(10)->get();
