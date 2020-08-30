@@ -10,7 +10,7 @@ use App\Http\Requests\BooksRequest;
 use App\Publisher;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 //import storage
 use Illuminate\Support\Facades\Storage;
 
@@ -102,6 +102,8 @@ class BooksController extends Controller
             $cover = $request->file('cover')->store('assets/covers');
         }
 
+        $admin_id = Auth::user()->id;
+
         Books::create([
             'title' => $validated['title'],
             'slug' => $validated['slug'],
@@ -110,6 +112,7 @@ class BooksController extends Controller
             'pub_id' => $validated['pub_id'],
             'cbo_id' => $validated['cbo_id'],
             'qty' => $validated['qty'],
+            'admin_id' => $admin_id,
             'cover' => $cover
         ]);
 
