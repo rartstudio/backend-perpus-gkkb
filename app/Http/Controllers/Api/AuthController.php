@@ -13,7 +13,7 @@ class AuthController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:55',
-            'email' => 'email|required|unique:users',
+            'email' => 'email|required',
             'password' => 'required|confirmed'
         ]);
 
@@ -41,5 +41,11 @@ class AuthController extends Controller
 
         return response(['user' => auth()->user(), 'access_token' => $accessToken]);
 
+    }
+    public function logout(Request $request) {
+        $request->user()->token()->revoke();
+        return response()->json([
+            'message' => 'Successfully logged out'
+        ]);
     }
 }
