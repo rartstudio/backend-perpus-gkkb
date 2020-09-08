@@ -19,10 +19,11 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/user','Api\UserController@show')->middleware('auth:api');
-
+Route::get('/transaction','Api\TransactionController@index')->middleware('auth:api');
+Route::post('/logout', 'Api\AuthController@logout')->middleware('auth:api');
 Route::post('/register', 'Api\AuthController@register');
 Route::post('/login', 'Api\AuthController@login');
-Route::post('/logout', 'Api\AuthController@logout')->middleware('auth:api');
+
 
 
 Route::get('book','Api\BooksController@index');
@@ -37,4 +38,4 @@ Route::get('categories-book/{category_book}','Api\CategoriesBookController@show'
 Route::get('publisher','Api\PublishersController@index');
 Route::get('publisher/{publisher}','Api\PublishersController@show');
 
-Route::get('recomendation-books','Api\RecomendationBooksController@index');
+Route::get('recommendation-books','Api\RecomendationBooksController@index');
