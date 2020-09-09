@@ -7,6 +7,7 @@ use App\Members;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -20,9 +21,14 @@ class AuthController extends Controller
 
         $validatedData['password'] = bcrypt($request->password);
 
+        //create data user to table users
         $user = User::create($validatedData);
+        
+        //
+        $slug= Str::slug($validatedData['name']);
 
-        Members::create(['user_id' => $user->id, 'is_verified' => 0]);
+        //adding data user to table members to providing edit member form
+        Members::create(['user_id' => $user->id, 'is_verified' => 0, 'slug' => $slug]);
 
         $user->assignRole('user');
 

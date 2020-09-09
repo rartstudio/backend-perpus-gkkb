@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/user','Api\UserController@show')->middleware('auth:api');
 Route::get('/transaction','Api\TransactionController@index')->middleware('auth:api');
 Route::post('/logout', 'Api\AuthController@logout')->middleware('auth:api');
+Route::get('/member/{member}', 'Api\MembersController@show')->middleware('auth:api');
 Route::post('/register', 'Api\AuthController@register');
 Route::post('/login', 'Api\AuthController@login');
 
