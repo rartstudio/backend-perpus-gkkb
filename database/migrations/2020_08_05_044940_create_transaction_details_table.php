@@ -15,13 +15,10 @@ class CreateTransactionDetailsTable extends Migration
     {
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('transaction_id');
-            $table->unsignedBigInteger('book_id');
+            $table->integer('transaction_id');
+            $table->integer('book_id');
+            $table->integer('state');
             $table->integer('qty');
-            $table->timestamps();
-
-            $table->foreign('transaction_id')->references('id')->on('transactions')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->foreign('book_id')->references('id')->on('books')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 
