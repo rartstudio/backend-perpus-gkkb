@@ -17,4 +17,9 @@ class TransactionController extends Controller
         // return new AuthorCollection($data);
 
     }
+
+    public function store(Request $request)
+    {
+        
+    }
 }
