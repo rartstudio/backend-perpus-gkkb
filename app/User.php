@@ -46,12 +46,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function members()
     {
-        return $this->hasOne(Members::class);
+        return $this->hasOne('App\Members','user_id','id');
     }
 
-    public function users()
+    public function transactions()
     {
-        return $this->hasMany(Transactions::class);
+        return $this->hasMany('App\Transactions','user_id','id');
     }
     
     public function review()

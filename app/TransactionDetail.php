@@ -10,11 +10,11 @@ class TransactionDetail extends Model
 
     public function transaction()
     {
-        return $this->belongsTo(Transaction::class);
+        return $this->belongsTo('App\Transaction','transaction_id','id');
     }
 
     public function book()
     {
-        return $this->belongsTo(Books::class);
+        return $this->belongsTo('App\Books','book_id','id');
     }
 }

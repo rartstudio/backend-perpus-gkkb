@@ -14,7 +14,10 @@ class UserController extends Controller
     {
         $user = $request->user();
 
-        $data = User::with(['members'])->find($user->id);
+        // $data = User::with(['members','transactions','transaction_details.transa'])->find($user->id);
+
+        //get transaction details using transactions relation on user and transaction details in transaction
+        $data = User::with(['members','transactions','transactions.transaction_details','transactions.transaction_details.book'])->find($user->id);
 
         return new AuthResource($data);
     }

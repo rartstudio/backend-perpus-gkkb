@@ -38,7 +38,7 @@ class Books extends Model
 
     public function transaction_details()
     {
-        return $this->hasMany(TransactionDetail::class);
+        return $this->hasMany('App\TransactionDetail','book_id','id');
     }
 
     public function getCover(){

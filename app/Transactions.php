@@ -10,16 +10,11 @@ class Transactions extends Model
 
     public function transaction_details()
     {
-        return $this->hasMany(TransactionDetail::class);
+        return $this->hasMany('App\TransactionDetail','transaction_id','id');
     }
-
-    public function member()
+    
+    public function users()
     {
-        return $this->belongsTo(Members::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(Users::class);
+        return $this->belongsTo('App\User','user_id','id');
     }    
 }
