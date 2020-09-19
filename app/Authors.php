@@ -13,7 +13,7 @@ class Authors extends Model
 
     public function books()
     {
-        return $this->hasMany(Books::class);
+        return $this->hasMany('App\Books','author_id','id');
     }
 
     public function getRouteKeyName()

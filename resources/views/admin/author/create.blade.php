@@ -5,7 +5,7 @@
         <div class="box-header">
         </div>
         <div class="box-body">
-            <form action="{{ route('admin.authors.store') }}" method="POST">
+            <form action="{{ route('admin.authors.store') }}" method="POST" id="addForm">
                 @csrf
                 <div class="form-group">
                     <label for="name">Nama</label>
@@ -18,6 +18,7 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary" id="btn-form">Tambah</button>
+                    {{-- <button href="{{ route('admin.authors.store') }}" class="btn btn-danger" id="store">Hapus</button> --}}
                 </div>
             </form>
         </div>
@@ -30,7 +31,6 @@
 
         btnTambah.addEventListener('click', function(e){
             btnTambah.innerHTML = "Tunggu";
-            btnTambah.disabled = true;
         });
     </script>
 @endpush

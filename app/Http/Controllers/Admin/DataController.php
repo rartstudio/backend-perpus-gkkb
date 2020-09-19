@@ -63,10 +63,11 @@ class DataController extends Controller
     public function books()
     {
         $books = Books::select('id','title','qty','author_id','cover','slug')->with('author')->orderBy('title','ASC');
+        // $books = Books::select('id','title','qty','author_id','cover','slug')->orderBy('title','ASC');
 
         return datatables()->of($books)
                 ->addColumn('author', function(Books $model){
-                    return $model->author->author_name;
+                    return $model->author['author_name'];
                 })
                 ->editColumn('cover', function(Books $model){
                     return '<img src="'.$model->getCover().'" height="180px" width="130px">';

@@ -104,7 +104,7 @@
 
         btnTambah.addEventListener('click', function(e){
             btnTambah.innerHTML = "Tunggu...";
-            btnTambah.disabled = true;
+            
         });
     </script>
 @endpush
