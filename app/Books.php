@@ -13,7 +13,7 @@ class Books extends Model
 
     public function author()
     {
-        return $this->belongsTo(Authors::class);
+        return $this->belongsTo('App\Authors','author_id','id');
     }
 
     public function categories_book()
