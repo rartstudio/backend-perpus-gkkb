@@ -9,6 +9,12 @@ Breadcrumbs::for('admin.dashboard',function($trail){
     $trail->push('Beranda', route('admin.dashboard'));
 });
 
+Breadcrumbs::for('admin.profile',function($trail){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('Profile', route('admin.profile'));
+});
+
+
 
 Breadcrumbs::for('admin.authors.index',function($trail){
     $trail->push('Beranda', route('admin.dashboard'));

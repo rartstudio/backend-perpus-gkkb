@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('dashboard');
+Route::get('/profile', 'HomeController@profile')->name('profile');
 
 Route::get('/authors/data','DataController@authors')->name('authors.data');
 Route::get('/categories_book/data','DataController@categories_book')->name('categories_book.data');

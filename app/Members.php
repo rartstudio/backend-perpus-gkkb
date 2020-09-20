@@ -30,4 +30,19 @@ class Members extends Model
     {
         return 'slug';
     }
+
+    public function getCover(){
+        //checking if cover image from url
+        if(substr($this->image,0,5) == "https"){
+            return $this->image;
+        }
+
+        //checking if image from folder
+        if($this->image){
+            return asset($this->image);
+        }
+
+        //returning placeholder if image is null
+        return 'https://via.placeholder.com/150x150.png?text=No+Cover';
+    }
 }
