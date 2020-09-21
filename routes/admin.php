@@ -21,3 +21,5 @@ Route::resource('categories_state', 'CategoriesStateController');
 Route::resource('books', 'BooksController');
 Route::resource('members', 'MembersController');
 Route::resource('recommendation-books','RecomendationBooksController');
+
+Route::get('transactions/{id}','TransactionsController@show')->name('transactions-show');

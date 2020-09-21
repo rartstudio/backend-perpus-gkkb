@@ -25,5 +25,19 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets/js/demo.js') }}"></script>
 
+<script>
+  jQuery(document).ready(function($){
+      // $('#modal-lg').on('show.bs.modal',function(e){
+      //     var button = $(e.relatedTarget);
+      //     var modal = $(this);
+
+      //     modal.find('.modal-body').load(button.data("remote"));
+      //     modal.find('.modal-title').html(button.data("title"));
+      // });
+      $('body').on('click', '[data-toggle="modal"]', function(){
+      $($(this).data("target")+' .modal-body').load($(this).data("remote"));
+  }); 
+  });
+</script>
 
 @stack('scripts')

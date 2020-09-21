@@ -17,9 +17,7 @@ class HomeController extends Controller
         $book = Books::count();
         $categories_book = CategoriesBook::count();
         $members = Members::count();
-        $process = Transactions::with('users','transaction_details')->whereIn('state',array(1,2,4))->get();
-        $borrow = Transactions::with('users','transaction_details')->where('state','=',5)->get();
-        $history = Transactions::with('users','transaction_details')->whereIn('state',array(3,6))->get();
+        $process = Transactions::with('users','transaction_details','transaction_details.book')->whereIn('state',array(1,2,4))->get();
 
         // dd($process);
         return view('admin.home', [
@@ -27,8 +25,6 @@ class HomeController extends Controller
             'categories_book' => $categories_book,
             'members' => $members,
             'process' => $process,
-            'borrow' => $borrow,
-            'history' => $history
         ]);
     }
 

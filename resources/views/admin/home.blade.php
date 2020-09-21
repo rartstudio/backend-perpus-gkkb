@@ -106,10 +106,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $i = 1; ?>
                     @forelse ($process as $item)
                     <tr>
                         <td>
-                            
+                            {{ $i }}
                         </td>
                         <td>
                             <a>
@@ -137,23 +138,26 @@
                             @endif</span>
                         </td>
                         <td class="project-actions text-right">
-                            <a class="btn btn-primary btn-sm" href="#">
-                                <i class="fas fa-eye">
-                                </i>
-                                View
-                            </a>
+                                <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-lg" 
+                                data-remote="{{ route('admin.transactions-show', $item->id) }}"
+                                data-title="detail uuu"
+                                href="#modal-lg">
+                                    <i class="fas fa-eye">
+                                    </i>
+                                    Detail
+                                </a>
                             <a class="btn btn-info btn-sm" href="#">
                                 <i class="fas fa-pencil-alt">
                                 </i>
-                                Edit
+                                Siap
                             </a>
                             <a class="btn btn-danger btn-sm" href="#">
                                 <i class="fas fa-trash">
                                 </i>
-                                Delete
+                                Tolak
                             </a>
                         </td>
-                        
+                        <?php $i++; ?>
                     </tr>    
                     @empty
                     <tr>
@@ -163,203 +167,34 @@
                 </tbody>
             </table>
         </div>
+        
       <!-- /.card-body -->
     </div>
     <!-- /.card process-->
-
-   <!-- Default box -->
-    <div class="card card-success">
-        <div class="card-header">
-            <h3 class="card-title">Transaksi dalam Peminjaman</h3>
-
-            <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                <i class="fas fa-times"></i></button>
-            </div>
-        </div>
-        <div class="card-body p-0">
-        <table class="table table-striped projects">
-            <thead>
-                <tr>
-                    <th style="width: 1%">
-                        No
-                    </th>
-                    <th style="width: 20%">
-                        Kode Transaksi
-                    </th>
-                    <th style="width: 20%">
-                        Peminjam
-                    </th>
-                    <th style="width: 5%">
-                        Qty
-                    </th>
-                    <th style="width: 8%" class="text-center">
-                        Status
-                    </th>
-                    <th style="width: 20%">
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($borrow as $item)
-                <tr>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        <a>
-                            {{ $item->transaction_code }}
-                        </a>
-                        <br/>
-                        <small>
-                            {{ $item->created_at }}
-                        </small>
-                    </td>
-                    <td>
-                        {{ $item->users->name }}
-                    </td>
-                    <td class="project_progress">
-                        {{ $item->transaction_details->count() }}
-                    </td>
-                    <td class="project-state">
-                        <span class="badge badge-success">
-                        @if ($item->state == 1 )
-                            Menunggu
-                        @elseif($item->state == 2 )
-                            Diterima
-                        @else 
-                            siap
-                        @endif</span>
-                    </td>
-                    <td class="project-actions text-right">
-                        <a class="btn btn-primary btn-sm" href="#">
-                            <i class="fas fa-folder">
-                            </i>
-                            View
-                        </a>
-                        <a class="btn btn-info btn-sm" href="#">
-                            <i class="fas fa-pencil-alt">
-                            </i>
-                            Edit
-                        </a>
-                        <a class="btn btn-danger btn-sm" href="#">
-                            <i class="fas fa-trash">
-                            </i>
-                            Delete
-                        </a>
-                    </td>
-                    
-                </tr>    
-                @empty
-                <tr>
-                    Transaksi Tidak ada
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
-        </div>
-         <!-- /.card-body -->
-    </div>
-<!-- /.card borrow-->
-
-    <!-- Default box -->
-    <div class="card card-danger">
-        <div class="card-header">
-            <h3 class="card-title">Riwayat Transaksi</h3>
-
-            <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                <i class="fas fa-times"></i></button>
-            </div>
-        </div>
-        <div class="card-body p-0">
-            <table class="table table-striped projects">
-                <thead>
-                    <tr>
-                        <th style="width: 1%">
-                            No
-                        </th>
-                        <th style="width: 20%">
-                            Kode Transaksi
-                        </th>
-                        <th style="width: 20%">
-                            Peminjam
-                        </th>
-                        <th style="width: 5%">
-                            Qty
-                        </th>
-                        <th style="width: 8%" class="text-center">
-                            Status
-                        </th>
-                        <th style="width: 20%">
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($history as $item)
-                    <tr>
-                        <td>
-                            
-                        </td>
-                        <td>
-                            <a>
-                                {{ $item->transaction_code }}
-                            </a>
-                            <br/>
-                            <small>
-                                {{ $item->created_at }}
-                            </small>
-                        </td>
-                        <td>
-                            {{ $item->users->name }}
-                        </td>
-                        <td class="project_progress">
-                            {{ $item->transaction_details->count() }}
-                        </td>
-                        <td class="project-state">
-                            <span class="badge badge-success">
-                            @if ($item->state == 1 )
-                                Menunggu
-                            @elseif($item->state == 2 )
-                                Diterima
-                            @else 
-                                siap
-                            @endif</span>
-                        </td>
-                        <td class="project-actions text-right">
-                            <a class="btn btn-primary btn-sm" href="#">
-                                <i class="fas fa-folder">
-                                </i>
-                                View
-                            </a>
-                            <a class="btn btn-info btn-sm" href="#">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                Edit
-                            </a>
-                            <a class="btn btn-danger btn-sm" href="#">
-                                <i class="fas fa-trash">
-                                </i>
-                                Delete
-                            </a>
-                        </td>
-                        
-                    </tr>    
-                    @empty
-                    <tr>
-                        Transaksi Tidak ada
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-      <!-- /.card-body -->
-    </div>
-    <!-- /.card history-->
+    
   </section>
+
+<div class="modal fade" id="modal-lg">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Detail Transaksi</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-primary">Diterima</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
   <!-- /.content -->
 @endsection
