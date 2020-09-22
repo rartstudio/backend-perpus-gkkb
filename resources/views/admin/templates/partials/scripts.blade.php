@@ -35,7 +35,8 @@
       //     modal.find('.modal-title').html(button.data("title"));
       // });
       $('body').on('click', '[data-toggle="modal"]', function(){
-      $($(this).data("target")+' .modal-body').load($(this).data("remote"));
+        $($(this).data("target")+' .modal-body').load($(this).data("remote"));
+        $($(this).data("target")+' .modal-title').html($(this).data("title"));
   }); 
   });
 </script>

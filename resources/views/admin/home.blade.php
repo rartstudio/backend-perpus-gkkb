@@ -144,7 +144,7 @@
                             data-toggle="modal" 
                             data-target="#modal-lg" 
                             data-remote="{{ route('admin.transactions-show', $item->id) }}"
-                            data-title="detail uuu"
+                            data-title="Detail Transaksi {{ $item->transaction_code }}"
                             href="#modal-lg"
                             >
                               <i class="fas fa-eye">
@@ -174,11 +174,14 @@
                                 Siap
                             </a>
                             
-                            <button class="btn btn-danger btn-sm" href="{{ route('admin.transactions-rejected',$item->id) }}">
+                            <a class="btn btn-danger btn-sm" href="{{ route('admin.transactions-rejected',$item->id) }}"
+                              data-toggle="modal" 
+                            data-target="#modal-lg" 
+                            data-title="Detail Transaksi {{ $item->transaction_code }}">
                                 <i class="fas fa-trash">
                                 </i>
                                 Tolak
-                            </button>
+                            </a>
                         </td>
                         <?php $i++; ?>
                     </tr>    
@@ -207,13 +210,12 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Detail Transaksi</h4>
+        <h4 class="modal-title"></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        
       </div>
     </div>
     <!-- /.modal-content -->

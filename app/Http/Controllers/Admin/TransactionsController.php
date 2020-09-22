@@ -12,7 +12,7 @@ class TransactionsController extends Controller
     public function show($id){
         $item = TransactionDetail::with('book')->where('transaction_id','=',$id)->get();
 
-        return view('admin.transactions.pages',[
+        return view('admin.transactions.show',[
             'item' => $item
         ]);
     }
