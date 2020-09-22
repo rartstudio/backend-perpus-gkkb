@@ -35,5 +35,6 @@
 <!-- ./wrapper -->
 
 @include('admin.templates.partials.scripts')
+@include('admin.templates.partials.alert')
 </body>
 </html>

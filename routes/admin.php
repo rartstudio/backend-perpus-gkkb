@@ -12,6 +12,8 @@ Route::get('/publishers/data','DataController@publishers')->name('publishers.dat
 Route::get('/books/data','DataController@books')->name('books.data');
 Route::get('/members/data','DataController@members')->name('members.data');
 Route::get('/recommendation-books/data','DataController@recomendationBooks')->name('recommendation-books.data');
+Route::get('/transactions-borrow','DataController@transactions_borrow')->name('transactions-borrow');
+Route::get('/transactions-history','DataController@transactions_history')->name('transactions-history');
 
 
 Route::resource('authors', 'AuthorsController');
@@ -23,3 +25,5 @@ Route::resource('members', 'MembersController');
 Route::resource('recommendation-books','RecomendationBooksController');
 
 Route::get('transactions/{id}','TransactionsController@show')->name('transactions-show');
+Route::post('transactions-accepted/{id}','TransactionsController@accepted')->name('transactions-accepted');
+Route::post('transactions-rejected/{id}','TransactionsController@rejected')->name('transactions-rejected');

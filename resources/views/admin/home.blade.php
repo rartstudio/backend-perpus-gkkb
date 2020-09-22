@@ -92,16 +92,17 @@
                         <th style="width: 20%">
                             Kode Transaksi
                         </th>
-                        <th style="width: 20%">
+                        <th>
                             Peminjam
                         </th>
                         <th style="width: 5%">
                             Qty
                         </th>
-                        <th style="width: 8%" class="text-center">
+                        <th style="width: 10%" class="text-center">
                             Status
                         </th>
-                        <th style="width: 20%">
+                        <th style="width: 31%" class="text-center">
+                            Aksi
                         </th>
                     </tr>
                 </thead>
@@ -138,24 +139,46 @@
                             @endif</span>
                         </td>
                         <td class="project-actions text-right">
-                                <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-lg" 
-                                data-remote="{{ route('admin.transactions-show', $item->id) }}"
-                                data-title="detail uuu"
-                                href="#modal-lg">
-                                    <i class="fas fa-eye">
-                                    </i>
-                                    Detail
-                                </a>
-                            <a class="btn btn-info btn-sm" href="#">
+                          <a 
+                            class="btn btn-primary btn-sm" 
+                            data-toggle="modal" 
+                            data-target="#modal-lg" 
+                            data-remote="{{ route('admin.transactions-show', $item->id) }}"
+                            data-title="detail uuu"
+                            href="#modal-lg"
+                            >
+                              <i class="fas fa-eye">
+                              </i>
+                              Detail
+                          </a>
+                          <button 
+                            class="btn btn-info btn-sm 
+                              @if ($item->state == 2)
+                                disabled
+                              @endif" 
+                            href="{{ route('admin.transactions-accepted',$item->id) }}"
+                            id="accept"
+                            >
+                              <i class="fas fa-pencil-alt">
+                              </i>
+                              Diterima
+                          </button>
+                            <a class="btn btn-info btn-sm 
+                            @if ($item->state == 1)
+                                disabled
+                            @else
+                                
+                            @endif" href="">
                                 <i class="fas fa-pencil-alt">
                                 </i>
                                 Siap
                             </a>
-                            <a class="btn btn-danger btn-sm" href="#">
+                            
+                            <button class="btn btn-danger btn-sm" href="{{ route('admin.transactions-rejected',$item->id) }}">
                                 <i class="fas fa-trash">
                                 </i>
                                 Tolak
-                            </a>
+                            </button>
                         </td>
                         <?php $i++; ?>
                     </tr>    
@@ -174,6 +197,12 @@
     
   </section>
 
+
+<form method="POST" id="acceptForm" action="">
+    @csrf
+    <input type="submit" value="Hapus" style="display: none">
+</form>
+
 <div class="modal fade" id="modal-lg">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -185,10 +214,6 @@
       </div>
       <div class="modal-body">
         
-      </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-        <button type="button" class="btn btn-primary">Diterima</button>
       </div>
     </div>
     <!-- /.modal-content -->
