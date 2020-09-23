@@ -10,7 +10,9 @@ use App\Http\Controllers\Controller;
 use App\Members;
 use App\Publisher;
 use App\RecomendationBooks;
+use App\Transactions;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -120,5 +122,66 @@ class DataController extends Controller
             ->addIndexColumn()
             ->rawColumns(['cover','action'])
             ->toJson();
+    }
+
+    public function rejected()
+    {
+        $data = Transactions::with('users')->where('state',3);
+
+        return datatables()->of($data)
+        ->addColumn('action','admin.transactions.action')
+        ->editColumn('created_at', function(Transactions $model){
+            $date = Carbon::parse($model->borrowed_at)->format('d-m-Y H:i:s');
+            return $date;
+        })
+        ->addIndexColumn()
+        ->rawColumns(['action'])
+        ->toJson();
+    }
+
+    public function borrow()
+    {
+        $data = Transactions::with('users')->where('state',5);
+
+        return datatables()->of($data)
+        ->addColumn('action','admin.transactions.action')
+        ->editColumn('created_at', function(Transactions $model){
+            $date = Carbon::parse($model->created_at)->format('d-m-Y H:i:s');
+            return $date;
+        })
+        ->editColumn('borrowed_at', function(Transactions $model){
+            $date = Carbon::parse($model->borrowed_at)->format('d-m-Y H:i:s');
+            return $date;
+        })
+        ->editColumn('returned_at', function(Transactions $model){
+            $date = Carbon::parse($model->returned_at)->format('d-m-Y H:i:s');
+            return $date;
+        })
+        ->addIndexColumn()
+        ->rawColumns(['action'])
+        ->toJson();
+    }
+
+    public function returned()
+    {
+        $data = Transactions::with('users')->where('state',6);
+
+        return datatables()->of($data)
+        ->addColumn('action','admin.transactions.action')
+        ->editColumn('created_at', function(Transactions $model){
+            $date = Carbon::parse($model->created_at)->format('d-m-Y H:i:s');
+            return $date;
+        })
+        ->editColumn('borrowed_at', function(Transactions $model){
+            $date = Carbon::parse($model->borrowed_at)->format('d-m-Y H:i:s');
+            return $date;
+        })
+        ->editColumn('returned_at', function(Transactions $model){
+            $date = Carbon::parse($model->returned_at)->format('d-m-Y H:i:s');
+            return $date;
+        })
+        ->addIndexColumn()
+        ->rawColumns(['action'])
+        ->toJson();
     }
 }

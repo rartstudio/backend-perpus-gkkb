@@ -12,9 +12,10 @@ Route::get('/publishers/data','DataController@publishers')->name('publishers.dat
 Route::get('/books/data','DataController@books')->name('books.data');
 Route::get('/members/data','DataController@members')->name('members.data');
 Route::get('/recommendation-books/data','DataController@recomendationBooks')->name('recommendation-books.data');
-Route::get('/transactions-borrow','DataController@transactions_borrow')->name('transactions-borrow');
-Route::get('/transactions-history','DataController@transactions_history')->name('transactions-history');
 
+Route::get('/transactions-returned/data','DataController@returned')->name('transactions-returned-data');
+Route::get('/transactions-borrow/data','DataController@borrow')->name('transactions-borrow-data');
+Route::get('/transactions-rejected/data','DataController@rejected')->name('transactions-rejected-data');
 
 Route::resource('authors', 'AuthorsController');
 Route::resource('categories_book', 'CategoriesBookController');
@@ -24,8 +25,16 @@ Route::resource('books', 'BooksController');
 Route::resource('members', 'MembersController');
 Route::resource('recommendation-books','RecomendationBooksController');
 
+
 Route::get('transactions/{id}','TransactionsController@show')->name('transactions-show');
+Route::get('transactions-borrow','TransactionsController@borrow')->name('transactions-borrow');
+Route::get('transactions-rejected','TransactionsController@rejected')->name('transactions-reject');
+Route::get('transactions-returned','TransactionsReturned@returned')->name('transactions-return');
+
+
 Route::post('transactions-accepted/{id}','TransactionsController@accepted')->name('transactions-accepted');
+
+
 Route::get('transactions-ready-form/{id}','TransactionsController@ReadyForm')->name('transactions-ready-form');
 Route::post('transactions-ready-form/{id}','TransactionsController@storeReadyForm')->name('transactions-ready-store');
 
