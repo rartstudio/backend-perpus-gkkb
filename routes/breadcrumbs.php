@@ -168,3 +168,9 @@ Breadcrumbs::for('admin.recommendation-books.edit',function($trail,$recommendati
     $trail->push('Rekomendasi Buku', route('admin.recommendation-books.index'));
     $trail->push('Edit Rekomendasi Buku', route('admin.recommendation-books.edit', $recommendation_book));
 });
+
+//transaction form ready
+Breadcrumbs::for('admin.transactions-ready-form',function($trail,$transaction){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('Form Transaski Siap', route('admin.transactions-ready-form', $transaction));
+});

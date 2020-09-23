@@ -168,7 +168,7 @@
                                 disabled
                             @else
                                 
-                            @endif" href="">
+                            @endif" href="{{ route('admin.transactions-ready-form',$item->id) }}">
                                 <i class="fas fa-pencil-alt">
                                 </i>
                                 Siap

@@ -17,7 +17,7 @@ class HomeController extends Controller
         $book = Books::count();
         $categories_book = CategoriesBook::count();
         $members = Members::count();
-        $process = Transactions::with('users','transaction_details','transaction_details.book')->whereIn('state',array(1,2,4))->get();
+        $process = Transactions::with('users','transaction_details','transaction_details.book')->whereIn('state',array(1,2))->get();
 
         // dd($process);
         return view('admin.home', [

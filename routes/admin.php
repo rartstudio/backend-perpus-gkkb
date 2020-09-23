@@ -26,5 +26,6 @@ Route::resource('recommendation-books','RecomendationBooksController');
 
 Route::get('transactions/{id}','TransactionsController@show')->name('transactions-show');
 Route::post('transactions-accepted/{id}','TransactionsController@accepted')->name('transactions-accepted');
-Route::get('transactions-ready/{id}','TransactionsController@ReadyEdit')->name('transactions-ready-edit');
+Route::get('transactions-ready-form/{id}','TransactionsController@ReadyForm')->name('transactions-ready-form');
+Route::post('transactions-ready-form/{id}','TransactionsController@storeReadyForm')->name('transactions-ready-store');
 Route::post('transactions-rejected/{id}','TransactionsController@rejected')->name('transactions-rejected');
