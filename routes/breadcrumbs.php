@@ -174,3 +174,9 @@ Breadcrumbs::for('admin.transactions-ready-form',function($trail,$transaction){
     $trail->push('Beranda', route('admin.dashboard'));
     $trail->push('Form Transaski Siap', route('admin.transactions-ready-form', $transaction));
 });
+
+//transaction form reject
+Breadcrumbs::for('admin.transactions-reject-form',function($trail,$transaction){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('Form Transaski Tolak', route('admin.transactions-reject-form', $transaction));
+});

@@ -174,10 +174,7 @@
                                 Siap
                             </a>
                             
-                            <a class="btn btn-danger btn-sm" href="{{ route('admin.transactions-rejected',$item->id) }}"
-                              data-toggle="modal" 
-                            data-target="#modal-lg" 
-                            data-title="Detail Transaksi {{ $item->transaction_code }}">
+                            <a class="btn btn-danger btn-sm" href="{{ route('admin.transactions-reject-form',$item->id) }}">
                                 <i class="fas fa-trash">
                                 </i>
                                 Tolak
@@ -187,7 +184,10 @@
                     </tr>    
                     @empty
                     <tr>
+                      <td colspan="6" class="text-center">
+
                         Transaksi Tidak ada
+                      </td>
                     </tr>
                     @endforelse
                 </tbody>

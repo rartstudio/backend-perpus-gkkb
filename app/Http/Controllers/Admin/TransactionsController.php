@@ -40,6 +40,26 @@ class TransactionsController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
+    public function RejectForm($id){
+        $item = TransactionDetail::with('book')->where('transaction_id','=',$id)->get();
+        $data = Transactions::with('users','users.members')->where('id',$id)->get();
+
+        return view('admin.transactions.EditRejectForm',[
+            'datas' => $data,
+            'item' => $item
+        ]);
+    }
+
+    public function storeRejectForm(Request $request, $id)
+    {
+        Transactions::where('id',$id)
+            ->update([
+                'state' => $request->state,
+                'add_info' => $request->add_info
+            ]);
+        return redirect()->route('admin.dashboard');
+    }
+
     public function accepted(Request $request,$id)
     {
         Transactions::where('id',$id)->update(['state' => 2]);
