@@ -82,17 +82,19 @@ class DataController extends Controller
 
     public function members()
     {
-        $members = Members::select('id','member_code',DB::raw("CONCAT(first_name,' ',last_name) as full_name"),'slug','gender','cst_id')->with('category_state')->orderBy('member_code', 'ASC');
+        // $members = Members::select('id','member_code',DB::raw("CONCAT(first_name,' ',last_name) as full_name"),'slug','gender','cst_id')->with('category_state')->orderBy('member_code', 'ASC');
+        $members = User::with('members')->orderBy('name','ASC');
 
         return datatables()->of($members)
+            ->addColumn('member_code')
             //if we use concat add filter column in below
-            ->filterColumn('full_name', function($query, $keyword) {
-                $sql = "CONCAT(first_name,'-',last_name)  like ?";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
-            })
-            ->addColumn('category_state',function(Members $model){
-                return $model->category_state->cst_name;
-                })
+            // ->filterColumn('full_name', function($query, $keyword) {
+            //     $sql = "CONCAT(first_name,'-',last_name)  like ?";
+            //     $query->whereRaw($sql, ["%{$keyword}%"]);
+            // })
+            // ->addColumn('category_state',function(Members $model){
+            //     return $model->category_state->cst_name;
+            //     })
             ->addColumn('action','admin.member.action')
             ->addIndexColumn()
             ->rawColumns(['action'])
@@ -141,10 +143,27 @@ class DataController extends Controller
 
     public function borrow()
     {
-        $data = Transactions::with('users')->where('state',5);
+        $data = Transactions::with('users','transaction_details')->where('state',5);
 
         return datatables()->of($data)
         ->addColumn('action','admin.transactions.action')
+        ->addColumn('qty',function(Transactions $model){
+            $qty = $model->transaction_details;
+            return $qty->count();
+        })
+        ->addColumn('name', function(Transactions $model){
+            $name = $model->users->name;
+            return $name;
+        })
+        ->addColumn('telat', function(Transactions $model){
+            $check = $model->returned_at;
+            if(Carbon::now() <= $check){
+                return 'Belum';
+            }
+            else {
+                return 'Sudah';
+            }
+        })
         ->editColumn('created_at', function(Transactions $model){
             $date = Carbon::parse($model->created_at)->format('d-m-Y H:i:s');
             return $date;
@@ -164,7 +183,7 @@ class DataController extends Controller
 
     public function returned()
     {
-        $data = Transactions::with('users')->where('state',6);
+        $data = Transactions::with('users','transaction_details')->where('state',6);
 
         return datatables()->of($data)
         ->addColumn('action','admin.transactions.action')

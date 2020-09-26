@@ -2,21 +2,26 @@
 
 @section('content')
     <div class="box">
+        <div class="box-header">
+        </div>
         <div class="box-body">
             <table class="table table-bordered table-hover" id="dataTable">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>No Anggota</th>
                         <th>Id</th>
-                        <th>Nama</th>
-                        <th>Jenis Kelamin</th>
+                        <th>Kode Transaksi</th>
+                        <th>Nama Peminjam</th>
+                        <th>Qty</th>
+                        <th>Tgl Pinjam</th>
+                        <th>Tgl Kembali</th>
+                        <th>Telat</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
             </table>
         </div>
     </div>
+    
 @endsection
 
 
@@ -43,13 +48,15 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('admin.members.data') }}',
+                ajax: '{{ route('admin.transactions_borrow_data.data') }}',
                 columns: [
                     { data: 'DT_RowIndex', orderable:false, searchable:false},
-                    { data: 'member_code'},
-                    { data: 'category_state'},
-                    { data: 'full_name'},
-                    { data: 'gender'},
+                    { data: 'transaction_code'},
+                    { data: 'name'},
+                    { data: 'qty'},
+                    { data: 'borrowed_at'},
+                    { data: 'returned_at'},
+                    { data: 'telat'},
                     { data: 'action'}
                 ]
             })

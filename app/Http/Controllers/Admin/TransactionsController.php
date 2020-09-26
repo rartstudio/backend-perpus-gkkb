@@ -73,4 +73,10 @@ class TransactionsController extends Controller
 
         return redirect()->route('admin.dashboard');
     }
+
+    public function borrow(){
+        return view('admin.transactions.borrow',[
+            'title'=> 'Daftar Transaksi Pinjam'
+        ]);
+    }
 }
