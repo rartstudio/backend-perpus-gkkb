@@ -56,6 +56,17 @@ class TransactionController extends Controller
         return response()->json('sukses',200);
     }
 
+    public function borrow ($id)
+    {
+        Transactions::where('id',$id)
+            ->update([
+                'state' => 5,
+                'borrowed_at' => Carbon::now(),
+                'returned_at' => Carbon::now()->addDays(14),
+            ]);
+        return response()->json('sukses',200);
+    }
+
     // public function store(Request $request)
     // {
 

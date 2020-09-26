@@ -23,8 +23,9 @@ class TransactionResource extends JsonResource
             'qty_borrow' => $this->qty_borrow,
             'qty_returned' => $this->qty_returned,
             'returned_at' => $this->returned_at,
+            'add_info' => $this->add_info,
             'borrowed_at' => $this->borrowed_at,
-            'created_at' => Carbon::parse($this->created_at)->format('d M Y'),
+            'created_at' => Carbon::parse($this->created_at)->format('d M Y H:i:s'),
             'transaction_details' => TransactionDetailResource::collection($this->whenLoaded('transaction_details')),
             // 'transaction_details' => 1
         ];

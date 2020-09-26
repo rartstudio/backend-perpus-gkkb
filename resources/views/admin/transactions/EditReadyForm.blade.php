@@ -54,13 +54,6 @@
                     <form action="{{ route('admin.transactions-ready-store', $data->id) }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="">Lama Pinjam</label>
-                            <select name="long" id="" class="form-control">
-                                <option value="7" >7</option>
-                                <option value="14" selected>14</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="">Status</label>
                             <select name="state" id="" class="form-control">
                                 <option value="4">Siap</option>

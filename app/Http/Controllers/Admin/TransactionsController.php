@@ -33,8 +33,8 @@ class TransactionsController extends Controller
         Transactions::where('id',$id)
             ->update([
                 'state' => $request->state,
-                'borrowed_at' => Carbon::now(),
-                'returned_at' => Carbon::now()->addDays($request->long),
+                // 'borrowed_at' => Carbon::now(),
+                // 'returned_at' => Carbon::now()->addDays($request->long),
                 'add_info' => $request->add_info
             ]);
         return redirect()->route('admin.dashboard');
