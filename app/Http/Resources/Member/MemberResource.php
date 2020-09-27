@@ -20,7 +20,8 @@ class MemberResource extends JsonResource
             'address' => $this->address,
             'phone_number' => $this->phone_number,
             'no_cst' => $this->no_cst,
-            'is_verified' => $this->is_verified
+            'is_verified' => $this->is_verified,
+            'submission' => $this->submission
         ];
     }
 }

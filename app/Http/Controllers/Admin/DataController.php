@@ -83,10 +83,32 @@ class DataController extends Controller
     public function members()
     {
         // $members = Members::select('id','member_code',DB::raw("CONCAT(first_name,' ',last_name) as full_name"),'slug','gender','cst_id')->with('category_state')->orderBy('member_code', 'ASC');
-        $members = User::with('members')->orderBy('name','ASC');
+        $members = User::orderBy('name','ASC');
 
         return datatables()->of($members)
-            ->addColumn('member_code')
+            ->addColumn('gender', function(User $model){
+                return $model->members->gender;
+            })
+            ->addColumn('address',function(User $model){
+                return $model->members->address;
+            })
+            ->addColumn('birthDate',function(User $model){
+                return $model->members->date_of_birth;
+            })
+            ->addColumn('phoneNumber',function(User $model){
+                return $model->members->phone_number;
+            })
+            ->addColumn('member_card',function(User $model){
+                return $model->members->no_cst;
+            })
+            ->addColumn('is_verified',function(User $model){
+                if($model->members->is_verified == 0){
+                    return 'Belum';
+                }
+                else{
+                    return 'Sudah';
+                }
+            })
             //if we use concat add filter column in below
             // ->filterColumn('full_name', function($query, $keyword) {
             //     $sql = "CONCAT(first_name,'-',last_name)  like ?";
@@ -128,7 +150,7 @@ class DataController extends Controller
 
     public function rejected()
     {
-        $data = Transactions::with('users')->where('state',3);
+        $data = Transactions::where('state',3);
 
         return datatables()->of($data)
         ->addColumn('action','admin.transactions.action')
@@ -143,7 +165,7 @@ class DataController extends Controller
 
     public function borrow()
     {
-        $data = Transactions::with('users','transaction_details')->where('state',5);
+        $data = Transactions::where('state',5);
 
         return datatables()->of($data)
         ->addColumn('action','admin.transactions.action')
@@ -183,7 +205,7 @@ class DataController extends Controller
 
     public function returned()
     {
-        $data = Transactions::with('users','transaction_details')->where('state',6);
+        $data = Transactions::where('state',6);
 
         return datatables()->of($data)
         ->addColumn('action','admin.transactions.action')

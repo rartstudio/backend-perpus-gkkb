@@ -28,7 +28,7 @@ class AuthController extends Controller
         $slug= Str::slug($validatedData['name']);
 
         //adding data user to table members to providing edit member form
-        Members::create(['user_id' => $user->id, 'is_verified' => 0, 'slug' => $slug]);
+        Members::create(['user_id' => $user->id, 'is_verified' => 0, 'slug' => $slug, 'submission' => 0]);
 
         $user->assignRole('user');
 

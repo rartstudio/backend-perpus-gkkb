@@ -41,4 +41,20 @@ class UserController extends Controller
             "status_code" => 200
         ],200);
     }
+
+    public function submission(Request $request)
+    {
+        $user = $request->user();
+
+        $members = Members::where('user_id',$user->id);
+
+        $members->update([
+            'submission' => $request->submission
+        ]);
+
+        return response()->json([
+            "message" => "sukses input data",
+            "status_code" => 200
+        ],200);
+    }
 }

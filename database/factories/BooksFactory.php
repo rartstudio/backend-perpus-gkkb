@@ -13,7 +13,7 @@ $factory->define(Books::class, function (Faker $faker) {
     $randomNumber = rand(1,100);
     $cover = "https://picsum.photos/id/{$randomNumber}/200/300";
 
-    $title = $faker->sentence(4);
+    $title = $faker->sentence(2);
     $slug = Str::slug($title);
 
     return [

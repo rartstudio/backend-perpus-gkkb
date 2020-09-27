@@ -198,7 +198,137 @@
     </div>
     <!-- /.card process-->
     
-  </section>
+</section>
+
+<section class="content">
+  <!-- Default box -->
+  <div class="card card-success">
+    <div class="card-header">
+        <h3 class="card-title">User Belum Verifikasi</h3>
+
+        <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <i class="fas fa-minus"></i></button>
+        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+            <i class="fas fa-times"></i></button>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-striped projects">
+            <thead>
+                <tr>
+                    <th style="width: 1%">
+                        No
+                    </th>
+                    <th style="width: 20%">
+                        Kode Transaksi
+                    </th>
+                    <th>
+                        Peminjam
+                    </th>
+                    <th style="width: 5%">
+                        Qty
+                    </th>
+                    <th style="width: 10%" class="text-center">
+                        Status
+                    </th>
+                    <th style="width: 31%" class="text-center">
+                        Aksi
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $i = 1; ?>
+                @forelse ($process as $item)
+                <tr>
+                    <td>
+                        {{ $i }}
+                    </td>
+                    <td>
+                        <a>
+                            {{ $item->transaction_code }}
+                        </a>
+                        <br/>
+                        <small>
+                            {{ $item->created_at }}
+                        </small>
+                    </td>
+                    <td>
+                        {{ $item->users->name }}
+                    </td>
+                    <td class="project_progress">
+                        {{ $item->transaction_details->count() }}
+                    </td>
+                    <td class="project-state">
+                        <span class="badge badge-success">
+                        @if ($item->state == 1 )
+                            Menunggu
+                        @elseif($item->state == 2 )
+                            Diterima
+                        @else 
+                            siap
+                        @endif</span>
+                    </td>
+                    <td class="project-actions text-right">
+                      <a 
+                        class="btn btn-primary btn-sm" 
+                        data-toggle="modal" 
+                        data-target="#modal-lg" 
+                        data-remote="{{ route('admin.transactions-show', $item->id) }}"
+                        data-title="Detail Transaksi {{ $item->transaction_code }}"
+                        href="#modal-lg"
+                        >
+                          <i class="fas fa-eye">
+                          </i>
+                          Detail
+                      </a>
+                      <button 
+                        class="btn btn-info btn-sm 
+                          @if ($item->state == 2)
+                            disabled
+                          @endif" 
+                        href="{{ route('admin.transactions-accepted',$item->id) }}"
+                        id="accept"
+                        >
+                          <i class="fas fa-pencil-alt">
+                          </i>
+                          Diterima
+                      </button>
+                        <a class="btn btn-info btn-sm 
+                        @if ($item->state == 1)
+                            disabled
+                        @else
+                            
+                        @endif" href="{{ route('admin.transactions-ready-form',$item->id) }}">
+                            <i class="fas fa-pencil-alt">
+                            </i>
+                            Siap
+                        </a>
+                        
+                        <a class="btn btn-danger btn-sm" href="{{ route('admin.transactions-reject-form',$item->id) }}">
+                            <i class="fas fa-trash">
+                            </i>
+                            Tolak
+                        </a>
+                    </td>
+                    <?php $i++; ?>
+                </tr>    
+                @empty
+                <tr>
+                  <td colspan="6" class="text-center">
+
+                    Transaksi Tidak ada
+                  </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+    
+  <!-- /.card-body -->
+</div>
+<!-- /.card process-->
+</section>
 
 
 <form method="POST" id="acceptForm" action="">

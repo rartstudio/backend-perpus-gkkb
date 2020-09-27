@@ -25,6 +25,7 @@ class CreateMembersTable extends Migration
             $table->unsignedBigInteger('cst_id')->nullable();
             $table->string('no_cst')->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->integer('submission')->nullable();
             $table->string('is_verified',2);
             $table->softDeletes();
             $table->timestamps();
