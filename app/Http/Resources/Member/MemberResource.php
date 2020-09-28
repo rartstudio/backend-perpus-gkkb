@@ -16,6 +16,7 @@ class MemberResource extends JsonResource
     {
         return [
             'date_of_birth' => $this->date_of_birth,
+            'image' => $this->image,
             'gender' => $this->gender,
             'address' => $this->address,
             'phone_number' => $this->phone_number,

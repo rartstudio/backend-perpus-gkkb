@@ -57,4 +57,28 @@ class UserController extends Controller
             "status_code" => 200
         ],200);
     }
+
+    public function uploadImage(Request $request)
+    {
+        $user = $request->user();
+
+        $members = Members::where('user_id',$user->id);
+
+        //set default null if user dont submit a cover image
+        $cover = null;
+
+        //checking if user pass a file cover image
+        if($request->hasFile('image')){
+            $cover = $request->file('image')->store('assets/covers');
+        }
+
+        $members->update([
+            'image' => $cover
+        ]);
+
+        return response()->json([
+            "message" => "sukses input data",
+            "status_code" => 200
+        ],200);
+    }
 }

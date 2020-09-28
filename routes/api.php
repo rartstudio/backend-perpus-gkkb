@@ -22,6 +22,7 @@ Route::get('/user','Api\UserController@show')->middleware('auth:api');
 // Route::post('/user/{user}','Api\UserController@update')->middleware('auth:api');
 Route::post('/user','Api\UserController@update')->middleware('auth:api');
 Route::post('/user/submission','Api\UserController@submission')->middleware('auth:api');
+Route::post('/user/image','Api\UserController@uploadImage')->middleware('auth:api');
 
 Route::get('/transaction','Api\TransactionController@index')->middleware('auth:api');
 Route::post('/transaction','Api\TransactionController@store')->middleware('auth:api');
