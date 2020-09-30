@@ -27,6 +27,8 @@ Route::post('/user/image','Api\UserController@uploadImage')->middleware('auth:ap
 Route::get('/transaction','Api\TransactionController@index')->middleware('auth:api');
 Route::post('/transaction','Api\TransactionController@store')->middleware('auth:api');
 Route::post('/transaction-borrow/{id}','Api\TransactionController@borrow')->middleware('auth:api');
+
+
 Route::get('/categories-state','Api\CategoriesStateController@index')->middleware('auth:api');
 Route::post('/logout', 'Api\AuthController@logout')->middleware('auth:api');
 

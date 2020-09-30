@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     public function index(){
+        //for state beginning
         $book = Books::count();
         $categories_book = CategoriesBook::count();
         $members = Members::count();
         $process = Transactions::with('users','transaction_details','transaction_details.book')->whereIn('state',array(1,2))->get();
+
+        $member = Members::with('user')->where('submission',1)->get();
 
         // dd($process);
         return view('admin.home', [
@@ -25,6 +28,7 @@ class HomeController extends Controller
             'categories_book' => $categories_book,
             'members' => $members,
             'process' => $process,
+            'member' => $member
         ]);
     }
 
@@ -38,9 +42,5 @@ class HomeController extends Controller
             'data' => $user,
             'member' => $member
         ]);
-    }
-
-    public function details(){
-        
     }
 }

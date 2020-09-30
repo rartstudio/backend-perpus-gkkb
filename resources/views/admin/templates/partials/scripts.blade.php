@@ -74,4 +74,36 @@
 
 </script>
 
+<script>
+    $('button#submission').on('click', function(e){
+        e.preventDefault();
+
+        var href = $(this).attr('href');
+
+        //use sweet alert
+        Swal.fire({
+            title: 'Apakah kamu yakin akan menverifikasi user ini?',
+            text: 'Harap dicek terlebih dahulu informasi user sebelum melanjutkan proses ini!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Terima!'
+            })
+            .then((result) => {
+                if(result.value){
+                    
+                    document.getElementById('acceptForm').action = href;
+                    document.getElementById('acceptForm').submit();
+                        Swal.fire(
+                            'Terima!',
+                            'Data Transaksi berhasil diterima',
+                            'success'
+                        )
+                }
+        });
+    })
+
+</script>
+
 @stack('scripts')

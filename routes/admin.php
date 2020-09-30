@@ -22,15 +22,17 @@ Route::resource('categories_book', 'CategoriesBookController');
 Route::resource('publishers', 'PublishersController');
 Route::resource('categories_state', 'CategoriesStateController');
 Route::resource('books', 'BooksController');
-Route::resource('members', 'MembersController');
 Route::resource('recommendation-books','RecomendationBooksController');
+
+
+// Route::resource('members', 'MembersController');
+Route::post('member-submission/{id}', 'MemberController@submission')->name('member-submission');
+Route::get('member/{id}','MemberController@show')->name('member-show');
 
 
 Route::get('transactions/{id}','TransactionsController@show')->name('transactions-show');
 Route::get('transactions-borrow','TransactionsController@borrow')->name('transactions-borrow');
 Route::get('transactions-rejected','TransactionsController@rejected')->name('transactions-reject');
-Route::get('transactions-returned','TransactionsReturned@returned')->name('transactions-return');
-
 
 Route::post('transactions-accepted/{id}','TransactionsController@accepted')->name('transactions-accepted');
 
@@ -40,5 +42,6 @@ Route::post('transactions-ready-form/{id}','TransactionsController@storeReadyFor
 
 Route::get('transactions-reject-form/{id}','TransactionsController@RejectForm')->name('transactions-reject-form');
 Route::post('transactions-reject-form/{id}','TransactionsController@storeRejectForm')->name('transactions-reject-store');
+
 
 Route::get('transactions-borrow','TransactionsController@borrow')->name('transactions-borrow');

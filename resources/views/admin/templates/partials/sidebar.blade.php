@@ -40,12 +40,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.transactions-return') }}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Dikembalikan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{ route('admin.transactions-reject') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Ditolak</p>
@@ -69,14 +63,14 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('admin.members.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Member
                         </p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="{{ route('admin.authors.index') }}" class="nav-link {{ Request::path() == 'admin/authors' ? 'active' : '' }}">
                         <i class="far fa-user nav-icon"></i>
