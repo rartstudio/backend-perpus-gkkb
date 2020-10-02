@@ -11,3 +11,12 @@
         <button type="submit" class="btn btn-primary mb-2 btn-block" id="rejected">Kirim</button>
     </form>
 </div>
+
+<script>
+    var btnTambah = document.getElementById('rejected');
+
+    btnTambah.addEventListener('click', function(e){
+        btnTambah.innerHTML = "Tunggu...";
+        btnTambah.classList.toggle('disabled');
+    });
+</script>
