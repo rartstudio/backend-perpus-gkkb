@@ -232,7 +232,7 @@
                     <th style="width: 10%" class="text-center">
                         Status
                     </th>
-                    <th style="width: 25%" class="text-center">
+                    <th style="width: 30%" class="text-center">
                         Aksi
                     </th>
                 </tr>
@@ -257,7 +257,7 @@
                         data-toggle="modal" 
                         data-target="#modal-lg" 
                         data-remote="{{ route('admin.member-show', $user->user->id) }}"
-                        data-title="Detail Transaksi {{ $user->no_cst }}"
+                        data-title="Detail Member{{ $user->no_cst }}"
                         href="#modal-lg"
                         >
                           <i class="fas fa-eye">
@@ -274,12 +274,18 @@
                           Diterima
                       </button>
                         
-                        <a class="btn btn-danger btn-sm" 
-                    href="{{ route('admin.member-reject',$user->user->id) }}">
-                            <i class="fas fa-trash">
-                            </i>
-                            Tolak
-                        </a>
+                      <a 
+                      class="btn btn-danger btn-sm" 
+                      data-toggle="modal" 
+                      data-target="#modal-lg" 
+                      data-remote="{{ route('admin.member-rejected-form', $user->user->id) }}"
+                      data-title="Detail Member : {{ ucfirst($user->user->name) }}"
+                      href="#modal-lg"
+                      >
+                        <i class="fas fa-trash">
+                        </i>
+                        Tolak
+                    </a>
                     </td>
                     <?php $i++; ?>
                 </tr>    

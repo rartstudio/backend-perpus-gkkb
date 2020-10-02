@@ -29,6 +29,8 @@ Route::resource('recommendation-books','RecomendationBooksController');
 Route::post('member-submission/{id}', 'MemberController@submission')->name('member-submission');
 Route::get('member/{id}','MemberController@show')->name('member-show');
 
+Route::get('member-rejected-form/{id}','MemberController@rejectedForm')->name('member-rejected-form');
+Route::post('member-rejected','MemberController@rejected')->name('member-rejected');
 
 Route::get('transactions/{id}','TransactionsController@show')->name('transactions-show');
 Route::get('transactions-borrow','TransactionsController@borrow')->name('transactions-borrow');
