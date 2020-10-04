@@ -79,4 +79,11 @@ class TransactionsController extends Controller
             'title'=> 'Daftar Transaksi Pinjam'
         ]);
     }
+
+    public function reject()
+    {
+        return view('admin.transactions.reject',[
+            'title'=> 'Daftar Transaksi Tolak'
+        ]);
+    }
 }

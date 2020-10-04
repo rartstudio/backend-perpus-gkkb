@@ -16,6 +16,7 @@ class CreateMessagesTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
+            $table->string('header');
             $table->string('message');
             $table->unsignedBigInteger('admin_id');
             $table->softDeletes();

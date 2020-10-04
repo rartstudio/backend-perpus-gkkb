@@ -21,7 +21,11 @@ class MemberController extends Controller
 
     public function submission($id)
     {
+        //accepting user submission
         Members::where('user_id',$id)->update(['submission' => 2]);
+        
+        //change verified to 1 
+        Members::where('user_id',$id)->update(['is_verified' => 1]);
 
         return redirect()->route('admin.dashboard');
     }
@@ -40,6 +44,7 @@ class MemberController extends Controller
 
         Messages::create([
             'user_id' => $request->id,
+            'header' => 'Verifikasi User',
             'message' => $request->message,
             'admin_id' => $admin_id
         ]);

@@ -12,9 +12,7 @@
                         <th>Kode Transaksi</th>
                         <th>Nama Peminjam</th>
                         <th>Qty</th>
-                        <th>Tgl Pinjam</th>
-                        <th>Tgl Kembali</th>
-                        <th>Telat</th>
+                        <th>Alasan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -48,15 +46,13 @@
             $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('admin.transactions-borrow.data') }}',
+                ajax: '{{ route('admin.transactions-reject.data') }}',
                 columns: [
                     { data: 'DT_RowIndex', orderable:false, searchable:false},
                     { data: 'transaction_code'},
                     { data: 'name'},
                     { data: 'qty'},
-                    { data: 'borrowed_at'},
-                    { data: 'returned_at'},
-                    { data: 'telat'},
+                    { data: 'add_info'},
                     { data: 'action'}
                 ]
             })

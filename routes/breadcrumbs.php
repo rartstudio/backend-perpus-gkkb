@@ -186,3 +186,9 @@ Breadcrumbs::for('admin.transactions-borrow',function($trail){
     $trail->push('Beranda', route('admin.dashboard'));
     $trail->push('List Transaksi Pinjam', route('admin.transactions-borrow'));
 });
+
+//transaction reject index
+Breadcrumbs::for('admin.transactions-reject',function($trail){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('List Transaksi Tolak', route('admin.transactions-reject'));
+});
