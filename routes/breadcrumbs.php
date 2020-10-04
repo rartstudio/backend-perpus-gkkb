@@ -126,9 +126,9 @@ Breadcrumbs::for('admin.books.show',function($trail,$book){
 
 //members
 
-Breadcrumbs::for('admin.members.index',function($trail){
+Breadcrumbs::for('admin.member-index',function($trail){
     $trail->push('Beranda', route('admin.dashboard'));
-    $trail->push('Member', route('admin.members.index'));
+    $trail->push('Member', route('admin.member-index'));
 });
 
 

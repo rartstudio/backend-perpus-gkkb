@@ -26,11 +26,15 @@ Route::resource('recommendation-books','RecomendationBooksController');
 
 
 // Route::resource('members', 'MembersController');
+Route::get('member','MemberController@index')->name('member-index');
 Route::post('member-submission/{id}', 'MemberController@submission')->name('member-submission');
 Route::get('member/{id}','MemberController@show')->name('member-show');
 
 Route::get('member-rejected-form/{id}','MemberController@rejectedForm')->name('member-rejected-form');
 Route::post('member-rejected','MemberController@rejected')->name('member-rejected');
+
+Route::get('member-message-form/{id}','MemberController@messageForm')->name('member-message-form');
+Route::post('member-message','MemberController@message')->name('member-message');
 
 Route::get('transactions/{id}','TransactionsController@show')->name('transactions-show');
 Route::get('transactions-borrow','TransactionsController@borrow')->name('transactions-borrow');

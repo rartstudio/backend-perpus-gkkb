@@ -8,9 +8,9 @@
                     <tr>
                         <th>No</th>
                         <th>No Anggota</th>
-                        <th>Id</th>
                         <th>Nama</th>
                         <th>Jenis Kelamin</th>
+                        <th>Alamat</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -46,10 +46,10 @@
                 ajax: '{{ route('admin.members.data') }}',
                 columns: [
                     { data: 'DT_RowIndex', orderable:false, searchable:false},
-                    { data: 'member_code'},
-                    { data: 'category_state'},
-                    { data: 'full_name'},
+                    { data: 'member_card'},
+                    { data: 'name'},
                     { data: 'gender'},
+                    { data: 'address'},
                     { data: 'action'}
                 ]
             })

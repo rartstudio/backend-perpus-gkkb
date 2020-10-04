@@ -11,12 +11,39 @@ use Illuminate\Support\Facades\Auth;
 
 class MemberController extends Controller
 {
+    public function index()
+    {
+        return view('admin.member.index');
+    }
+
     public function show($id){
         $item = Members::with('user')->where('user_id','=',$id)->get();
 
         return view('admin.member.show',[
             'item' => $item
         ]);
+    }
+
+    public function messageForm($id)
+    {
+        $user = User::where('id',$id)->get();
+        return view('admin.member.message',[
+            'user' => $user
+        ]);
+    }
+
+    public function message(Request $request)
+    {
+        $admin_id = Auth::user()->id;
+
+        Messages::create([
+            'user_id' => $request->id,
+            'header' => 'Verifikasi User',
+            'message' => $request->message,
+            'admin_id' => $admin_id
+        ]);
+        
+        return redirect()->route('admin.member-index');
     }
 
     public function submission($id)
