@@ -8,5 +8,4 @@ href="#modal-lg"
 >
     <i class="fas fa-eye">
     </i>
-    Detail
 </a>

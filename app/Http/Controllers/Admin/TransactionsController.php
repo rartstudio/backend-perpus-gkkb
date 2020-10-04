@@ -11,10 +11,12 @@ use Illuminate\Http\Request;
 class TransactionsController extends Controller
 {
     public function show($id){
+        $transaction = Transactions::where('id',$id)->get();
         $item = TransactionDetail::with('book')->where('transaction_id','=',$id)->get();
 
         return view('admin.transactions.show',[
-            'item' => $item
+            'item' => $item,
+            'transaction' => $transaction
         ]);
     }
 
@@ -65,6 +67,13 @@ class TransactionsController extends Controller
         Transactions::where('id',$id)->update(['state' => 2]);
 
         return redirect()->route('admin.dashboard');
+    }
+
+    public function returned(Request $request,$id)
+    {
+        Transactions::where('id',$id)->update(['state' => 6, 'returned_at' => Carbon::now() ]);
+
+        return redirect()->route('admin.transactions-borrow');
     }
 
     public function rejected(Request $request, $id)

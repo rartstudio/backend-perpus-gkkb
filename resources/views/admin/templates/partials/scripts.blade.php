@@ -70,10 +70,9 @@
                         )
                 }
         });
-    })
+    });
 
 </script>
-
 <script>
     $('button#submission').on('click', function(e){
         e.preventDefault();
@@ -102,8 +101,7 @@
                         )
                 }
         });
-    })
-
+    });
 </script>
 
 @stack('scripts')

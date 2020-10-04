@@ -37,7 +37,7 @@ Route::get('transactions-borrow','TransactionsController@borrow')->name('transac
 Route::get('transactions-rejected','TransactionsController@rejected')->name('transactions-reject');
 
 Route::post('transactions-accepted/{id}','TransactionsController@accepted')->name('transactions-accepted');
-
+Route::get('transactions-returned/{id}','TransactionsController@returned')->name('transactions-returned');
 
 Route::get('transactions-ready-form/{id}','TransactionsController@ReadyForm')->name('transactions-ready-form');
 Route::post('transactions-ready-form/{id}','TransactionsController@storeReadyForm')->name('transactions-ready-store');
