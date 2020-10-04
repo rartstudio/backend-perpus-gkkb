@@ -95,4 +95,11 @@ class TransactionsController extends Controller
             'title'=> 'Daftar Transaksi Tolak'
         ]);
     }
+
+    public function return()
+    {
+        return view('admin.transactions.return',[
+            'title'=> 'Daftar Transaksi Kembali'
+        ]);
+    }
 }

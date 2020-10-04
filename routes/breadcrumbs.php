@@ -192,3 +192,9 @@ Breadcrumbs::for('admin.transactions-reject',function($trail){
     $trail->push('Beranda', route('admin.dashboard'));
     $trail->push('List Transaksi Tolak', route('admin.transactions-reject'));
 });
+
+//transaction return index
+Breadcrumbs::for('admin.transactions-return',function($trail){
+    $trail->push('Beranda', route('admin.dashboard'));
+    $trail->push('List Transaksi Kembali', route('admin.transactions-return'));
+});

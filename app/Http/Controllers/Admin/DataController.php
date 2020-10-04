@@ -216,11 +216,11 @@ class DataController extends Controller
         $data = Transactions::where('state',6);
 
         return datatables()->of($data)
-        ->addColumn('action','admin.transactions.action')
-        ->editColumn('created_at', function(Transactions $model){
-            $date = Carbon::parse($model->created_at)->format('d-m-Y H:i:s');
-            return $date;
+        ->addColumn('name', function(Transactions $model){
+            $name = $model->users->name;
+            return $name;
         })
+        ->addColumn('action','admin.transactions.action')
         ->editColumn('borrowed_at', function(Transactions $model){
             $date = Carbon::parse($model->borrowed_at)->format('d-m-Y H:i:s');
             return $date;

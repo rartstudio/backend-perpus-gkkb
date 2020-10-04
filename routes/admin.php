@@ -45,6 +45,7 @@ Route::post('transactions-ready-form/{id}','TransactionsController@storeReadyFor
 Route::get('transactions-reject-form/{id}','TransactionsController@RejectForm')->name('transactions-reject-form');
 Route::post('transactions-reject-form/{id}','TransactionsController@storeRejectForm')->name('transactions-reject-store');
 
-
+//view
 Route::get('transactions-borrow','TransactionsController@borrow')->name('transactions-borrow');
 Route::get('transactions-reject','TransactionsController@reject')->name('transactions-reject');
+Route::get('transactions-return','TransactionsController@return')->name('transactions-return');

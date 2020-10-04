@@ -40,6 +40,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('admin.transactions-return') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Dikembalikan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('admin.transactions-reject') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Ditolak</p>

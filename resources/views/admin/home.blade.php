@@ -173,7 +173,13 @@
                                 Siap
                             </a>
                             
-                            <a class="btn btn-danger btn-sm" href="{{ route('admin.transactions-reject-form',$item->id) }}">
+                            <a class="btn btn-danger btn-sm
+                            @if ($item->state == 1)
+                                disabled
+                            @else
+                                
+                            @endif"
+                            " href="{{ route('admin.transactions-reject-form',$item->id) }}">
                                 <i class="fas fa-trash">
                                 </i>
                                 Tolak
