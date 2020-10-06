@@ -38,8 +38,9 @@ class MemberController extends Controller
 
         Messages::create([
             'user_id' => $request->id,
-            'header' => 'Verifikasi User',
+            'header' => $request->header,
             'message' => $request->message,
+            'is_read' => 0,
             'admin_id' => $admin_id
         ]);
         
@@ -73,6 +74,7 @@ class MemberController extends Controller
             'user_id' => $request->id,
             'header' => 'Verifikasi User',
             'message' => $request->message,
+            'is_read' => 0,
             'admin_id' => $admin_id
         ]);
 

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class MessagesController extends Controller
 {
-    public function show(Request $request) 
+    public function index(Request $request) 
     {
         $user = $request->user();
 
@@ -22,5 +22,17 @@ class MessagesController extends Controller
         //dd($data);
 
         return new MessageCollection($data);
+    }
+
+    public function isRead(Request $request, $id)
+    {
+        $user = $request->user();
+
+        $message = Messages::where('user_id','=',$user)->where('id',$id)
+            ->update([
+                'is_read' => 1,
+            ]);
+
+        return response()->json($message,200);
     }
 }

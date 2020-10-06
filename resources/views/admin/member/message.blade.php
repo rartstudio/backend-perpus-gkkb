@@ -3,8 +3,10 @@
         @csrf
         @foreach ($user as $item)    
             <div class="form-group">
-                <label for="exampleFormControlTextarea1">Pesan</label>
                 <input type="hidden" value="{{ $item->id }}" id="user_id" name="id">
+                <label for="header">Judul</label>
+                <input type="text" name="header" id="header" class="form-control">
+                <label for="message">Pesan</label>
                 <textarea class="form-control" id="message" rows="3" name="message"></textarea>
             </div>
         @endforeach
