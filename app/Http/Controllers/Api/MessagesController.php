@@ -24,11 +24,9 @@ class MessagesController extends Controller
         return new MessageCollection($data);
     }
 
-    public function isRead(Request $request, $id)
+    public function isRead($id)
     {
-        $user = $request->user();
-
-        $message = Messages::where('user_id','=',$user)->where('id',$id)
+        $message = Messages::where('id',$id)
             ->update([
                 'is_read' => 1,
             ]);
