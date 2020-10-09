@@ -11,6 +11,21 @@ class Books extends Model
 
     protected $guarded = [];
 
+    public function stock()
+    {
+        return $this->hasOne('App\StockMaster','book_id','id');
+    }
+
+    public function stock_out()
+    {
+        return $this->hasOne('App\StockTrxBorrow','book_id','id');
+    }
+
+    public function stock_in()
+    {
+        return $this->hasOne('App\StockTrxReturn','book_id','id');
+    }
+
     public function author()
     {
         return $this->belongsTo('App\Authors','author_id','id');

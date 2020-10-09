@@ -16,6 +16,7 @@ class CreateStockTrxReturnTable extends Migration
         Schema::create('stock_trx_return', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('book_id');
+            $table->unsignedBigInteger('transaction_id');
             $table->string('add_info');
             $table->integer('qty');
             $table->softDeletes();

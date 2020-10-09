@@ -22,12 +22,12 @@
 @endsection
 
 @push('scripts')
-    <script>
-        var btnTambah = document.getElementById('btn-form');
+<script>
+    var btnTambah = document.getElementById('btn-form');
 
-        btnTambah.addEventListener('click', function(e){
-            btnTambah.innerHTML = "Tunggu...";
-            
-        });
-    </script>
+    btnTambah.addEventListener('click', function(e){
+        btnTambah.innerHTML = "Tunggu...";
+        btnTambah.classList.toggle('disabled');
+    });
+</script>
 @endpush

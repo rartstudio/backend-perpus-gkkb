@@ -17,4 +17,14 @@ class Transactions extends Model
     {
         return $this->belongsTo('App\User','user_id','id');
     }    
+
+    public function stock_out()
+    {
+        return $this->hasMany('App\StockTrxBorrow','transaction_id','id');
+    }
+
+    public function stock_in()
+    {
+        return $this->hasMany('App\StockTrxReturn','transaction_id','id');
+    }
 }
