@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\StockMaster;
 use App\StockTrxBorrow;
 use App\TransactionDetail;
 use App\Transactions;
@@ -59,23 +60,13 @@ class TransactionController extends Controller
 
     public function borrow (Request $request,$id)
     {
-        $transaction = Transactions::find($id);
-
-        Transactions::where('id',$id)
-            ->update([
-                'state' => 5,
-                'borrowed_at' => Carbon::now(),
-                'returned_at' => Carbon::now()->addDays(14),
-            ]);
-
-        TransactionDetail::where('transaction_id',$id)
-        ->update([
-            'state' => 5
-        ]);
-
         //get all request 
         $allItem = $request->all();
 
+        //get details data
+        $details = TransactionDetail::where('transaction_id',$id)->get();
+
+        //structured data for stock_trx_borrow
         foreach($allItem as $k => $item){
             //dont use the item cause we will insert trx id on current loop
             // $allItem[$k]['add_info'] = $transaction->transaction_code;
@@ -83,8 +74,36 @@ class TransactionController extends Controller
             $allItem[$k]['updated_at'] = Carbon::now();
         }
 
-        //save it to transaction detail
+        //updating data of transactions
+        Transactions::where('id',$id)
+            ->update([
+                'state' => 5,
+                'borrowed_at' => Carbon::now(),
+                'returned_at' => Carbon::now()->addDays(14),
+            ]);
+
+        //updating data of transactions details 
+        TransactionDetail::where('transaction_id',$id)
+            ->update([
+                'state' => 5
+            ]);
+
+        //save it to stock_trx_borrow
         StockTrxBorrow::insert($allItem);
+
+        //updating stock master data
+        foreach($details as $k => $item){
+    
+            //get data from stock master
+            $book = StockMaster::where('book_id',$details[$k]['book_id'])->get();
+
+            //do calculate
+            $previousBorrow = $book[0]['trx_borrow'] + $details[$k]['qty'];
+            $finalEnding = ($book[0]['beginning'] + $book[0]['trf_in'] + $book[0]['trx_return']) - ($book[0]['trx_out'] + $previousBorrow);
+            
+            //updating to stockmaster
+            StockMaster::where('book_id',$details[$k]['book_id'])->update(['trx_borrow' => $previousBorrow, 'ending' => $finalEnding]);
+        }
 
         return response()->json('sukses',200);
     }

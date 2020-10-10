@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\StockMaster;
 use App\StockTrxReturn;
 use App\TransactionDetail;
 use App\Transactions;
@@ -76,23 +77,39 @@ class TransactionsController extends Controller
         $details = TransactionDetail::where('transaction_id',$id)->get();
         $transaction = Transactions::where('id',$id)->get();
 
+        //input data to stock_trx_return
         foreach($details as $k => $item){
             //dont use the item cause we will insert trx id on current loop
             $details[$k]['add_info'] = $transaction[0]->transaction_code;
-            $details[$k]['created_at'] = Carbon::now();
-            $details[$k]['updated_at'] = Carbon::now();
+            $details[$k]['created_at'] = Carbon::now()->format('Y-m-d h:i:s');
+            $details[$k]['updated_at'] = Carbon::now()->format('Y-m-d h:i:s');
             unset($details[$k]['state']);
             unset($details[$k]['id']);
         }
-
-        //save it to transaction detail
-        StockTrxReturn::insert(json_decode($details,true));
 
         //updating data returned , state and returned at
         Transactions::where('id',$id)->update(['state' => 6, 'qty_returned' => count($details),'returned_at' => Carbon::now() ]);
 
         //updating state in transaction detail
         TransactionDetail::where('transaction_id',$id)->update(['state' => 6]);
+
+        //save it to transaction detail
+        StockTrxReturn::insert(json_decode($details,true));
+
+
+        //updating stock master data
+        foreach($details as $k => $item){
+            
+            //get data from stock master
+            $book = StockMaster::where('book_id',$details[$k]['book_id'])->get();
+
+            //do calculate
+            $previousReturn = $book[0]['trx_return'] + $details[$k]['qty'];
+            $finalEnding = ($book[0]['beginning'] + $book[0]['trf_in'] + $previousReturn) - ($book[0]['trx_out'] + $book[0]['trx_borrow']);
+            
+            //updating to stockmaster
+            StockMaster::where('book_id',$details[$k]['book_id'])->update(['trx_return' => $previousReturn, 'ending' => $finalEnding]);
+        }
 
         return redirect()->route('admin.transactions-borrow');
     }
