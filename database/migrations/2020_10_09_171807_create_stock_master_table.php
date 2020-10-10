@@ -16,12 +16,12 @@ class CreateStockMasterTable extends Migration
         Schema::create('stock_master', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('book_id');
-            $table->integer('beginning');
-            $table->integer('trf_in');
-            $table->integer('trf_out');
-            $table->integer('trx_borrow');
-            $table->integer('trx_return');
-            $table->integer('ending');
+            $table->integer('beginning')->nullable()->default(0);
+            $table->integer('trf_in')->nullable()->default(0);
+            $table->integer('trf_out')->nullable()->default(0);
+            $table->integer('trx_borrow')->nullable()->default(0);
+            $table->integer('trx_return')->nullable()->default(0);
+            $table->integer('ending')->nullable()->default(0);
             $table->unsignedBigInteger('admin_id');
             $table->softDeletes();
             $table->timestamps();

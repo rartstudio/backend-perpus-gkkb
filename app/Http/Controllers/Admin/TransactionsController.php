@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\StockTrxReturn;
 use App\TransactionDetail;
 use App\Transactions;
 use Carbon\Carbon;
@@ -69,9 +70,29 @@ class TransactionsController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
-    public function returned(Request $request,$id)
+    public function returned($id)
     {
-        Transactions::where('id',$id)->update(['state' => 6, 'returned_at' => Carbon::now() ]);
+        //get how many data in details
+        $details = TransactionDetail::where('transaction_id',$id)->get();
+        $transaction = Transactions::where('id',$id)->get();
+
+        foreach($details as $k => $item){
+            //dont use the item cause we will insert trx id on current loop
+            $details[$k]['add_info'] = $transaction[0]->transaction_code;
+            $details[$k]['created_at'] = Carbon::now();
+            $details[$k]['updated_at'] = Carbon::now();
+            unset($details[$k]['state']);
+            unset($details[$k]['id']);
+        }
+
+        //save it to transaction detail
+        StockTrxReturn::insert(json_decode($details,true));
+
+        //updating data returned , state and returned at
+        Transactions::where('id',$id)->update(['state' => 6, 'qty_returned' => count($details),'returned_at' => Carbon::now() ]);
+
+        //updating state in transaction detail
+        TransactionDetail::where('transaction_id',$id)->update(['state' => 6]);
 
         return redirect()->route('admin.transactions-borrow');
     }

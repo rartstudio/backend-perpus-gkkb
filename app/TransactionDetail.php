@@ -8,6 +8,8 @@ class TransactionDetail extends Model
 {
     protected $guarded = [];
 
+    public $timestamps = false;
+
     public function transaction()
     {
         return $this->belongsTo('App\Transaction','transaction_id','id');

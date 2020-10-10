@@ -96,7 +96,7 @@
                     document.getElementById('acceptForm').submit();
                         Swal.fire(
                             'Terima!',
-                            'Data Transaksi berhasil diterima',
+                            'Data User berhasil diterima',
                             'success'
                         )
                 }

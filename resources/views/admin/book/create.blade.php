@@ -37,7 +37,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="qty">Qty</label>
+                    <label for="qty">Stock Awal (Qty)</label>
                     <input type="number" name="qty" id="qty" class="form-control @error('qty') border border-danger @enderror" placeholder="Ketikkan jumlah buku" value="{{old('qty')}}">
                     @error('qty')
                         <span class="form-text text-red">

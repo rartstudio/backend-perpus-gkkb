@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\StockTrxBorrow;
 use App\TransactionDetail;
 use App\Transactions;
 use Carbon\Carbon;
@@ -56,14 +57,35 @@ class TransactionController extends Controller
         return response()->json('sukses',200);
     }
 
-    public function borrow ($id)
+    public function borrow (Request $request,$id)
     {
+        $transaction = Transactions::find($id);
+
         Transactions::where('id',$id)
             ->update([
                 'state' => 5,
                 'borrowed_at' => Carbon::now(),
                 'returned_at' => Carbon::now()->addDays(14),
             ]);
+
+        TransactionDetail::where('transaction_id',$id)
+        ->update([
+            'state' => 5
+        ]);
+
+        //get all request 
+        $allItem = $request->all();
+
+        foreach($allItem as $k => $item){
+            //dont use the item cause we will insert trx id on current loop
+            // $allItem[$k]['add_info'] = $transaction->transaction_code;
+            $allItem[$k]['created_at'] = Carbon::now();
+            $allItem[$k]['updated_at'] = Carbon::now();
+        }
+
+        //save it to transaction detail
+        StockTrxBorrow::insert($allItem);
+
         return response()->json('sukses',200);
     }
 

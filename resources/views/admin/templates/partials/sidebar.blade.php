@@ -95,12 +95,12 @@
                         <p>Penerbit</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('admin.categories_state.index') }}" class="nav-link {{ Request::path() == 'admin/categories_state' ? 'active' : '' }}">
                         <i class="fas fa-user nav-icon"></i>
                         <p>Kategori Member</p>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
       <!-- /.sidebar-menu -->

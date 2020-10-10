@@ -8,9 +8,11 @@ use App\CategoriesBook;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BooksRequest;
 use App\Publisher;
+use App\StockMaster;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 //import storage
 use Illuminate\Support\Facades\Storage;
 
@@ -104,7 +106,7 @@ class BooksController extends Controller
 
         $admin_id = Auth::user()->id;
 
-        Books::create([
+        $book = Books::create([
             'title' => $validated['title'],
             'slug' => $validated['slug'],
             'description' => $validated['description'],
@@ -114,6 +116,16 @@ class BooksController extends Controller
             'qty' => $validated['qty'],
             'admin_id' => $admin_id,
             'cover' => $cover
+        ]);
+
+        //get book id
+        $book_id = $book->id;
+
+        StockMaster::create([
+            'book_id' => $book_id,
+            'beginning' => $validated['qty'],
+            'ending' => $validated['qty'],
+            'admin_id' => $admin_id
         ]);
 
         return redirect()->route('admin.books.index')->with('success','Data buku berhasil ditambahkan');

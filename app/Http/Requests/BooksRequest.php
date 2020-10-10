@@ -26,7 +26,7 @@ class BooksRequest extends FormRequest
         return [
             'title' => 'required',
             'description' => 'required|min:20',
-            'qty' => 'required|numeric',
+            'qty' => 'required|numeric|min:1',
             'cover' => 'file|image',
             'author_id' => 'required',
             'cbo_id' => 'required',
@@ -40,6 +40,7 @@ class BooksRequest extends FormRequest
             'title.required' => 'Judul buku harus diisi',
             'description.required' => 'Deskripsi buku harus diisi',
             'qty.required' => 'Qty buku harus diisi',
+            'qty.min' => 'Minimal stock awal buku 1',
             'author_id.required' => 'Penulis buku harus diisi',
             'cbo_id.required' => 'Kategori buku harus diisi',
             'pub_id.required' => 'Penerbit buku harus diisi'

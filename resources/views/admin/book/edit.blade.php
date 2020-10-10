@@ -44,8 +44,8 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="qty">Qty</label>
-                    <input type="number" name="qty" id="qty" class="form-control @error('qty') border border-danger @enderror" placeholder="Ketikkan deskripsi buku" value="{{ $book->qty ?? old('qty') }}">
+                    <label for="qty">Stock Awal (Qty)</label>
+                    <input type="number" name="qty" id="qty" class="form-control @error('qty') border border-danger @enderror" placeholder="Ketikkan deskripsi buku" value="{{ $book->qty ?? old('qty') }}" readonly>
                     @error('qty')
                         <span class="form-text text-red">
                             {{ $message }}
