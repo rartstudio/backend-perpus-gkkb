@@ -6,6 +6,7 @@ use App\Http\Resources\Authors\AuthorResource;
 use App\Http\Resources\CategoriesBook\CategoriesBookResource;
 use App\Http\Resources\Publishers\PublishersResource;
 use App\Http\Resources\Reviews\ReviewResource;
+use App\Http\Resources\Stock\StockMasterResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class BookResource extends JsonResource
@@ -23,6 +24,7 @@ class BookResource extends JsonResource
             'categories' => new CategoriesBookResource($this->categories_book),
             'title' => $this->title,
             'slug' => $this->slug,
+            'stock' => new StockMasterResource($this->stock),
             'description' => $this->description,
             'author' => new AuthorResource($this->author),
             'publisher' => new PublishersResource($this->publisher),

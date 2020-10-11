@@ -71,7 +71,7 @@ class BooksController extends Controller
             $data = Books::with(['author','categories_book','publisher','review'])->orderBy('created_at',$query)->take(10)->get();
         }
         else {
-            $data = Books::with(['author','categories_book','publisher','review'])->take(10)->get();
+            $data = Books::with(['author','categories_book','publisher','review','stock'])->take(10)->get();
         }
         
         return new BookCollection($data);

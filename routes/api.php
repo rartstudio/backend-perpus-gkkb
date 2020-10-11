@@ -29,6 +29,7 @@ Route::post('/user/messages/{id}', 'Api\MessagesController@isRead')->middleware(
 Route::get('/transaction','Api\TransactionController@index')->middleware('auth:api');
 Route::post('/transaction','Api\TransactionController@store')->middleware('auth:api');
 Route::post('/transaction-borrow/{id}','Api\TransactionController@borrow')->middleware('auth:api');
+Route::post('/transaction-reject/{id}','Api\TransactionController@reject')->middleware('auth:api');
 
 
 Route::get('/categories-state','Api\CategoriesStateController@index')->middleware('auth:api');

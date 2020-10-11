@@ -108,6 +108,24 @@ class TransactionController extends Controller
         return response()->json('sukses',200);
     }
 
+    public function reject(Request $request, $id)
+    {
+        //updating data of transactions
+        Transactions::where('id',$id)
+            ->update([
+                'state' => 7,
+                'add_info' => $request->add_info
+            ]);
+        
+        //updating data of transactions details 
+        TransactionDetail::where('transaction_id',$id)
+        ->update([
+            'state' => 7,
+        ]);
+
+        return response()->json('sukses',200);
+    }
+
     // public function store(Request $request)
     // {
 

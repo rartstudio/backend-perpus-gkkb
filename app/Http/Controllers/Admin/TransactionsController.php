@@ -41,6 +41,7 @@ class TransactionsController extends Controller
                 // 'returned_at' => Carbon::now()->addDays($request->long),
                 'add_info' => $request->add_info
             ]);
+        TransactionDetail::where('transaction_id',$id)->update(['state' => 4]);
         return redirect()->route('admin.dashboard');
     }
 
@@ -61,12 +62,15 @@ class TransactionsController extends Controller
                 'state' => $request->state,
                 'add_info' => $request->add_info
             ]);
+            
+        TransactionDetail::where('transaction_id',$id)->update(['state' => 3]);
         return redirect()->route('admin.dashboard');
     }
 
-    public function accepted(Request $request,$id)
+    public function accepted($id)
     {
         Transactions::where('id',$id)->update(['state' => 2]);
+        TransactionDetail::where('transaction_id',$id)->update(['state' => 2]);
 
         return redirect()->route('admin.dashboard');
     }
@@ -114,9 +118,10 @@ class TransactionsController extends Controller
         return redirect()->route('admin.transactions-borrow');
     }
 
-    public function rejected(Request $request, $id)
+    public function rejected($id)
     {
         Transactions::where('id',$id)->update(['state' => 3]);
+        TransactionDetail::where('transaction_id',$id)->update(['state' => 3]);
 
         return redirect()->route('admin.dashboard');
     }
