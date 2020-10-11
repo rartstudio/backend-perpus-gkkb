@@ -2,8 +2,19 @@
 
 <a href="{{ route('admin.books.edit', $model) }}" class="btn btn-success mb-2"><i class="fas fa-star">
 </i></a>
-<a href="{{ route('admin.books.show', $model) }}" class="btn btn-info mb-2"><i class="fas fa-eye">
-</i></a>
+{{-- <a href="{{ route('admin.books.show', $model) }}" class="btn btn-info mb-2"><i class="fas fa-eye">
+</i></a> --}}
+<a 
+    class="btn btn-info mb-2"
+    data-toggle="modal" 
+    data-target="#modal-lg" 
+    data-remote="{{ route('admin.books.show', $model) }}"
+    data-title="Detail Buku {{ $model->title }}"
+    href="#modal-lg"
+    >
+        <i class="fas fa-eye">
+        </i>
+</a>
 <a href="{{ route('admin.books.edit', $model) }}" class="btn btn-warning mb-2"><i class="fas fa-pencil-alt">
 </i></a>
 

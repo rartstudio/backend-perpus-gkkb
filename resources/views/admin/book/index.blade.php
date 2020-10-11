@@ -60,7 +60,7 @@
                     { data: 'cover'},
                     { data: 'title'},
                     { data: 'author'},
-                    { data: 'qty'},
+                    { data: 'stock'},
                     { data: 'action'}
                 ]
             })
