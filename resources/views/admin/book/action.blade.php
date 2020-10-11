@@ -1,12 +1,15 @@
 <!--when we use view we can resolve $author with $model to get existing loop data model-->
 
-<a href="{{ route('admin.books.show', $model) }}" class="btn btn-info mb-2 w-75">Lihat</a>
-<br>
-<a href="{{ route('admin.books.edit', $model) }}" class="btn btn-warning mb-2 w-75">Edit</a>
-<br>
+<a href="{{ route('admin.books.edit', $model) }}" class="btn btn-success mb-2"><i class="fas fa-star">
+</i></a>
+<a href="{{ route('admin.books.show', $model) }}" class="btn btn-info mb-2"><i class="fas fa-eye">
+</i></a>
+<a href="{{ route('admin.books.edit', $model) }}" class="btn btn-warning mb-2"><i class="fas fa-pencil-alt">
+</i></a>
 
 {{-- we dont use this because this doesnt support a delete method cause we need form to delete or do this way if you want to do in this way--}}
-<button href="{{ route('admin.books.destroy', $model) }}" class="btn btn-danger w-75" id="delete">Hapus</button>
+<button href="{{ route('admin.books.destroy', $model) }}" class="btn btn-danger mb-2" id="delete"><i class="fas fa-trash-alt">
+</i></button>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>

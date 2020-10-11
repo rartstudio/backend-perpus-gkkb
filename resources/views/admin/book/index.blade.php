@@ -3,18 +3,21 @@
 @section('content')
     <div class="box">
         <div class="box-header">
-            <a href="{{ route('admin.books.create') }}" class="btn btn-primary my-2">Tambah Buku</a>
+            <a href="{{ route('admin.books.create') }}" class="btn btn-primary my-2">
+                <i class="fas fa-plus">
+                </i>
+            </a>
         </div>
         <div class="box-body">
             <table class="table table-bordered table-hover" id="dataTable">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Cover</th>
+                        <th style="width: 5%">Id</th>
+                        <th style="width: 17%">Cover</th>
                         <th>Judul</th>
                         <th>Penulis</th>
-                        <th>Qty</th>
-                        <th>Aksi</th>
+                        <th style="width: 5%">Qty</th>
+                        <th style="width: 20%">Aksi</th>
                     </tr>
                 </thead>
             </table>

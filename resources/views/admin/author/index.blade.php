@@ -3,7 +3,10 @@
 @section('content')
     <div class="box">
         <div class="box-header">
-            <a href="{{ route('admin.authors.create') }}" class="btn btn-primary my-2">Tambah Penulis</a>
+            <a href="{{ route('admin.authors.create') }}" class="btn btn-primary my-2">
+                <i class="fas fa-plus">
+                </i>
+            </a>
         </div>
         <div class="box-body">
             <table class="table table-bordered table-hover" id="dataTable">

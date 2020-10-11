@@ -52,14 +52,6 @@
                             </a>
                         </li>
                     </ul>
-                  </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.recommendation-books.index') }}" class="nav-link {{ Request::path() == 'admin/recommendation-books' ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Recommendation
-                        </p>
-                    </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.books.index') }}" class="nav-link {{ Request::path() == 'admin/books' ? 'active' : '' }}">
