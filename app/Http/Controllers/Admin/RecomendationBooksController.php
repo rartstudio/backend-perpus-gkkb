@@ -31,9 +31,22 @@ class RecomendationBooksController extends Controller
      */
     public function create()
     {
+        //get all book_id of recommendation
+        $recommendationBookId = RecomendationBooks::select('book_id')->get();
+
+        //set empty array
+        $allId = [];
+
+        //get id each of book and push it to empty array
+        foreach($recommendationBookId as $k => $item){
+            array_push($allId,$recommendationBookId[$k]['book_id']);
+        }
+
+        $books = Books::whereNotIn('id',$allId)->orderBy('title','ASC')->get();
+
         return view('admin.recommendation.create',[
             'title' => 'Tambah Member',
-            'books' => Books::orderBy('title','ASC')->get()
+            'books' => $books
         ]);
     }
 

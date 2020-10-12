@@ -150,6 +150,14 @@ class DataController extends Controller
                     return 'Tidak Aktif';
                 }
             })
+            ->editColumn('started_at', function(RecomendationBooks $model){
+                $date = Carbon::parse($model->started_at)->format('d-m-Y');
+                return $date;
+            })
+            ->editColumn('ended_at', function(RecomendationBooks $model){
+                $date = Carbon::parse($model->ended_at)->format('d-m-Y');
+                return $date;
+            })
             ->addColumn('action','admin.recommendation.action')
             ->addIndexColumn()
             ->rawColumns(['cover','action'])

@@ -17,7 +17,7 @@
                         <th>Judul</th>
                         <th>Penulis</th>
                         <th style="width: 5%">Qty</th>
-                        <th style="width: 20%">Aksi</th>
+                        <th style="width: 15%">Aksi</th>
                     </tr>
                 </thead>
             </table>

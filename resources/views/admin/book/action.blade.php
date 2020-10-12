@@ -1,7 +1,5 @@
 <!--when we use view we can resolve $author with $model to get existing loop data model-->
 
-<a href="{{ route('admin.books.edit', $model) }}" class="btn btn-success mb-2"><i class="fas fa-star">
-</i></a>
 {{-- <a href="{{ route('admin.books.show', $model) }}" class="btn btn-info mb-2"><i class="fas fa-eye">
 </i></a> --}}
 <a 

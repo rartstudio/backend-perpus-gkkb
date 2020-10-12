@@ -10,14 +10,14 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
                 <img class="img-circle elevation-2">
             </div>
             <div class="info">
                 <a href="{{ route('admin.profile') }}" class="d-block">{{ Auth::user()->name }}</a>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -52,6 +52,14 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.recommendation-books.index') }}" class="nav-link {{ Request::path() == 'admin/recommendation-books' ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Recommendation
+                        </p>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.books.index') }}" class="nav-link {{ Request::path() == 'admin/books' ? 'active' : '' }}">
