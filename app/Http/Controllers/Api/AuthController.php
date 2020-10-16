@@ -59,4 +59,56 @@ class AuthController extends Controller
             'message' => 'Successfully logged out'
         ]);
     }
+
+    public function forgot(Request $request)
+    {
+        $user = User::where('email',$request->email)->first();
+
+        if(!$user){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'email tidak terdaftar'
+            ],503);
+        }
+
+        $member = Members::where('user_id',$user->id);
+
+        if(!$member){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data Member tidak tersedia'
+            ],409);
+        }
+
+        if($member->date_of_baptism != $request->date_of_baptism || $member->member_code != $request->member_code) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data Tidak sesuai'
+            ],403);
+        }
+
+        return response()->json([
+            'status' => 'sukses',
+            'data' => $member
+        ]);
+    }
+
+    public function reset(Request $request)
+    {
+        if($request->password != $request->password_confirmation){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Password dam Konfirmasi Password tidak sama'
+            ]);
+        }
+
+        User::where('email',$request->email)->update([
+            'password' => $request->password
+        ]);
+
+        return response()->json([
+            'status' => 'sukses',
+            'message' => 'Password Berhasi diubah'
+        ],200);
+    }
 }

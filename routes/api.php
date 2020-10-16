@@ -26,6 +26,7 @@ Route::post('/user/image','Api\UserController@uploadImage')->middleware('auth:ap
 Route::get('/user/messages','Api\MessagesController@index')->middleware('auth:api');
 Route::post('/user/messages/{id}', 'Api\MessagesController@isRead')->middleware('auth:api');
 
+
 Route::get('/transaction','Api\TransactionController@index')->middleware('auth:api');
 Route::post('/transaction','Api\TransactionController@store')->middleware('auth:api');
 Route::post('/transaction-borrow/{id}','Api\TransactionController@borrow')->middleware('auth:api');
@@ -37,7 +38,8 @@ Route::post('/logout', 'Api\AuthController@logout')->middleware('auth:api');
 
 Route::post('/register', 'Api\AuthController@register');
 Route::post('/login', 'Api\AuthController@login');
-
+Route::post('/forgot-password','Api/AuthController@forgot');
+Route::post('/reset-password','Api\AuthController@reset');
 
 
 Route::get('book','Api\BooksController@index');
