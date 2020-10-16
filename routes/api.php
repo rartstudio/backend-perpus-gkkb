@@ -38,7 +38,7 @@ Route::post('/logout', 'Api\AuthController@logout')->middleware('auth:api');
 
 Route::post('/register', 'Api\AuthController@register');
 Route::post('/login', 'Api\AuthController@login');
-Route::post('/forgot-password','Api/AuthController@forgot');
+Route::post('/forgot-password','Api\AuthController@forgot');
 Route::post('/reset-password','Api\AuthController@reset');
 
 

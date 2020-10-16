@@ -31,6 +31,7 @@ class UserController extends Controller
         $members->update([
             'address' => $request->address,
             'date_of_birth' => date('Y-m-d',strtotime($request->date_of_birth)),
+            'date_of_baptism' => date('Y-m-d',strtotime($request->date_of_baptism)),
             'gender' => $request->gender,
             'phone_number' => $request->phone_number,
             'no_cst' => $request->no_cst

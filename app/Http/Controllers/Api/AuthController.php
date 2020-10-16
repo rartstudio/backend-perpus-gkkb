@@ -71,7 +71,7 @@ class AuthController extends Controller
             ],503);
         }
 
-        $member = Members::where('user_id',$user->id);
+        $member = Members::where('user_id',$user->id)->get();
 
         if(!$member){
             return response()->json([
@@ -80,7 +80,11 @@ class AuthController extends Controller
             ],409);
         }
 
-        if($member->date_of_baptism != $request->date_of_baptism || $member->member_code != $request->member_code) {
+        $parsedDateRequest = $request->date_of_baptism;
+        $parsedDateData = $member[0]->date_of_baptism;
+        
+        // dd(gettype($parsedDateData));
+        if($parsedDateRequest != $parsedDateData || $member[0]->no_cst != $request->member_code) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Data Tidak sesuai'
