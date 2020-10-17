@@ -67,7 +67,7 @@ class AuthController extends Controller
         if(!$user){
             return response()->json([
                 'status' => 'error',
-                'message' => 'email tidak terdaftar'
+                'message' => 'Email tidak terdaftar'
             ],503);
         }
 
@@ -87,13 +87,13 @@ class AuthController extends Controller
         if($parsedDateRequest != $parsedDateData || $member[0]->no_cst != $request->member_code) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Data Tidak sesuai'
+                'message' => 'Kombinasi Data Member Tidak sesuai'
             ],403);
         }
 
         return response()->json([
             'status' => 'sukses',
-            'data' => $member
+            'data' => $user
         ]);
     }
 
@@ -103,16 +103,16 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Password dam Konfirmasi Password tidak sama'
-            ]);
+            ],403);
         }
 
         User::where('email',$request->email)->update([
-            'password' => $request->password
+            'password' => bcrypt($request->password)
         ]);
 
         return response()->json([
             'status' => 'sukses',
-            'message' => 'Password Berhasi diubah'
+            'message' => 'Password Berhasil diubah'
         ],200);
     }
 }
