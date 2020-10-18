@@ -38,6 +38,13 @@ class BooksController extends Controller
             //get all data book
             $data = Books::with(['author','categories_book','publisher','review'])->where('title','like','%'.$query.'%')->get();   
         }
+        else if ($request->query('sort') && $request->query('max')){
+            //get query
+            $query = $request->query('sort');
+            $max = $request->query('max');
+
+            $data = Books::with(['author','categories_book','publisher','review'])->orderBy('created_at',$query)->take($max)->get();
+        }
         else if ($request->query('author')){
             //get query
             $query = $request->query('author');    
@@ -62,7 +69,7 @@ class BooksController extends Controller
             $conArray = $this->parserData($id);
 
             //get data
-            $data = Books::with(['author','categories_book','publisher','review'])->whereIn('cbo_id',$conArray)->take(10)->get();
+            $data = Books::with(['author','categories_book','publisher','review'])->whereIn('cbo_id',$conArray)->get();
         }
         else if ($request->query('sort')){
             //get query
@@ -71,7 +78,7 @@ class BooksController extends Controller
             $data = Books::with(['author','categories_book','publisher','review'])->orderBy('created_at',$query)->take(10)->get();
         }
         else {
-            $data = Books::with(['author','categories_book','publisher','review','stock'])->take(10)->get();
+            $data = Books::with(['author','categories_book','publisher','review','stock'])->inRandomOrder()->get();
         }
         
         return new BookCollection($data);

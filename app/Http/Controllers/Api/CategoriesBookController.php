@@ -13,7 +13,7 @@ class CategoriesBookController extends Controller
     public function index() 
     {
         //get all data book
-        $data = CategoriesBook::paginate(5);
+        $data = CategoriesBook::all();
 
         return new CategoriesBookCollection($data);
     }
