@@ -8,6 +8,8 @@ use App\Members;
 use App\User;
 use Illuminate\Http\Request;
 
+//import storage
+use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
     public function show(Request $request) 
@@ -70,6 +72,7 @@ class UserController extends Controller
 
         //checking if user pass a file cover image
         if($request->hasFile('image')){
+            // Storage::delete($members->image);
             $cover = $request->file('image')->store('assets/covers');
         }
 
