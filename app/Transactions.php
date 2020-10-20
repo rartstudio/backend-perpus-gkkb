@@ -12,7 +12,7 @@ class Transactions extends Model
     {
         return $this->hasMany('App\TransactionDetail','transaction_id','id');
     }
-    
+
     public function users()
     {
         return $this->belongsTo('App\User','user_id','id');

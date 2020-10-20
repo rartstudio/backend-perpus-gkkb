@@ -75,11 +75,12 @@ class BooksController extends Controller
             //get query
             $query = $request->query('sort');
 
-            $data = Books::with(['author','categories_book','publisher','review'])->orderBy('created_at',$query)->take(10)->get();
+            $data = Books::with(['author','categories_book','publisher','review'])->orderBy('created_at',$query)->get();
         }
         else {
-            $data = Books::with(['author','categories_book','publisher','review','stock'])->inRandomOrder()->get();
+            $data = Books::with(['author','categories_book','publisher','review','stock'])->paginate(2);
         }
+
         
         return new BookCollection($data);
     }

@@ -18,7 +18,8 @@ class AuthController extends Controller
             'email' => 'email|required',
             'password' => 'required|confirmed'
         ]);
-
+        
+        $validatedData['name'] = ucwords($request->name);
         $validatedData['password'] = bcrypt($request->password);
 
         //create data user to table users

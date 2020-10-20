@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Auth\AuthResource;
+use App\Http\Resources\TransactionDetails\TransactionDetailsCollection;
 use App\Members;
+use App\TransactionDetail;
+use App\Transactions;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -84,5 +87,25 @@ class UserController extends Controller
             "message" => "sukses input data",
             "status_code" => 200
         ],200);
+    }
+
+    public function detailBook(Request $request)
+    {   
+        $user = $request->user();
+
+        //status
+        $state= ['5','6'];
+
+        $transactions = Transactions::select('id')->where('user_id',$user->id)->whereIn('state',$state)->get();
+
+        $transactionsId = [];
+
+        foreach($transactions as $k => $item){
+            array_push($transactionsId,$transactions[$k]['id']);
+        }
+
+        $details = TransactionDetail::whereIn('transaction_id',$transactionsId)->get();
+
+        return new TransactionDetailsCollection($details);
     }
 }
