@@ -69,16 +69,16 @@ class BooksController extends Controller
             $conArray = $this->parserData($id);
 
             //get data
-            $data = Books::with(['author','categories_book','publisher','review'])->whereIn('cbo_id',$conArray)->get();
+            $data = Books::with(['author','categories_book','publisher','review'])->whereIn('cbo_id',$conArray)->paginate(5);
         }
         else if ($request->query('sort')){
             //get query
             $query = $request->query('sort');
 
-            $data = Books::with(['author','categories_book','publisher','review'])->orderBy('created_at',$query)->get();
+            $data = Books::with(['author','categories_book','publisher','review'])->orderBy('created_at',$query)->paginate(5);
         }
         else {
-            $data = Books::with(['author','categories_book','publisher','review','stock'])->paginate(2);
+            $data = Books::with(['author','categories_book','publisher','review','stock'])->paginate(5);
         }
 
         
