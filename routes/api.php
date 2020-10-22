@@ -27,6 +27,8 @@ Route::get('/user/messages','Api\MessagesController@index')->middleware('auth:ap
 Route::get('/user/statistic','Api\UserController@detailBook')->middleware('auth:api');
 Route::post('/user/messages/{id}', 'Api\MessagesController@isRead')->middleware('auth:api');
 
+Route::post('/review','Api\ReviewController@store')->middleware('auth:api');
+
 Route::get('/transaction','Api\TransactionController@index')->middleware('auth:api');
 Route::post('/transaction','Api\TransactionController@store')->middleware('auth:api');
 Route::post('/transaction-borrow/{id}','Api\TransactionController@borrow')->middleware('auth:api');

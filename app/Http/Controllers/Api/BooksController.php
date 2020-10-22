@@ -36,7 +36,7 @@ class BooksController extends Controller
             $query = $request->query('name');    
             
             //get all data book
-            $data = Books::with(['author','categories_book','publisher','review'])->where('title','like','%'.$query.'%')->get();   
+            $data = Books::with(['author','categories_book','publisher','review'])->where('title','like','%'.$query.'%')->paginate(5);   
         }
         else if ($request->query('sort') && $request->query('max')){
             //get query
