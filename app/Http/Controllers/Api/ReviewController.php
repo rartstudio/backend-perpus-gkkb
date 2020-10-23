@@ -3,12 +3,52 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Reviews\ReviewCollection;
+use App\Http\Resources\Transaction\TransactionCollection;
+use App\Http\Resources\TransactionDetails\TransactionDetailsCollection;
 use App\ReviewBooks;
+use App\TransactionDetail;
+use App\Transactions;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
+    public function index (Request $request)
+    {
+        $user = $request->user();
+        
+        $review = ReviewBooks::with('book','user')->where('user_id',$user->id)->get();
+        
+        return new ReviewCollection($review);
+    }
+
+    public function unreview (Request $request)
+    {
+        $user = $request->user();
+        $book = ReviewBooks::select('book_id')->distinct('book_id')->where('user_id',$user->id)->get();
+        
+        $book_id = [];
+
+        //destructured data to array
+        foreach($book as $k => $item){
+            array_push($book_id,$book[$k]['book_id']);
+        }
+
+        $transaction = Transactions::select('id')->where('state',6)->where('user_id',$user->id)->get();
+
+        $transaction_id = [];
+
+        //destructured data to array
+        foreach($transaction as $k => $item){
+            array_push($transaction_id,$transaction[$k]['id']);
+        }
+
+        $details = TransactionDetail::whereIn('transaction_id',$transaction_id)->whereNotIn('book_id',$book_id)->get();
+        
+        return new TransactionDetailsCollection($details);
+    }
+
     public function store(Request $request)
     {
         $review = new ReviewBooks;
@@ -24,5 +64,12 @@ class ReviewController extends Controller
         $review->save();
         
         return response()->json('sukses',200);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $review = ReviewBooks::find($id);
+
+        $review->delete();
     }
 }
