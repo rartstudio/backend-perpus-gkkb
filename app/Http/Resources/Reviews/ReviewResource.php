@@ -3,7 +3,9 @@
 namespace App\Http\Resources\Reviews;
 
 use App\Http\Resources\Books\BookResource;
+use App\Http\Resources\User\ImageResource;
 use App\Http\Resources\User\UserResource;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ReviewResource extends JsonResource
@@ -18,10 +20,11 @@ class ReviewResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user' => new UserResource($this->user),
+            'user' => new ImageResource($this->user),
             'comment' => $this->comment,
             'rating' => $this->rating,
-            'book' => new BookResource($this->book)
+            'book' => new BookResource($this->book),
+            'last' => $this->created_at->diffForHumans()
         ];
     }
 }

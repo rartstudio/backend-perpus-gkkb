@@ -3,6 +3,8 @@
 namespace App\Http\Resources\RecomendationBooks;
 
 use App\Http\Resources\Books\BookResource;
+use App\Http\Resources\Reviews\ReviewCollection;
+use App\Http\Resources\Reviews\ReviewResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RecomendationBookResource extends JsonResource
@@ -16,7 +18,8 @@ class RecomendationBookResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'book' => new BookResource($this->book)
+            'book' => new BookResource($this->book),
+            'reviews' => new ReviewCollection($this->whenLoaded('review')),
         ];
     }
 }

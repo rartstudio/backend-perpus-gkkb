@@ -12,7 +12,7 @@ class RecomendationBooksController extends Controller
     public function index() 
     {
         //get all data book
-        $data = RecomendationBooks::with(['book'])->paginate(5);
+        $data = RecomendationBooks::with(['book','book.review'])->paginate(5);
 
         return new RecomendationBookCollection($data);
     }

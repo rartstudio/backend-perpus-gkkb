@@ -18,7 +18,7 @@ class ReviewController extends Controller
     {
         $user = $request->user();
         
-        $review = ReviewBooks::with('book','user')->where('user_id',$user->id)->get();
+        $review = ReviewBooks::with('book','user')->where('user_id',$user->id)->orderBy('created_at','desc')->get();
         
         return new ReviewCollection($review);
     }
@@ -44,7 +44,7 @@ class ReviewController extends Controller
             array_push($transaction_id,$transaction[$k]['id']);
         }
 
-        $details = TransactionDetail::whereIn('transaction_id',$transaction_id)->whereNotIn('book_id',$book_id)->get();
+        $details = TransactionDetail::select('book_id','state','qty')->whereIn('transaction_id',$transaction_id)->whereNotIn('book_id',$book_id)->groupBy('book_id','state','qty')->get();
         
         return new TransactionDetailsCollection($details);
     }
