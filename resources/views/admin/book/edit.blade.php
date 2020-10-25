@@ -134,7 +134,7 @@
 
         btnTambah.addEventListener('click', function(e){
             btnTambah.innerHTML = "Tunggu...";
-            
+            btnTambah.classList.toggle('disabled');
         });
     </script>
 @endpush

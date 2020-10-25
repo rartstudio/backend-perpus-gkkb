@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class RecommendationUserController extends Controller
 {
+    public function index(Request $request){
+        $user = $request->user();
+
+        $recommendation = RecommendationUser::where('user_id',$user->id)->get();
+        return response()->json([
+            'recommendation' => $recommendation
+        ],200);
+    }
+
     public function store (Request $request)
     {
         $recommendation = new RecommendationUser;

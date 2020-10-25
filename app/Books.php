@@ -51,6 +51,11 @@ class Books extends Model
         return $this->hasOne('App\RecomendationBooks', 'book_id', 'id');
     }
 
+    public function recommendation_user()
+    {
+        return $this->hasMany('App\RecommendationUser','book_id','id');
+    }
+
     public function review()
     {
         return $this->hasMany('App\ReviewBooks', 'book_id', 'id');

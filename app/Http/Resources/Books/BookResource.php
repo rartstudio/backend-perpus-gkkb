@@ -30,8 +30,7 @@ class BookResource extends JsonResource
             'publisher' => new PublishersResource($this->publisher),
             'reviews' => ReviewResource::collection($this->whenLoaded('review')),
             'cover' => $this->cover,
-            'qty' => $this->qty,
-
+            'qty' => $this->qty
         ];
     }
 }

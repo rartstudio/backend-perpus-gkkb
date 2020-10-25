@@ -9,9 +9,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BooksRequest;
 use App\Publisher;
 use App\StockMaster;
+use App\StockTrxBorrow;
+use App\StockTrxReturn;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use ImageOptimizer;
 
 //import storage
 use Illuminate\Support\Facades\Storage;
@@ -100,11 +103,14 @@ class BooksController extends Controller
         $cover = null;
 
         //checking if user pass a file cover image
+        
         if($request->hasFile('cover')){
             $cover = $request->file('cover')->store('assets/covers');
         }
 
         $admin_id = Auth::user()->id;
+
+        // dd($cover);
 
         $book = Books::create([
             'title' => $validated['title'],
@@ -254,7 +260,12 @@ class BooksController extends Controller
      */
     public function destroy(Books $book)
     {
+        StockMaster::where('book_id',$book->id)->delete();
+        StockTrxBorrow::where('book_id',$book->id)->delete();
+        StockTrxReturn::where('book_id',$book->id)->delete();
+        Storage::delete($book->cover);
         $book->delete();
+        
         return redirect()->route('admin.books.index')
                 ->with('danger','data buku berhasil dihapus');
     }

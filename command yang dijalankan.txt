@@ -1,4 +1,9 @@
 
+check php ini dimana
+php --ini
+setelah itu cari file dan set memory limit 2048M
+
+
 composer create-project laravel/laravel --prefer-dist perpus-gereja-2
 
 composer require laravel/ui

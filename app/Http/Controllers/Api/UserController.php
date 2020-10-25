@@ -110,19 +110,4 @@ class UserController extends Controller
 
         return new TransactionDetailsCollection($details);
     }
-
-    public function recommendation (Request $request)
-    {
-        $recommendation = new RecommendationUser;
-        
-        $user = $request->user();
-        
-        $recommendation->user_id = $user->id;
-        $recommendation->book_id = $request->book_id;
-        $recommendation->created_at = Carbon::now();
-
-        $recommendation->save();
-        
-        return response()->json('sukses',200);
-    }
 }
