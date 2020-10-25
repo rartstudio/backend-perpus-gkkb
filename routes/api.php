@@ -32,6 +32,8 @@ Route::get('/review','Api\ReviewController@index')->middleware('auth:api');
 Route::post('/review','Api\ReviewController@store')->middleware('auth:api');
 Route::delete('/review/{id}','Api\ReviewController@destroy')->middleware('auth:api');
 
+Route::post('/recommendation','Api\RecommendationUserController@store')->middleware('auth:api');
+
 Route::get('/transaction','Api\TransactionController@index')->middleware('auth:api');
 Route::post('/transaction','Api\TransactionController@store')->middleware('auth:api');
 Route::post('/transaction-borrow/{id}','Api\TransactionController@borrow')->middleware('auth:api');

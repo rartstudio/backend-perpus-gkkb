@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Auth\AuthResource;
 use App\Http\Resources\TransactionDetails\TransactionDetailsCollection;
 use App\Members;
+use App\RecommendationUser;
 use App\TransactionDetail;
 use App\Transactions;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 //import storage
@@ -107,5 +109,20 @@ class UserController extends Controller
         $details = TransactionDetail::whereIn('transaction_id',$transactionsId)->get();
 
         return new TransactionDetailsCollection($details);
+    }
+
+    public function recommendation (Request $request)
+    {
+        $recommendation = new RecommendationUser;
+        
+        $user = $request->user();
+        
+        $recommendation->user_id = $user->id;
+        $recommendation->book_id = $request->book_id;
+        $recommendation->created_at = Carbon::now();
+
+        $recommendation->save();
+        
+        return response()->json('sukses',200);
     }
 }
