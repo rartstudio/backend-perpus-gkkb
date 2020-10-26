@@ -110,4 +110,22 @@ class UserController extends Controller
 
         return new TransactionDetailsCollection($details);
     }
+
+    public function borrow(Request $request)
+    {
+        $user = $request->user();
+
+        $transaction = Transactions::select('id')->where('state',6)->where('user_id',$user->id)->get();
+
+        $transaction_id = [];
+
+        //destructured data to array
+        foreach($transaction as $k => $item){
+            array_push($transaction_id,$transaction[$k]['id']);
+        }
+
+        $details = TransactionDetail::with('book.review')->select('book_id','state','qty')->whereIn('transaction_id',$transaction_id)->groupBy('book_id','state','qty')->get();
+
+        return new TransactionDetailsCollection($details);
+    }
 }

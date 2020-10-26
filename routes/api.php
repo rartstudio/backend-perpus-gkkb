@@ -19,14 +19,15 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // Route::post('/user/{user}','Api\UserController@update')->middleware('auth:api');
+Route::get('/user','Api\UserController@show')->middleware('auth:api');
 Route::post('/user','Api\UserController@update')->middleware('auth:api');
 Route::post('/user/submission','Api\UserController@submission')->middleware('auth:api');
 Route::post('/user/image','Api\UserController@uploadImage')->middleware('auth:api');
 Route::post('/user/messages/{id}', 'Api\MessagesController@isRead')->middleware('auth:api');
 Route::get('/user/messages','Api\MessagesController@index')->middleware('auth:api');
 Route::get('/user/statistic','Api\UserController@detailBook')->middleware('auth:api');
-Route::get('/user','Api\UserController@show')->middleware('auth:api');
 Route::get('/user/unreview', 'Api\ReviewController@unreview')->middleware('auth:api');
+Route::get('/user/borrow','Api\UserController@borrow')->middleware('auth:api');
 
 Route::get('/review','Api\ReviewController@index')->middleware('auth:api');
 Route::post('/review','Api\ReviewController@store')->middleware('auth:api');
@@ -34,6 +35,7 @@ Route::delete('/review/{id}','Api\ReviewController@destroy')->middleware('auth:a
 
 Route::get('/recommendation','Api\RecommendationUserController@index')->middleware('auth:api');
 Route::post('/recommendation','Api\RecommendationUserController@store')->middleware('auth:api');
+Route::delete('/recommendation/{id}','Api\RecommendationUserController@destroy')->middleware('auth:api');
 
 Route::get('/transaction','Api\TransactionController@index')->middleware('auth:api');
 Route::post('/transaction','Api\TransactionController@store')->middleware('auth:api');
